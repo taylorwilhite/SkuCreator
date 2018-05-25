@@ -1,0 +1,19 @@
+{
+  "name": "skucreator",
+  "version": "0.1.0",
+  "description": "Bulk Creation of new SKUs for SKUvault",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/twilhiteamaryllis/SkuCreator.git"
+  },
+  "author": "Taylor Wilhite",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/twilhiteamaryllis/SkuCreator/issues"
+  },
+  "homepage": "https://gitlab.com/twilhiteamaryllis/SkuCreator#README"
+}
