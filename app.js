@@ -15,6 +15,39 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res){
 	console.log(req.body);
+	// Get info from body
+	var sku = req.body.sku;
+	var desc = req.body.variantTitle;
+	var classification = req.body.classification;
+	var brand = req.body.brand;
+	var supName = req.body.supp.Name;
+	var supPrim = req.body.supp.Primary;
+	// Format Correctly - CURRENTLY ONLY ONE FOR TESTING
+	var newSKU = {  
+	   "Sku":sku,
+	   "Description":desc,
+	   "Classification":classification,
+	   "Supplier":supName,
+	   "Brand":brand,
+	   // "Pictures":[  
+	   //    "http://www.example.com/image.jpg"
+	   // ],
+	   // "Attributes":{  
+	   //    "String":"String"
+	   // },
+	   "SupplierInfo":[  
+	      {  
+	         "SupplierName":supName,
+	         "IsPrimary":true
+	      }
+	   ],
+	   "TenantToken":"String",
+	   "UserToken":"String"
+	};
+
+	console.log(newSKU);
+	// Submit to SKUvault
+	//redirect
 });
 
 // Start Server
