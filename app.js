@@ -1,3 +1,5 @@
+// Allow loading environment from .env
+require('dotenv').load();
 // Set Requirements
 var express = require('express');
 var app = express();
@@ -41,8 +43,8 @@ app.post('/', function(req, res){
 	         "IsPrimary":true
 	      }
 	   ],
-	   "TenantToken":"String",
-	   "UserToken":"String"
+	   "TenantToken":process.env.MY_TENANT,
+	   "UserToken":process.env.MY_USER
 	};
 
 	console.log(newSKU);
