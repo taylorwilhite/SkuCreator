@@ -5,15 +5,15 @@
 </head>
 <body>
 	<h1>Create SKUs</h1>
-	<form>
+	<form action="/" method="POST">
 		<input type="text" name="sku" placeholder="SKU">
 		<input type="text" name="variantColor" placeholder="Color">
 		<input type="text" name="variantSize" placeholder="Size">
 		<input type="text" name="variantTitle" placeholder="Title">
 		<input type="text" name="classification" placeholder="Classification"> <!-- Probably make this a dropdown -->
 		<input type="text" name="brand" placeholder="Brand">
-		<input type="text" name="supplierName" placeholder="Supplier"> <!-- Probably make this a supplier object -->
-		<input type="text" name="supplierPrimary" placeholder="Supplier Primary?">
+		<input type="text" name="supp[Name]" placeholder="Supplier"> <!-- Probably make this a supplier object -->
+		<input type="text" name="supp[Primary]" placeholder="Supplier Primary?">
 		<input type="submit">
 	</form>
 
