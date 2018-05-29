@@ -46,8 +46,8 @@ app.post('/', function(req, res){
 	   "TenantToken":process.env.MY_TENANT,
 	   "UserToken":process.env.MY_USER
 	};
-
-	console.log(newSKU);
+	var newSkuJSON = JSON.stringify(newSKU);
+	console.log(newSkuJSON);
 	// Submit to SKUvault
 	//redirect
 });
