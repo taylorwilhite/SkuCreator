@@ -18,15 +18,16 @@ app.get('/', function(req, res){
 app.post('/', function(req, res){
 	console.log(req.body);
 	// Get info from body
-	var sku = req.body.sku;
+	var sku = req.body.sku.parent;
 	var desc = req.body.variantTitle;
 	var classification = req.body.classification;
 	var brand = req.body.brand;
 	var supName = req.body.supp.Name;
 	var supPrim = req.body.supp.Primary;
+	var skuColor = req.body.sku.color
 	// Format Correctly - CURRENTLY ONLY ONE FOR TESTING
 	var newSKU = {  
-	   "Sku":sku,
+	   "Sku":sku + skuColor + "-S",
 	   "Description":desc,
 	   "Classification":classification,
 	   "Supplier":supName,

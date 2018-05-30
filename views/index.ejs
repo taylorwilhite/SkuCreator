@@ -6,8 +6,9 @@
 <body>
 	<h1>Create SKUs</h1>
 	<form action="/" method="POST">
-		<input type="text" name="sku" placeholder="SKU">
+		<input type="text" name="sku[parent]" placeholder="Parent SKU">
 		<input type="text" name="variantColor" placeholder="Color">
+		<input type="text" name="sku[color]" placeholder="Color Code">
 		<input type="text" name="variantSize" placeholder="Size">
 		<input type="text" name="variantTitle" placeholder="Title">
 		<input type="text" name="classification" placeholder="Classification"> <!-- Probably make this a dropdown -->
