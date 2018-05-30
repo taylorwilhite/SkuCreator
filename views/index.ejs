@@ -9,7 +9,16 @@
 		<input type="text" name="sku[parent]" placeholder="Parent SKU">
 		<input type="text" name="variantColor" placeholder="Color">
 		<input type="text" name="sku[color]" placeholder="Color Code">
-		<input type="text" name="variantSize" placeholder="Size">
+		<fieldset>
+			<label><input type="checkbox" name="size[]" value="S">Small</label>
+			<label><input type="checkbox" name="size[]" value="M">Medium</label>
+			<label><input type="checkbox" name="size[]" value="L">Large</label>
+			<label><input type="checkbox" name="size[]" value="XL">X-Large</label>
+			<label><input type="checkbox" name="size[]" value="P1X">P1X</label>
+			<label><input type="checkbox" name="size[]" value="P2X">P2X</label>
+			<label><input type="checkbox" name="size[]" value="P3X">P3X</label>
+		</fieldset>
+		
 		<input type="text" name="variantTitle" placeholder="Title">
 		<input type="text" name="classification" placeholder="Classification"> <!-- Probably make this a dropdown -->
 		<input type="text" name="brand" placeholder="Brand">

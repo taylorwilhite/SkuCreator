@@ -49,8 +49,10 @@ app.post('/', function(req, res){
 	};
 	var newSkuJSON = JSON.stringify(newSKU);
 	console.log(newSkuJSON);
+	console.log(req.body.size);
 	// Submit to SKUvault
 	//redirect
+	res.redirect("/");
 });
 
 // Start Server
