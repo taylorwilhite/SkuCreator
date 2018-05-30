@@ -25,7 +25,11 @@ app.post('/', function(req, res){
 	var supPrim = req.body.supp.Primary;
 	var skuColor = req.body.sku.color
 	var sizes = req.body.size
-	var newSKUs = {"Items":[]};
+	var newSKUs = {
+		"Items":[],
+			"TenantToken":process.env.MY_TENANT,
+			"UserToken":process.env.MY_USER
+		};
 	// Format Correctly - CURRENTLY ONLY ONE FOR TESTING
 	sizes.forEach(function(size){
 		//For loop for sizes
@@ -47,9 +51,7 @@ app.post('/', function(req, res){
 		         "SupplierName":supName,
 		         "IsPrimary":true
 		      }
-		   ],
-		   "TenantToken":process.env.MY_TENANT,
-		   "UserToken":process.env.MY_USER
+		   ]
 		};
 		newSKUs["Items"].push(newSize);
 		var newSize = {};
