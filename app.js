@@ -86,7 +86,8 @@ app.post('/', function(req, res){
 			console.log(err);
 			res.redirect("back");
 		} else {
-			console.log(body);
+			console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
+  			console.log('body:', body); // Print the HTML for the Google homepage.;
 			res.redirect("/");
 		}
 	})
