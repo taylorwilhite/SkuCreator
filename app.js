@@ -86,7 +86,7 @@ app.post('/', function(req, res){
 			console.log(err);
 			res.redirect("back");
 		} else {
-			console.log(response);
+			console.log(body);
 			res.redirect("/");
 		}
 	})
