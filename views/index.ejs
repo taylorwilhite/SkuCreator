@@ -6,9 +6,11 @@
 <body>
 	<h1>Create SKUs</h1>
 	<form action="/" method="POST">
-		<input type="text" name="sku[parent]" placeholder="Parent SKU">
-		<input type="text" name="variantColor" placeholder="Color">
-		<input type="text" name="sku[color]" placeholder="Color Code">
+		<input type="text" name="sku[parent]" placeholder="Parent SKU" required="true">
+		<input type="text" name="variantColor" placeholder="Color" required="true">
+		<input type="text" name="sku[color]" placeholder="Color Code" required="true">
+		<input type="text" name="picture" placeholder="image link">
+		<input type="text" name="fb-code" placeholder="Fabric Book">
 		<fieldset>
 			<label><input type="checkbox" name="size[]" value="S">Small</label>
 			<label><input type="checkbox" name="size[]" value="M">Medium</label>
@@ -37,14 +39,19 @@
 			<option value="(A7) Apparel- Activewear">(A7) Apparel- Activewear</option>
 			<option value="(A7) Apparel- Swimwear">(A7) Apparel- Swimwear</option>
 		</select>
+		<label for="brand">Brand: </label>
 		<select name="brand" id="brand" required="true">
 			<option value="" selected>Select One</option>
 			<option value="AMARYLLIS">AMARYLLIS</option>
 			<option value="AMA By Amaryllis">AMA By Amaryllis</option>
 			<option value="REFLECTION">REFLECTION</option>
 		</select>
+		<label for="rawCost">Raw Cost: </label>
+		<input type="number" name="supp[Cost]" id="rawCost" step="0.01">
 		<!-- <input type="text" name="supp[Name]" placeholder="Supplier"> -->
 		<!-- <input type="text" name="supp[Primary]" placeholder="Supplier Primary?"> -->
+		<label for="landedCost">Landed Cost: </label>
+		<input type="number" name="landedCost" id="landedCost" step="0.01">
 		<input type="submit">
 	</form>
 

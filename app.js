@@ -23,8 +23,14 @@ app.post('/', function(req, res){
 	var brand = req.body.brand;
 	var supName = req.body.supp.Name;
 	var supPrim = req.body.supp.Primary;
-	var skuColor = req.body.sku.color
-	var sizes = req.body.size
+	var skuColor = req.body.sku.color;
+	var colorName = req.body.variantColor;
+	var sizes = req.body.size;
+	var landedCost = req.body.landedCost;
+	var rawCost = req.body.supp.Cost;
+	var picture = req.body.picture;
+	var fbCode = req.body.fbCode;
+
 	var newSKUs = {
 		"Items":[],
 			"TenantToken":process.env.MY_TENANT,
@@ -38,18 +44,25 @@ app.post('/', function(req, res){
 			"Sku":sku + skuColor + "-" + size,
 			"Description":desc,
 			"Classification":classification,
-			"Supplier":supName,
+			"Supplier":"JuJu",
 		    "Brand":brand,
-		    // "Pictures":[  
-		    //    "http://www.example.com/image.jpg"
-		    // ],
-		    // "Attributes":{  
-		    //    "String":"String"
-		    // },
+		    "PartNumber":colorName + " " + size,
+		    "Cost":landedCost,
+		    "VariationParentSku":sku,
+		    "Pictures":[  
+		       picture
+		    ],
+		    "Attributes":{  
+		       "Color":colorName,
+		       "Size":size,
+		       "FB Code":fbCode,
+		    },
 		    "SupplierInfo":[  
 		      {  
-		         "SupplierName":supName,
-		         "IsPrimary":true
+		         "SupplierName":"JuJu",
+		         "IsPrimary":true,
+		         "IsActive":true,
+		         "Cost":rawCost
 		      }
 		   ]
 		};
