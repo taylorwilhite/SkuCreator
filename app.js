@@ -95,6 +95,6 @@ app.post('/', function(req, res){
 });
 
 // Start Server
-app.listen(3000, function(){
+app.listen(env.process.PORT || 3000, function(){
 	console.log('Server is running on port 3000');
 });
