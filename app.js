@@ -79,7 +79,8 @@ app.post('/', function(req, res){
 		{method: 'POST',
 		url: 'https://app.skuvault.com/api/products/createProducts',
 		headers: [{'Content-Type': 'application/json', 'Accept': 'application/json'}],
-		body: newSkuJSON
+		json: true,
+		body: newSKUs
 		}, function(err, response, body){
 		if(err){
 			console.log(err);
