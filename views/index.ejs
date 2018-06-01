@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Create Multiple SKUs</title>
+	<script type="text/javascript" src="/scripts/interact.js"></script>
 </head>
 <body>
 	<h1>Create SKUs</h1>
@@ -19,6 +20,7 @@
 			<label><input type="checkbox" name="size[]" value="P1X">P1X</label>
 			<label><input type="checkbox" name="size[]" value="P2X">P2X</label>
 			<label><input type="checkbox" name="size[]" value="P3X">P3X</label>
+			<label><input type="checkbox" onclick="selectAll(this)">Select All</label>
 		</fieldset>
 		
 		<input type="text" name="variantTitle" placeholder="Title" required="true">
