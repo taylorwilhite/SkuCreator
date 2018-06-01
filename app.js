@@ -4,6 +4,7 @@ require('dotenv').load();
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var request = require('request');
 
 // Config
 app.set('view engine', 'ejs');
@@ -74,8 +75,22 @@ app.post('/', function(req, res){
 	console.log(newSkuJSON);
 	console.log(newSKUs);
 	// Submit to SKUvault
+	request(
+		{method: 'POST',
+		url: 'https://app.skuvault.com/api/products/createProducts',
+		headers: [{'Content-Type': 'application/json', 'Accept': 'application/json'}],
+		body: newSkuJSON
+		}, function(err, response, body){
+		if(err){
+			console.log(err);
+			res.redirect("back");
+		} else {
+			console.log(response);
+			res.redirect("/");
+		}
+	})
 	//redirect
-	res.redirect("/");
+	// res.redirect("/");
 });
 
 // Start Server
