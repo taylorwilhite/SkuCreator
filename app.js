@@ -74,7 +74,7 @@ app.post('/', function(req, res){
 	var newSkuJSON = JSON.stringify(newSKUs);
 	console.log(newSkuJSON);
 	console.log(newSKUs);
-	// Submit to SKUvault
+	// Submit to SKUvault NOT WORKING FIX THIS POST REQUEST
 	request(
 		{method: 'POST',
 		url: 'https://app.skuvault.com/api/products/createProducts',
