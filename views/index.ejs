@@ -19,7 +19,7 @@
 			<label><input type="checkbox" name="size[]" value="P3X">P3X</label>
 		</fieldset>
 		
-		<input type="text" name="variantTitle" placeholder="Title">
+		<input type="text" name="variantTitle" placeholder="Title" required="true">
 		<label for="classification">Classification: </label>
 		<select name="classification" id="classification" required="true">
 			<option value="" selected>Select One</option>
@@ -36,9 +36,14 @@
 			<option value="(A6) Apparel- Jumpsuits & Rompers">(A6) Apparel- Jumpsuits & Rompers</option>
 			<option value="(A7) Apparel- Activewear">(A7) Apparel- Activewear</option>
 			<option value="(A7) Apparel- Swimwear">(A7) Apparel- Swimwear</option>
-		</select> <!-- Probably make this a dropdown -->
-		<input type="text" name="brand" placeholder="Brand">
-		<input type="text" name="supp[Name]" placeholder="Supplier">
+		</select>
+		<select name="brand" id="brand" required="true">
+			<option value="" selected>Select One</option>
+			<option value="AMARYLLIS">AMARYLLIS</option>
+			<option value="AMA By Amaryllis">AMA By Amaryllis</option>
+			<option value="REFLECTION">REFLECTION</option>
+		</select>
+		<!-- <input type="text" name="supp[Name]" placeholder="Supplier"> -->
 		<!-- <input type="text" name="supp[Primary]" placeholder="Supplier Primary?"> -->
 		<input type="submit">
 	</form>
