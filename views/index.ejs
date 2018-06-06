@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Create Multiple SKUs</title>
-	<script type="text/javascript" src="/scripts/interact.js"></script>
-</head>
-<body>
+<% include ./partials/header %>
+
 	<h1>Create SKUs</h1>
 	<form action="/" method="POST">
 		<input type="text" name="sku[parent]" placeholder="Parent SKU" required="true">
@@ -66,6 +61,4 @@
 		<input type="number" name="landedCost" id="landedCost" step="0.01">
 		<input type="submit">
 	</form>
-
-</body>
-</html>
+<% include ./partials/footer %>
