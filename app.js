@@ -100,6 +100,10 @@ app.post('/', function(req, res){
 	})
 });
 
+app.get('/login', function(req, res){
+	res.render('login');
+});
+
 // Start Server
 app.listen(process.env.PORT || 3000, function(){
 	console.log('Server is running on port 3000');
