@@ -5,11 +5,18 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
+var session = require('express-session');
 
 // Config
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
+app.use(session({
+	secret: process.env.SESSION_SECRET,
+	saveUninitialized: false,
+	resave: false,
+	maxAge: 8 * 60 * 60 * 1000
+}));
 
 // Routes
 
@@ -33,12 +40,13 @@ app.post('/', function(req, res){
 	var picture = req.body.picture;
 	var fbCode = req.body.fbCode;
 
+	// Create Empty object to push SKUs into
 	var newSKUs = {
 		"Items":[],
 			"TenantToken":process.env.MY_TENANT,
 			"UserToken":process.env.MY_USER
 		};
-	// Format Correctly - CURRENTLY ONLY ONE FOR TESTING
+	// Format Correctly
 	sizes.forEach(function(size){
 		//For loop for sizes
 		var newSize =
@@ -73,9 +81,7 @@ app.post('/', function(req, res){
 	});
 	
 	var newSkuJSON = JSON.stringify(newSKUs);
-	// console.log(newSkuJSON);
-	// console.log(newSKUs);
-	// Submit to SKUvault NOT WORKING FIX THIS POST REQUEST
+	// Submit to SKUvault
 	request(
 		{method: 'POST',
 		url: 'https://app.skuvault.com/api/products/createProducts',
@@ -88,12 +94,10 @@ app.post('/', function(req, res){
 			res.redirect("back");
 		} else {
 			console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
-  			console.log('body:', body); // Print the HTML for the Google homepage.;
+  			console.log('body:', body); // Print the status response
 			res.redirect("/");
 		}
 	})
-	//redirect
-	// res.redirect("/");
 });
 
 // Start Server
