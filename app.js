@@ -6,6 +6,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
 var session = require('express-session');
+var middleware = require('./middleware');
 
 // Config
 app.set('view engine', 'ejs');
@@ -20,7 +21,7 @@ app.use(session({
 
 // Routes
 
-app.get('/', function(req, res){
+app.get('/', middleware.isLoggedIn, function(req, res){
 	res.render('index');
 });
 
@@ -129,11 +130,12 @@ app.post('/login', function(req, res){
 				res.redirect('back');
 			} else {
 				// set cookie and go home
-				req.session.cookie.TenantToken = body.TenantToken;
-				req.session.cookie.UserToken = body.UserToken;
+				req.session.TenantToken = body.TenantToken;
+				req.session.UserToken = body.UserToken;
 				res.redirect('/');
 			}
 		}
+		console.log(req.session);
 	});
 });
 
