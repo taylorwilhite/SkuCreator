@@ -36,10 +36,12 @@ app.post('/', function(req, res){
 	var skuColor = req.body.sku.color;
 	var colorName = req.body.variantColor;
 	var sizes = req.body.size;
-	var landedCost = req.body.landedCost;
-	var rawCost = req.body.supp.Cost;
+	var regLanded = req.body.landedCost;
+	var regRaw = req.body.supp.Cost;
 	var picture = req.body.picture;
 	var fbCode = req.body.fbCode;
+	var plusLanded = req.body.plus.landedCost;
+	var plusRaw = req.body.plus.rawCost;
 
 	// Create Empty object to push SKUs into
 	var newSKUs = {
@@ -49,7 +51,17 @@ app.post('/', function(req, res){
 		};
 	// Format Correctly
 	sizes.forEach(function(size){
+		var landedCost = ''
+		var rawCost = ''
 		//For loop for sizes
+		if(size == 'P1X' || size == 'P2X' || size =='P3X'){
+			var landedCost = plusLanded;
+			var rawCost = plusRaw;
+		} else {
+			var landedCost = regLanded;
+			var rawCost = regRaw;
+		};
+
 		var newSize =
 		{  
 			"Sku":sku + skuColor + "-" + size,
