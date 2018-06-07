@@ -82,7 +82,6 @@ app.post('/', function(req, res){
 	});
 	
 	var newSkuJSON = JSON.stringify(newSKUs);
-	console.log(newSKUs);
 	// Submit to SKUvault
 	request(
 		{method: 'POST',
