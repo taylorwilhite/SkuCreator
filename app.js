@@ -44,8 +44,8 @@ app.post('/', function(req, res){
 	// Create Empty object to push SKUs into
 	var newSKUs = {
 		"Items":[],
-			"TenantToken":process.env.MY_TENANT,
-			"UserToken":process.env.MY_USER
+			"TenantToken":req.session.TenantToken,
+			"UserToken":req.session.UserToken
 		};
 	// Format Correctly
 	sizes.forEach(function(size){
@@ -82,6 +82,7 @@ app.post('/', function(req, res){
 	});
 	
 	var newSkuJSON = JSON.stringify(newSKUs);
+	console.log(newSKUs);
 	// Submit to SKUvault
 	request(
 		{method: 'POST',
@@ -135,7 +136,6 @@ app.post('/login', function(req, res){
 				res.redirect('/');
 			}
 		}
-		console.log(req.session);
 	});
 });
 
