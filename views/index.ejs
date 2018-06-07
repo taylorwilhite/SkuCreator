@@ -7,18 +7,8 @@
 		<input type="text" name="sku[color]" placeholder="Color Code" required="true">
 		<input type="text" name="picture" placeholder="image link">
 		<input type="text" name="fbCode" placeholder="Fabric Book">
-		<fieldset>
-			<label><input type="checkbox" name="size[]" value="S">Small</label>
-			<label><input type="checkbox" name="size[]" value="M">Medium</label>
-			<label><input type="checkbox" name="size[]" value="L">Large</label>
-			<label><input type="checkbox" name="size[]" value="XL">X-Large</label>
-			<label><input type="checkbox" name="size[]" value="P1X">P1X</label>
-			<label><input type="checkbox" name="size[]" value="P2X">P2X</label>
-			<label><input type="checkbox" name="size[]" value="P3X">P3X</label>
-			<label><input type="checkbox" onclick="selectAll(this)">Select All</label>
-		</fieldset>
-		
 		<input type="text" name="variantTitle" placeholder="Title" required="true">
+
 		<label for="classification">Classification: </label>
 		<select name="classification" id="classification" required="true">
 			<option value="" selected>Select One</option>
@@ -46,6 +36,7 @@
 			<option value="(A7-SMU) Apparel- Activewear">(A7-SMU) Apparel- Activewear</option>
 			<option value="(A7) Apparel- Swimwear">(A7) Apparel- Swimwear</option>
 		</select>
+
 		<label for="brand">Brand: </label>
 		<select name="brand" id="brand" required="true">
 			<option value="" selected>Select One</option>
@@ -53,12 +44,33 @@
 			<option value="AMA By Amaryllis">AMA By Amaryllis</option>
 			<option value="REFLECTION">REFLECTION</option>
 		</select>
-		<label for="rawCost">Raw Cost: </label>
-		<input type="number" name="supp[Cost]" id="rawCost" step="0.01">
-		<!-- <input type="text" name="supp[Name]" placeholder="Supplier"> -->
-		<!-- <input type="text" name="supp[Primary]" placeholder="Supplier Primary?"> -->
-		<label for="landedCost">Landed Cost: </label>
-		<input type="number" name="landedCost" id="landedCost" step="0.01">
+
+		<fieldset>
+			<legend>Sizes</legend>
+			<label><input type="checkbox" name="size[]" value="S">Small</label>
+			<label><input type="checkbox" name="size[]" value="M">Medium</label>
+			<label><input type="checkbox" name="size[]" value="L">Large</label>
+			<label><input type="checkbox" name="size[]" value="XL">X-Large</label>
+			<label><input type="checkbox" name="size[]" value="P1X">P1X</label>
+			<label><input type="checkbox" name="size[]" value="P2X">P2X</label>
+			<label><input type="checkbox" name="size[]" value="P3X">P3X</label>
+			<label><input type="checkbox" onclick="selectAll(this)">Select All</label>
+		</fieldset>
+		
+
+
+		<fieldset>
+			<legend>Cost</legend>
+			<label for="rawCost">Raw Cost: </label>
+			<input type="number" name="supp[Cost]" id="rawCost" step="0.01">
+			<label for="landedCost">Landed Cost: </label>
+			<input type="number" name="landedCost" id="landedCost" step="0.01">
+			<label for="plusRawCost">Raw Cost (PLUS): </label>
+			<input type="number" name="plus[rawCost]" id="plusRawCost" step="0.01">
+			<label for="plusLandedCost">Landed Cost (PLUS): </label>
+			<input type="number" name="plus[landedCost]" id="plusLandedCost" step="0.01">
+		</fieldset>
+		
 		<input type="submit">
 	</form>
 <% include ./partials/footer %>
