@@ -15,7 +15,7 @@ app.use(session({
 	secret: process.env.SESSION_SECRET,
 	saveUninitialized: false,
 	resave: false,
-	maxAge: 8 * 60 * 60 * 1000
+	cookie: {maxAge: 8 * 60 * 60 * 1000}
 }));
 
 // Routes
@@ -102,6 +102,39 @@ app.post('/', function(req, res){
 
 app.get('/login', function(req, res){
 	res.render('login');
+});
+
+app.post('/login', function(req, res){
+	// form object to send to skuvault
+	var skuvaultLogin = {
+		"Email":req.body.username,
+		"Password":req.body.password
+	}
+	// send object
+	request(
+	{method: 'POST',
+	url: 'https://app.skuvault.com/api/gettokens',
+	headers: [{'Content-Type': 'application/json', 'Accept': 'application/json'}],
+	json: true,
+	body: skuvaultLogin
+	}, function(err, response, body){
+		// check response for tokens
+		if(err){
+			console.log(err);
+			res.redirect('/login');
+		} else {
+			// if not there redirect and log error
+			if(!body.TenantToken){
+				console.log('Incorrect credentials');
+				res.redirect('back');
+			} else {
+				// set cookie and go home
+				req.session.cookie.TenantToken = body.TenantToken;
+				req.session.cookie.UserToken = body.UserToken;
+				res.redirect('/');
+			}
+		}
+	});
 });
 
 // Start Server
