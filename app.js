@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var session = require('express-session');
 var middleware = require('./middleware');
+var flash = require('connect-flash');
 
 // Config
 app.set('view engine', 'ejs');
@@ -18,6 +19,14 @@ app.use(session({
 	resave: false,
 	cookie: {maxAge: 8 * 60 * 60 * 1000}
 }));
+app.use(flash());
+
+// make flash available
+app.use(function(req, res, next){
+   res.locals.success = req.flash('success');
+   res.locals.error = req.flash('error');
+   next();
+});
 
 // Routes
 
@@ -104,13 +113,29 @@ app.post('/', function(req, res){
 		}, function(err, response, body){
 		if(err){
 			console.log(err);
+			req.flash('error', err)
 			res.redirect("back");
 		} else {
+			// TODO: ADD LOGIC TO GIVE ACCURATE STATUS FEEDBACK IN FLASH HERE
+			if(response.statusCode == 202){
+				var errors = [];
+				body.Errors.forEach(function(error){
+					var skuError = error.Sku + ': ' + error.ErrorMessages;
+					errors.push(skuError);
+				});
+				req.flash('error', errors.join('<br>'));
+				res.redirect('back');
+			} else if(response.statusCode == 200){
+				req.flash('success', 'SKUs Created successfully!');
+				res.redirect('/');
+			} else {
+				req.flash('error', 'Possible error, unexpected response code: ' + response.statusCode);
+				res.redirect('back');
+			}
 			console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
   			console.log('body:', body); // Print the status response
-			res.redirect("/");
 		}
-	})
+	});
 });
 
 app.get('/login', function(req, res){
@@ -134,16 +159,18 @@ app.post('/login', function(req, res){
 		// check response for tokens
 		if(err){
 			console.log(err);
+			req.flash('error', 'There was an error submitting. Try again.');
 			res.redirect('/login');
 		} else {
 			// if not there redirect and log error
 			if(!body.TenantToken){
-				console.log('Incorrect credentials');
+				req.flash('error', 'Incorrect credentials. Please Try again.');
 				res.redirect('back');
 			} else {
 				// set cookie and go home
 				req.session.TenantToken = body.TenantToken;
 				req.session.UserToken = body.UserToken;
+				req.flash('success', 'Login succeeded!');
 				res.redirect('/');
 			}
 		}

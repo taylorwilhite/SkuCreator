@@ -5,7 +5,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
 	if(req.session.TenantToken){
 		return next();
 	} else {
-		console.log('You need to be logged in');
+		req.flash('error', 'You need to be logged in');
 		res.redirect('/login');
 	};
 };

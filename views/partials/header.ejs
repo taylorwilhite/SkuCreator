@@ -5,6 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Create Multiple SKUs</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
 	<script type="text/javascript" src="/scripts/interact.js"></script>
 </head>
 <body>
+	<div class="container">
+		<% if(error && error.length > 0) { %>
+			<div class='alert alert-error'><p><%- error %></p></div>
+		<% } %>
+
+		<% if(success && success.length > 0) { %>
+			<div class='alert alert-success'><p><%- success %></p></div>
+		<% } %>
+	</div>

@@ -1,0 +1,26 @@
+html {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-error {
+	color: #a94442;
+	background-color: #f2dede;
+}
+
+.alert-success {
+	color: #3c763d;
+	background-color: #dff0d8;
+}
