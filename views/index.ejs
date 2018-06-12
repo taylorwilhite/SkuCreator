@@ -3,7 +3,7 @@
 	<h1>Create SKUs</h1>
 	<form action="/" method="POST">
 		<input type="text" name="sku[parent]" placeholder="Parent SKU" required="true">
-		<input type="text" name="picture" placeholder="image link">
+		
 		<input type="text" name="fbCode" placeholder="Fabric Book">
 		<input type="text" name="variantTitle" placeholder="Title" required="true">
 
@@ -46,6 +46,7 @@
 		<div id="colorFields">
 			<input type="text" name="colorSet[color1][color]" placeholder="Color" required="true">
 			<input type="text" name="colorSet[color1][colorCode]" placeholder="Color Code" required="true">
+			<input type="text" name="colorSet[color1][pictureLink]" placeholder="Image Link">
 			<button type="button" id="addColor" onclick="addColorFields()">Add Color</button>
 		</div>
 		

@@ -15,12 +15,10 @@ router.post('/', function(req, res){
 	var brand = req.body.brand;
 	var supName = req.body.supp.Name;
 	var supPrim = req.body.supp.Primary;
-	var skuColor = req.body.sku.color;
-	var colorName = req.body.variantColor;
+	var colors = req.body.colorSet;
 	var sizes = req.body.size;
 	var regLanded = req.body.landedCost;
 	var regRaw = req.body.supp.Cost;
-	var picture = req.body.picture;
 	var fbCode = req.body.fbCode;
 	var plusLanded = req.body.plus.landedCost;
 	var plusRaw = req.body.plus.rawCost;
@@ -32,51 +30,57 @@ router.post('/', function(req, res){
 			"UserToken":req.session.UserToken
 		};
 	// Format Correctly
-	sizes.forEach(function(size){
-		var landedCost = ''
-		var rawCost = ''
-		//For loop for sizes
-		if(size == 'P1X' || size == 'P2X' || size =='P3X'){
-			var landedCost = plusLanded;
-			var rawCost = plusRaw;
-		} else {
-			var landedCost = regLanded;
-			var rawCost = regRaw;
-		};
+	for (var colorIndex in colors) {
+		var skuColor = colors[colorIndex].color;
+		var colorCode = colors[colorIndex].colorCode;
+		var picture = colors[colorIndex].pictureLink;
 
-		var newSize =
-		{  
-			"Sku":sku + skuColor + "-" + size,
-			"Description":desc,
-			"Classification":classification,
-			"Supplier":"JuJu",
-		    "Brand":brand,
-		    "PartNumber":colorName + " " + size,
-		    "Cost":landedCost,
-		    "VariationParentSku":sku,
-		    "Pictures":[  
-		       picture
-		    ],
-		    "Attributes":{  
-		       "Color":colorName,
-		       "Size":size,
-		       "FB Code":fbCode,
-		    },
-		    "SupplierInfo":[  
-		      {  
-		         "SupplierName":"JuJu",
-		         "IsPrimary":true,
-		         "IsActive":true,
-		         "Cost":rawCost
-		      }
-		   ]
-		};
-		newSKUs["Items"].push(newSize);
-		var newSize = {};
-	});
+		sizes.forEach(function(size){
+			var landedCost = ''
+			var rawCost = ''
+			//For loop for sizes
+			if(size == 'P1X' || size == 'P2X' || size =='P3X'){
+				var landedCost = plusLanded;
+				var rawCost = plusRaw;
+			} else {
+				var landedCost = regLanded;
+				var rawCost = regRaw;
+			};
+
+			var newSize =
+			{  
+				"Sku":sku + colorCode + "-" + size,
+				"Description":desc,
+				"Classification":classification,
+				"Supplier":"JuJu",
+			    "Brand":brand,
+			    "PartNumber":skuColor + " " + size,
+			    "Cost":landedCost,
+			    "VariationParentSku":sku,
+			    "Pictures":[  
+			       picture
+			    ],
+			    "Attributes":{  
+			       "Color":skuColor,
+			       "Size":size,
+			       "FB Code":fbCode,
+			    },
+			    "SupplierInfo":[  
+			      {  
+			         "SupplierName":"JuJu",
+			         "IsPrimary":true,
+			         "IsActive":true,
+			         "Cost":rawCost
+			      }
+			   ]
+			};
+			newSKUs["Items"].push(newSize);
+			var newSize = {};
+		});
+	};
 	
 	var newSkuJSON = JSON.stringify(newSKUs);
-	// Submit to SKUvault
+	//Submit to SKUvault
 	request(
 		{method: 'POST',
 		url: 'https://app.skuvault.com/api/products/createProducts',
@@ -89,7 +93,7 @@ router.post('/', function(req, res){
 			req.flash('error', err)
 			res.redirect("back");
 		} else {
-			// TODO: ADD LOGIC TO GIVE ACCURATE STATUS FEEDBACK IN FLASH HERE
+			// logic for error/success flashes
 			if(response.statusCode == 202){
 				var errors = [];
 				body.Errors.forEach(function(error){
