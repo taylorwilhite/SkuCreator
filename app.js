@@ -1,17 +1,29 @@
-// Allow loading environment from .env
-require('dotenv').load();
 // Set Requirements
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 var request = require('request');
 var session = require('express-session');
 var middleware = require('./middleware');
 var flash = require('connect-flash');
+var Counter = require('./models/counter');
+
+// Allow loading environment from .env
+require('dotenv').load();
 
 // Routes
 var indexRoutes = require('./routes/index');
 var skuRoutes = require('./routes/skuCreation');
+
+var databaseUri = process.env.MONGODB_URI || 'mongodb://localhost/skuCreateDb';
+var db = mongoose.connection;
+
+mongoose.connect(databaseUri);
+db.on('error', console.error.bind(console, 'connection error: '));
+db.once('open', function(){
+	console.log('Database Connected');
+});
 
 // Config
 app.set('view engine', 'ejs');
