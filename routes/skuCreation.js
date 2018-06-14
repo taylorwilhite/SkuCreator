@@ -2,6 +2,23 @@ var express = require('express');
 var router = express.Router();
 var middleware = require('../middleware');
 var request = require('request');
+var Counter = require('../models/counter');
+
+
+function getNextUpc(sequenceName){
+	var query = {"_id": sequenceName};
+	var update = {$inc:{sequence_value:1}};
+	var options = {new: true};
+
+   	Counter.findOneAndUpdate(query, update, options, function(err, counter){
+   	if(err){
+   		console.log(err);
+   	} else {
+   		console.log(counter.sequence_value); // gives updated number
+   		return counter.sequence_value // gives undefined
+   	}
+   });
+};
 
 router.get('/', middleware.isLoggedIn, function(req, res){
 	res.render('index');
@@ -51,6 +68,7 @@ router.post('/', function(req, res){
 			{  
 				"Sku":sku + colorCode + "-" + size,
 				"Description":desc,
+				"Code":getNextUpc('productupc'),
 				"Classification":classification,
 				"Supplier":"JuJu",
 			    "Brand":brand,
@@ -79,7 +97,8 @@ router.post('/', function(req, res){
 		});
 	};
 	
-	var newSkuJSON = JSON.stringify(newSKUs);
+	console.log(newSKUs);
+	// var newSkuJSON = JSON.stringify(newSKUs);
 	//Submit to SKUvault
 	request(
 		{method: 'POST',
