@@ -25,7 +25,8 @@ router.get('/', middleware.isLoggedIn, function(req, res){
 	res.render('index');
 });
 
-router.post('/', function(req, res){
+router.post('/', async function(req, res){
+	try{
 	// Get info from body
 	var sku = req.body.sku.parent;
 	var desc = req.body.variantTitle;
@@ -99,10 +100,10 @@ router.post('/', function(req, res){
 		});
 	};
 	
-	console.log(newSKUs);
+	setTimeout(function(){console.log(newSKUs)}, 5000);
 	// var newSkuJSON = JSON.stringify(newSKUs);
 	//Submit to SKUvault
-	request(
+	setTimeout(request(
 		{method: 'POST',
 		url: 'https://app.skuvault.com/api/products/createProducts',
 		headers: [{'Content-Type': 'application/json', 'Accept': 'application/json'}],
@@ -133,7 +134,10 @@ router.post('/', function(req, res){
 			console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
   			console.log('body:', body); // Print the status response
 		}
-	});
+	}), 10000);
+	} catch(error) {
+		console.log(error);
+	}
 });
 
 module.exports = router;
