@@ -5,19 +5,20 @@ var request = require('request');
 var Counter = require('../models/counter');
 
 
-function getNextUpc(sequenceName){
-	var query = {"_id": sequenceName};
+async function getNextUpc(seqName){
+	var query = {"_id": seqName};
 	var update = {$inc:{sequence_value:1}};
 	var options = {new: true};
 
-   	Counter.findOneAndUpdate(query, update, options, function(err, counter){
-   	if(err){
-   		console.log(err);
-   	} else {
-   		console.log(counter.sequence_value); // gives updated number
-   		return counter.sequence_value // gives undefined
-   	}
-   });
+   	const counter = await Counter.findOneAndUpdate(query, update, options, function(err, counter){
+	   	if(err){
+	   		console.log(err);
+	   	} else {
+	   		console.log(counter.sequence_value); // gives updated number
+	   		return counter.sequence_value // gives undefined
+	   	}
+	}).exec();
+   	return counter.sequence_value;
 };
 
 router.get('/', middleware.isLoggedIn, function(req, res){
@@ -52,9 +53,10 @@ router.post('/', function(req, res){
 		var colorCode = colors[colorIndex].colorCode;
 		var picture = colors[colorIndex].pictureLink;
 
-		sizes.forEach(function(size){
+		sizes.forEach( async function(size){
 			var landedCost = ''
 			var rawCost = ''
+			var newUpc = await getNextUpc('productupc');
 			//For loop for sizes
 			if(size == 'P1X' || size == 'P2X' || size =='P3X'){
 				var landedCost = plusLanded;
@@ -68,7 +70,7 @@ router.post('/', function(req, res){
 			{  
 				"Sku":sku + colorCode + "-" + size,
 				"Description":desc,
-				"Code":getNextUpc('productupc'),
+				"Code":newUpc,
 				"Classification":classification,
 				"Supplier":"JuJu",
 			    "Brand":brand,
