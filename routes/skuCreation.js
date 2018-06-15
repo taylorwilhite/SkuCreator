@@ -103,7 +103,7 @@ router.post('/', async function(req, res){
 	setTimeout(function(){console.log(newSKUs)}, 5000);
 	// var newSkuJSON = JSON.stringify(newSKUs);
 	//Submit to SKUvault
-	setTimeout(request(
+	setTimeout(function(){request(
 		{method: 'POST',
 		url: 'https://app.skuvault.com/api/products/createProducts',
 		headers: [{'Content-Type': 'application/json', 'Accept': 'application/json'}],
@@ -134,7 +134,7 @@ router.post('/', async function(req, res){
 			console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
   			console.log('body:', body); // Print the status response
 		}
-	}), 10000);
+	})}, 10000);
 	} catch(error) {
 		console.log(error);
 	}
