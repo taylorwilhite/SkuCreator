@@ -19,11 +19,13 @@ var skuRoutes = require('./routes/skuCreation');
 var databaseUri = process.env.MONGODB_URI || 'mongodb://localhost/skuCreateDb';
 var db = mongoose.connection;
 
-mongoose.connect(databaseUri);
-db.on('error', console.error.bind(console, 'connection error: '));
-db.once('open', function(){
-	console.log('Database Connected');
-});
+mongoose.connect(databaseUri)
+	.then(() => console.log('Database Connected'))
+	.catch(err => console.log('Database connection error: ${err.message}'));
+// db.on('error', console.error.bind(console, 'connection error: '));
+// db.once('open', function(){
+// 	console.log('Database Connected');
+// });
 
 // Config
 app.set('view engine', 'ejs');
