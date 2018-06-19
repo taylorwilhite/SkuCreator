@@ -79,21 +79,20 @@ router.post('/', async function(req, res){
 			{  
 				"Sku":sku + colorCode + "-" + size,
 				"Description":desc,
-				"Code":await getNextUpc('productupc'),
+				"PartNumber":skuColor + " " + size,
+				"Attributes":{  
+			       "Color":skuColor,
+			       "Size":size,
+			       "FB Code":fbCode,
+			    },				
 				"Classification":classification,
 				"Supplier":"JuJu",
-			    "Brand":brand,
-			    "PartNumber":skuColor + " " + size,
+			    "Brand":brand,			    
 			    "Cost":landedCost,
 			    "VariationParentSku":sku,
 			    "Pictures":[  
 			       picture
-			    ],
-			    "Attributes":{  
-			       "Color":skuColor,
-			       "Size":size,
-			       "FB Code":fbCode,
-			    },
+			    ],			
 			    "SupplierInfo":[  
 			      {  
 			         "SupplierName":"JuJu",
@@ -101,7 +100,8 @@ router.post('/', async function(req, res){
 			         "IsActive":true,
 			         "Cost":rawCost
 			      }
-			   ]
+			   ],
+			   "Code":await getNextUpc('productupc')
 			};
 			newSKUs["Items"].push(newSize);
 			var newSize = {};
