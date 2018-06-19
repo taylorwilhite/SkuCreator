@@ -14,7 +14,6 @@ async function getNextUpc(seqName){
 	   	if(err){
 	   		console.log(err);
 	   	} else {
-	   		console.log(counter.sequence_value); // gives updated number
 	   		return counter.sequence_value // gives undefined
 	   	}
 	}).exec();
@@ -108,8 +107,6 @@ router.post('/', async function(req, res){
 		});
 	};
 	
-
-	setTimeout(function(){console.log(newSKUs)}, 5000);
 	await wait1Sec(1);
 	// var newSkuJSON = JSON.stringify(newSKUs);
 	//Submit to SKUvault
