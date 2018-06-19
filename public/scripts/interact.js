@@ -13,7 +13,7 @@ function addColorFields(){
 	var colorFieldCode = document.createElement('input');
 	var pictureLink = document.createElement('input');
 	colorField.type = 'text';
-	colorField.name = 'colorSet[color' + fieldNum + '][color]';
+	colorField.name = 'colorSet[color' + fieldNum + '][colorName]';
 	colorField.placeholder = 'Color';
 	colorFieldCode.type = 'text';
 	colorFieldCode.name = 'colorSet[color' + fieldNum + '][colorCode]';

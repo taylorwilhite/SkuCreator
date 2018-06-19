@@ -21,6 +21,14 @@ async function getNextUpc(seqName){
    	return counter.sequence_value;
 };
 
+function wait1Sec(x) { 
+  return new Promise(resolve => {
+    setTimeout(() => {
+    	resolve(x);
+    }, 2000);
+  });
+};
+
 router.get('/', middleware.isLoggedIn, function(req, res){
 	res.render('index');
 });
@@ -50,14 +58,14 @@ router.post('/', async function(req, res){
 		};
 	// Format Correctly
 	for (var colorIndex in colors) {
-		var skuColor = colors[colorIndex].color;
+		var skuColor = colors[colorIndex].colorName;
 		var colorCode = colors[colorIndex].colorCode;
 		var picture = colors[colorIndex].pictureLink;
 
 		sizes.forEach( async function(size){
 			var landedCost = ''
 			var rawCost = ''
-			var newUpc = await getNextUpc('productupc');
+			// var newUpc = await getNextUpc('productupc');
 			//For loop for sizes
 			if(size == 'P1X' || size == 'P2X' || size =='P3X'){
 				var landedCost = plusLanded;
@@ -71,7 +79,7 @@ router.post('/', async function(req, res){
 			{  
 				"Sku":sku + colorCode + "-" + size,
 				"Description":desc,
-				"Code":newUpc,
+				"Code":await getNextUpc('productupc'),
 				"Classification":classification,
 				"Supplier":"JuJu",
 			    "Brand":brand,
@@ -100,10 +108,12 @@ router.post('/', async function(req, res){
 		});
 	};
 	
+
 	setTimeout(function(){console.log(newSKUs)}, 5000);
+	await wait1Sec(1);
 	// var newSkuJSON = JSON.stringify(newSKUs);
 	//Submit to SKUvault
-	setTimeout(function(){request(
+	request(
 		{method: 'POST',
 		url: 'https://app.skuvault.com/api/products/createProducts',
 		headers: [{'Content-Type': 'application/json', 'Accept': 'application/json'}],
@@ -134,7 +144,7 @@ router.post('/', async function(req, res){
 			console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
   			console.log('body:', body); // Print the status response
 		}
-	})}, 10000);
+	});
 	} catch(error) {
 		console.log(error);
 	}
