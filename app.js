@@ -21,7 +21,7 @@ var db = mongoose.connection;
 
 mongoose.connect(databaseUri)
 	.then(() => console.log('Database Connected'))
-	.catch(err => console.log('Database connection error: ${err.message}'));
+	.catch(err => console.log('Database connection error: ' + err.message));
 // db.on('error', console.error.bind(console, 'connection error: '));
 // db.once('open', function(){
 // 	console.log('Database Connected');
