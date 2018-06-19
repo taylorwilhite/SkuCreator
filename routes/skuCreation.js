@@ -20,6 +20,12 @@ async function getNextUpc(seqName){
    	return counter.sequence_value;
 };
 
+function picLink(linkUrl){
+	linkUrl = linkUrl.replace(/www\.dropbox/, 'dl.dropboxusercontent');
+	linkUrl = linkUrl.replace(/\?.*/, '');
+	return linkUrl;
+}
+
 function wait1Sec(x) { 
   return new Promise(resolve => {
     setTimeout(() => {
@@ -59,7 +65,7 @@ router.post('/', async function(req, res){
 	for (var colorIndex in colors) {
 		var skuColor = colors[colorIndex].colorName;
 		var colorCode = colors[colorIndex].colorCode;
-		var picture = colors[colorIndex].pictureLink;
+		var picture = picLink(colors[colorIndex].pictureLink);
 
 		sizes.forEach( async function(size){
 			var landedCost = ''
