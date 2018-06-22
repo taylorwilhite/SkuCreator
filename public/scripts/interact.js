@@ -1,4 +1,5 @@
 var fieldNum = 2;
+var kimonoStyle = false;
 
 function selectAll(source){
 	checkboxes = document.getElementsByName('size[]');
@@ -27,4 +28,15 @@ function addColorFields(){
 	container.appendChild(colorFieldCode);
 	container.appendChild(pictureLink);
 	fieldNum++;
+};
+
+function kimonoSizeToggle(){
+	var regSizes = ['S', 'M', 'L', 'XL'];
+	var kimonoSizes = ['SM', 'LXL'];
+	if(kimonoStyle == false){
+		regSizes.forEach(function(size){
+			var deleteSize = document.querySelectorAll('input[value=' + size + ']');
+			deleteSize.parentNode.removeChild(deleteSize);
+		});
+	}
 };
