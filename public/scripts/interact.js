@@ -35,8 +35,9 @@ function addColorFields(){
 function kimonoSizeToggle(){
 	if(kimonoStyle == false){
 		regSizes.forEach(function(size){
-			var deleteSize = document.querySelectorAll('input[value=' + size + ']');
-			deleteSize.parentNode.removeChild(deleteSize);
+			var deleteSize = document.querySelector('input[value=' + size + ']');
+			var sizeLabel = deleteSize.parentNode;
+			sizeLabel.parentNode.removeChild(sizeLabel);
 		});
 	}
 };
