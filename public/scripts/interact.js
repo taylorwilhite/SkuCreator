@@ -33,11 +33,24 @@ function addColorFields(){
 };
 
 function kimonoSizeToggle(){
+	var sizeField = document.getElementById('sizeContainer');
+
 	if(kimonoStyle == false){
 		regSizes.forEach(function(size){
 			var deleteSize = document.querySelector('input[value=' + size + ']');
 			var sizeLabel = deleteSize.parentNode;
 			sizeLabel.parentNode.removeChild(sizeLabel);
+		});
+		kimonoSizes.forEach(function(size){
+			var labelContent = document.createTextNode(size);
+			var sizeLabel = document.createElement('label');
+			var sizeCheck = document.createElement('input');
+			sizeCheck.type = 'checkbox';
+			sizeCheck.name = 'size[]';
+			sizeCheck.value = size;
+			sizeLabel.appendChild(labelContent);
+			sizeLabel.prepend(sizeCheck);
+			sizeField.prepend(sizeLabel);
 		});
 	}
 };
