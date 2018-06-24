@@ -33,42 +33,39 @@ function addColorFields(){
 };
 
 function kimonoSizeToggle(){
-	var sizeField = document.getElementById('sizeContainer');
-
 	if(kimonoStyle == false){
 		regSizes.forEach(function(size){
-			var deleteSize = document.querySelector('input[value=' + size + ']');
-			var sizeLabel = deleteSize.parentNode;
-			sizeLabel.parentNode.removeChild(sizeLabel);
+			deleteSizes(size);
 		});
 		kimonoSizes.forEach(function(size){
-			var labelContent = document.createTextNode(size);
-			var sizeLabel = document.createElement('label');
-			var sizeCheck = document.createElement('input');
-			sizeCheck.type = 'checkbox';
-			sizeCheck.name = 'size[]';
-			sizeCheck.value = size;
-			sizeLabel.appendChild(labelContent);
-			sizeLabel.prepend(sizeCheck);
-			sizeField.prepend(sizeLabel);
+			addSizes(size);
 		});
 	} else {
 		kimonoSizes.forEach(function(size){
-			var deleteSize = document.querySelector('input[value=' + size + ']');
-			var sizeLabel = deleteSize.parentNode;
-			sizeLabel.parentNode.removeChild(sizeLabel);
+			deleteSizes(size);
 		});
 		regSizes.forEach(function(size){
-			var labelContent = document.createTextNode(size);
-			var sizeLabel = document.createElement('label');
-			var sizeCheck = document.createElement('input');
-			sizeCheck.type = 'checkbox';
-			sizeCheck.name = 'size[]';
-			sizeCheck.value = size;
-			sizeLabel.appendChild(labelContent);
-			sizeLabel.prepend(sizeCheck);
-			sizeField.prepend(sizeLabel);
+			addSizes(size);
 		});
 	}
 	kimonoStyle = !kimonoStyle;
+};
+
+function deleteSizes(size){
+	var deleteSize = document.querySelector('input[value=' + size + ']');
+	var sizeLabel = deleteSize.parentNode;
+	sizeLabel.parentNode.removeChild(sizeLabel);
+};
+
+function addSizes(size){
+	var sizeField = document.getElementById('sizeContainer');
+	var labelContent = document.createTextNode(size);
+	var sizeLabel = document.createElement('label');
+	var sizeCheck = document.createElement('input');
+	sizeCheck.type = 'checkbox';
+	sizeCheck.name = 'size[]';
+	sizeCheck.value = size;
+	sizeLabel.appendChild(labelContent);
+	sizeLabel.prepend(sizeCheck);
+	sizeField.prepend(sizeLabel);
 };
