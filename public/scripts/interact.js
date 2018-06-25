@@ -1,4 +1,7 @@
 var fieldNum = 2;
+var kimonoStyle = false;
+var regSizes = ['XL', 'L', 'M', 'S'];
+var kimonoSizes = ['LXL', 'SM'];
 
 function selectAll(source){
 	checkboxes = document.getElementsByName('size[]');
@@ -27,4 +30,42 @@ function addColorFields(){
 	container.appendChild(colorFieldCode);
 	container.appendChild(pictureLink);
 	fieldNum++;
+};
+
+function kimonoSizeToggle(){
+	if(kimonoStyle == false){
+		regSizes.forEach(function(size){
+			deleteSizes(size);
+		});
+		kimonoSizes.forEach(function(size){
+			addSizes(size);
+		});
+	} else {
+		kimonoSizes.forEach(function(size){
+			deleteSizes(size);
+		});
+		regSizes.forEach(function(size){
+			addSizes(size);
+		});
+	}
+	kimonoStyle = !kimonoStyle;
+};
+
+function deleteSizes(size){
+	var deleteSize = document.querySelector('input[value=' + size + ']');
+	var sizeLabel = deleteSize.parentNode;
+	sizeLabel.parentNode.removeChild(sizeLabel);
+};
+
+function addSizes(size){
+	var sizeField = document.getElementById('sizeContainer');
+	var labelContent = document.createTextNode(size);
+	var sizeLabel = document.createElement('label');
+	var sizeCheck = document.createElement('input');
+	sizeCheck.type = 'checkbox';
+	sizeCheck.name = 'size[]';
+	sizeCheck.value = size;
+	sizeLabel.appendChild(labelContent);
+	sizeLabel.prepend(sizeCheck);
+	sizeField.prepend(sizeLabel);
 };
