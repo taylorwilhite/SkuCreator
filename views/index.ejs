@@ -50,17 +50,19 @@
 			<button type="button" id="addColor" onclick="addColorFields()">Add Color</button>
 		</div>
 		
-		<fieldset id="sizeContainer">
+		<fieldset>
 			<legend>Sizes</legend>
-			<label><input type="checkbox" name="size[]" value="S">S</label>
-			<label><input type="checkbox" name="size[]" value="M">M</label>
-			<label><input type="checkbox" name="size[]" value="L">L</label>
-			<label><input type="checkbox" name="size[]" value="XL">X</label>
-			<label><input type="checkbox" name="size[]" value="P1X">P1X</label>
-			<label><input type="checkbox" name="size[]" value="P2X">P2X</label>
-			<label><input type="checkbox" name="size[]" value="P3X">P3X</label>
-			<label><input type="checkbox" onclick="selectAll(this)">Select All</label>
-			<button type="button" id="kimonoSizing" onclick="kimonoSizeToggle()">Size Style Toggle</button>
+			<div id="sizeContainer">
+				<label><input type="checkbox" name="size[]" value="S">S</label>
+				<label><input type="checkbox" name="size[]" value="M">M</label>
+				<label><input type="checkbox" name="size[]" value="L">L</label>
+				<label><input type="checkbox" name="size[]" value="XL">X</label>
+				<label><input type="checkbox" name="size[]" value="P1X">P1X</label>
+				<label><input type="checkbox" name="size[]" value="P2X">P2X</label>
+				<label><input type="checkbox" name="size[]" value="P3X">P3X</label>
+				<label><input type="checkbox" onclick="selectAll(this)">Select All</label>
+				<button type="button" id="kimonoSizing" onclick="kimonoSizeToggle()">Size Style Toggle</button>
+			</div>			
 		</fieldset>
 		
 
