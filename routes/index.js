@@ -5,11 +5,13 @@ var request = require('request');
 var User = require('../models/user');
 var middleware = require('../middleware');
 
-router.get('/', function(req, res){
+router.get('/', (req, res) => res.redirect('skuCreation'));
+
+router.get('/login', function(req, res){
 	res.render('login');
 });
 
-router.post('/', passport.authenticate('local', {failureRedirect: '/login', failureFlash: 'Invalid username or password.'}), function(req, res){
+router.post('/login', passport.authenticate('local', {failureRedirect: '/login', failureFlash: 'Invalid username or password.'}), function(req, res){
 	// form object to send to skuvault
 	var skuvaultLogin = {
 		"Email":req.body.username,
@@ -38,7 +40,7 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/login', fail
 				req.session.TenantToken = body.TenantToken;
 				req.session.UserToken = body.UserToken;
 				req.flash('success', 'Login succeeded!');
-				res.redirect('/');
+				res.redirect('/skuCreation');
 			}
 		}
 	});

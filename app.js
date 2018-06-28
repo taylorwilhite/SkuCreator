@@ -52,8 +52,8 @@ app.use(function(req, res, next){
 });
 
 // Route information
-app.use('/login', indexRoutes);
-app.use('/', skuRoutes);
+app.use('/', indexRoutes);
+app.use('/skuCreation', skuRoutes);
 
 // Start Server
 app.listen(process.env.PORT || 3000, function(){
