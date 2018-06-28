@@ -3,6 +3,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
 var request = require('request');
 var session = require('express-session');
 var middleware = require('./middleware');
@@ -16,16 +18,13 @@ require('dotenv').load();
 var indexRoutes = require('./routes/index');
 var skuRoutes = require('./routes/skuCreation');
 
+// DB setup
 var databaseUri = process.env.MONGODB_URI || 'mongodb://localhost/skuCreateDb';
 var db = mongoose.connection;
 
 mongoose.connect(databaseUri)
 	.then(() => console.log('Database Connected'))
 	.catch(err => console.log('Database connection error: ' + err.message));
-// db.on('error', console.error.bind(console, 'connection error: '));
-// db.once('open', function(){
-// 	console.log('Database Connected');
-// });
 
 // Config
 app.set('view engine', 'ejs');
@@ -38,6 +37,11 @@ app.use(session({
 	cookie: {maxAge: 8 * 60 * 60 * 1000}
 }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate())); // User is not defined yet
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // make flash available
 app.use(function(req, res, next){
