@@ -9,6 +9,7 @@ var request = require('request');
 var session = require('express-session');
 var middleware = require('./middleware');
 var flash = require('connect-flash');
+var User = require('./models/user');
 var Counter = require('./models/counter');
 
 // Allow loading environment from .env
