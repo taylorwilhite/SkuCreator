@@ -46,11 +46,12 @@ passport.use(new LocalStrategy(User.authenticate())); // User is not defined yet
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// make flash available
+// make flash and user available
 app.use(function(req, res, next){
-   res.locals.success = req.flash('success');
-   res.locals.error = req.flash('error');
-   next();
+	res.locals.activeUser = req.user;
+	res.locals.success = req.flash('success');
+	res.locals.error = req.flash('error');
+	next();
 });
 
 // Route information

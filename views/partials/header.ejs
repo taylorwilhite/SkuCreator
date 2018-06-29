@@ -9,6 +9,15 @@
 	<script type="text/javascript" src="/scripts/interact.js"></script>
 </head>
 <body>
+	<nav>
+			<% if(!activeUser){ %>
+			<a href="/login">Login</a>
+			<a href="/register">Register</a>
+			<% } else { %>
+			<a href="/logout">Logout</a>
+			<% } %>
+	</nav>
+
 	<div class="container">
 		<% if(error && error.length > 0) { %>
 			<div class='alert alert-error'><p><%- error %></p></div>
