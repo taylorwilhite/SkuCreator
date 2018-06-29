@@ -38,7 +38,7 @@ router.get('/', middleware.isLoggedIn, function(req, res){
 	res.render('index');
 });
 
-router.post('/', async function(req, res){
+router.post('/', middleware.isLoggedIn, async function(req, res){
 	try{
 	// Get info from body
 	var sku = req.body.sku.parent;
@@ -139,7 +139,7 @@ router.post('/', async function(req, res){
 				res.redirect('back');
 			} else if(response.statusCode == 200){
 				req.flash('success', 'SKUs Created successfully!');
-				res.redirect('/');
+				res.redirect('/skuCreation');
 			} else {
 				req.flash('error', 'Possible error, unexpected response code: ' + response.statusCode);
 				res.redirect('back');
