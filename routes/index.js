@@ -49,7 +49,7 @@ router.get('/login', function(req, res){
 	res.render('login');
 });
 
-router.post('/login', passport.authenticate('local', {failureRedirect: '/login', failureFlash: 'Invalid username or password.'}), function(req, res){
+router.post('/login', passport.authenticate('local', {failureRedirect: '/login', failureFlash: 'Invalid username or password. Please register or try again.'}), function(req, res){
 	// form object to send to skuvault
 	var skuvaultLogin = {
 		"Email":req.body.username,
