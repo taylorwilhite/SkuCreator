@@ -14,7 +14,7 @@ async function getNextUpc(seqName){
 	   	if(err){
 	   		console.log(err);
 	   	} else {
-	   		return counter.sequence_value // gives undefined
+	   		return counter.sequence_value
 	   	}
 	}).exec();
    	return counter.sequence_value;
@@ -70,7 +70,6 @@ router.post('/', middleware.isLoggedIn, async function(req, res){
 		sizes.forEach( async function(size){
 			var landedCost = ''
 			var rawCost = ''
-			// var newUpc = await getNextUpc('productupc');
 			//For loop for sizes
 			if(size == 'P1X' || size == 'P2X' || size =='P3X'){
 				var landedCost = plusLanded;
@@ -114,7 +113,7 @@ router.post('/', middleware.isLoggedIn, async function(req, res){
 	};
 	
 	await wait1Sec(1);
-	// var newSkuJSON = JSON.stringify(newSKUs);
+	
 	//Submit to SKUvault
 	request(
 		{method: 'POST',
