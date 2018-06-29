@@ -1,5 +1,5 @@
-html {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+* {
+  font-family: 'Fira Sans', sans-serif;
 }
 
 body {
@@ -40,9 +40,8 @@ nav a:hover {
 }
 
 input[type='text'], input[type='password'], input[type='number'] {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
   border-radius: 5px;
-  background-color: ;
   line-height: 20px;
   border: 1px #888 solid;
   margin-bottom: 10px;
@@ -50,9 +49,10 @@ input[type='text'], input[type='password'], input[type='number'] {
   margin-right: 5px;
 }
 
-select option {
+select {
+  font-size: 13px;
   line-height: 20px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  
 }
 
 label {
