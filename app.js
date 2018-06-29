@@ -7,6 +7,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var request = require('request');
 var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var middleware = require('./middleware');
 var flash = require('connect-flash');
 var User = require('./models/user');
@@ -35,7 +36,8 @@ app.use(session({
 	secret: process.env.SESSION_SECRET,
 	saveUninitialized: false,
 	resave: false,
-	cookie: {maxAge: 8 * 60 * 60 * 1000}
+	cookie: {maxAge: 8 * 60 * 60 * 1000},
+	store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 app.use(flash());
 app.use(passport.initialize());
