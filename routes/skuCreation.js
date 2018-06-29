@@ -38,7 +38,7 @@ router.get('/', middleware.isLoggedIn, function(req, res){
 	res.render('index');
 });
 
-router.post('/', async function(req, res){
+router.post('/', middleware.isLoggedIn, async function(req, res){
 	try{
 	// Get info from body
 	var sku = req.body.sku.parent;
