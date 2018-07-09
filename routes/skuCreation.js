@@ -111,7 +111,7 @@ router.post('/', middleware.isLoggedIn, async function(req, res){
 			var newSize = {};
 		});
 	};
-	
+	// Wait for previous function
 	await wait1Sec(1);
 	
 	//Submit to SKUvault
