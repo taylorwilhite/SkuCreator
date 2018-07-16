@@ -15,6 +15,7 @@ function addColorFields(){
 	var colorField = document.createElement('input');
 	var colorFieldCode = document.createElement('input');
 	var pictureLink = document.createElement('input');
+	var fbColorField = document.createElement('input');
 	colorField.type = 'text';
 	colorField.name = 'colorSet[color' + fieldNum + '][colorName]';
 	colorField.placeholder = 'Color';
@@ -24,11 +25,15 @@ function addColorFields(){
 	pictureLink.type = 'text';
 	pictureLink.name = 'colorSet[color' + fieldNum + '][pictureLink]';
 	pictureLink.placeholder = 'Image Link';
+	fbColorField.type = 'text';
+	fbColorField.name = 'colorSet[color' + fieldNum + '][fbColor]';
+	fbColorField.placeholder = 'FB Color Number';
 
 	container.appendChild(document.createElement('br'));
 	container.appendChild(colorField);
 	container.appendChild(colorFieldCode);
 	container.appendChild(pictureLink);
+	container.appendChild(fbColorField);
 	fieldNum++;
 };
 

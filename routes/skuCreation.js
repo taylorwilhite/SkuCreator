@@ -66,6 +66,7 @@ router.post('/', middleware.isLoggedIn, async function(req, res){
 		var skuColor = colors[colorIndex].colorName;
 		var colorCode = colors[colorIndex].colorCode;
 		var picture = picLink(colors[colorIndex].pictureLink);
+		var fbColor = colors[colorIndex].fbColor;
 
 		sizes.forEach( async function(size){
 			var landedCost = ''
@@ -88,6 +89,7 @@ router.post('/', middleware.isLoggedIn, async function(req, res){
 			       "Color":skuColor,
 			       "Size":size,
 			       "FB Code":fbCode,
+			       "FB Color Number":fbColor
 			    },				
 				"Classification":classification,
 				"Supplier":"JuJu",
