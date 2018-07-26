@@ -35,7 +35,14 @@ function wait1Sec(x) {
 };
 
 router.get('/', middleware.isLoggedIn, function(req, res){
-	res.render('index');
+	// Pull all colors and pass to view
+	Color.find({}, (err, allColors) => {
+		if(err){
+			console.log(err);
+		} else {
+			res.render('index', {allColors: allColors});
+		}
+	});
 });
 
 router.post('/', middleware.isLoggedIn, async function(req, res){
