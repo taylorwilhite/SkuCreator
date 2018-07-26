@@ -12,7 +12,7 @@ var middleware = require('./middleware');
 var flash = require('connect-flash');
 var User = require('./models/user');
 var Counter = require('./models/counter');
-var seedDB = require('./seeds');
+// var seedDB = require('./seeds');
 
 // Allow loading environment from .env
 require('dotenv').load();
@@ -30,7 +30,7 @@ mongoose.connect(databaseUri)
 	.catch(err => console.log('Database connection error: ' + err.message));
 
 // Config
-seedDB();
+// seedDB();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
