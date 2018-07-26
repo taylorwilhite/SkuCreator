@@ -3,7 +3,7 @@ var router = express.Router();
 var middleware = require('../middleware');
 var request = require('request');
 var Counter = require('../models/counter');
-
+var Color = require('../models/color');
 
 async function getNextUpc(seqName){
 	var query = {"_id": seqName};
