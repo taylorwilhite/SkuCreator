@@ -11,8 +11,11 @@ function selectAll(source){
 };
 
 function fillColorCode(event){
-	var colorIndex = event.target.name.replace(/\[colorName\]/, '');
-	console.log(colorIndex);
+	var colorIndex = event.target.name.replace(/\[colorName\]/, '[colorCode]');
+	var foundCode = clientColorList.find(function(selected) {
+		return selected.color === event.target.value
+	}).colorCode;
+	document.querySelector("input[name='" + colorIndex + "']").value = foundCode;
 };
 
 function addColorFields(){
