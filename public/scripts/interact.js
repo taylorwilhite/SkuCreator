@@ -19,6 +19,7 @@ function addColorFields(){
 	colorField.type = 'text';
 	colorField.name = 'colorSet[color' + fieldNum + '][colorName]';
 	colorField.placeholder = 'Color';
+	colorField.list = 'colorNameList';
 	colorFieldCode.type = 'text';
 	colorFieldCode.name = 'colorSet[color' + fieldNum + '][colorCode]';
 	colorFieldCode.placeholder = 'Color Code';
