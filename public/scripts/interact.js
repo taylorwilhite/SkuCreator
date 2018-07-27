@@ -26,6 +26,7 @@ function addColorFields(){
 	var fbColorField = document.createElement('input');
 	colorField.type = 'text';
 	colorField.name = 'colorSet[color' + fieldNum + '][colorName]';
+	colorField.classList.add('colorName');
 	colorField.placeholder = 'Color';
 	colorField.setAttribute('list', 'colorNameList');
 	colorField.setAttribute('onchange', 'fillColorCode(event)');
@@ -84,4 +85,17 @@ function addSizes(size){
 	sizeLabel.appendChild(labelContent);
 	sizeLabel.prepend(sizeCheck);
 	sizeField.prepend(sizeLabel);
+};
+
+function validateColors(){
+	var checkedColors = document.getElementsByClassName('colorName');
+	var colorsArr = Array.from(checkedColors)
+	for(i = 0; i < colorsArr.length; i++){
+		console.log(colorsArr[i].value);
+		var colorChecked = clientColorList.find(arrColor => {return arrColor.color === colorsArr[i].value});
+		if(colorChecked == undefined){
+			alert('One or more Colors is not in the system. Please correct your colors.');
+			return false;
+		};
+	};
 };
