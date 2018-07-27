@@ -27,10 +27,12 @@ function addColorFields(){
 	colorField.type = 'text';
 	colorField.name = 'colorSet[color' + fieldNum + '][colorName]';
 	colorField.placeholder = 'Color';
-	colorField.list = 'colorNameList';
+	colorField.setAttribute('list', 'colorNameList');
+	colorField.setAttribute('onchange', 'fillColorCode(event)');
 	colorFieldCode.type = 'text';
 	colorFieldCode.name = 'colorSet[color' + fieldNum + '][colorCode]';
 	colorFieldCode.placeholder = 'Color Code';
+	colorFieldCode.setAttribute('readonly', '');
 	pictureLink.type = 'text';
 	pictureLink.name = 'colorSet[color' + fieldNum + '][pictureLink]';
 	pictureLink.placeholder = 'Image Link';
