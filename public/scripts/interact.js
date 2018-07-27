@@ -10,6 +10,11 @@ function selectAll(source){
   }
 };
 
+function fillColorCode(event){
+	var colorIndex = event.target.name.replace(/\[colorName\]/, '');
+	console.log(colorIndex);
+};
+
 function addColorFields(){
 	var container = document.getElementById('colorFields');
 	var colorField = document.createElement('input');
