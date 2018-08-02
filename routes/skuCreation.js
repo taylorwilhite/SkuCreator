@@ -3,7 +3,7 @@ var router = express.Router();
 var middleware = require('../middleware');
 var request = require('request');
 var Counter = require('../models/counter');
-
+var Color = require('../models/color');
 
 async function getNextUpc(seqName){
 	var query = {"_id": seqName};
@@ -35,7 +35,14 @@ function wait1Sec(x) {
 };
 
 router.get('/', middleware.isLoggedIn, function(req, res){
-	res.render('index');
+	// Pull all colors and pass to view
+	Color.find({}, (err, allColors) => {
+		if(err){
+			console.log(err);
+		} else {
+			res.render('index', {allColors: allColors});
+		}
+	});
 });
 
 router.post('/', middleware.isLoggedIn, async function(req, res){

@@ -1,7 +1,8 @@
 <% include ./partials/header %>
+
 <div class='container'>
 	<h1>Create SKUs</h1>
-	<form action="/skuCreation" method="POST">
+	<form onsubmit="return validateColors()" action="/skuCreation" method="POST">
 		<input type="text" name="sku[parent]" placeholder="Parent SKU" required="true">
 		
 		<input type="text" name="fbCode" placeholder="Fabric Book">
@@ -45,11 +46,16 @@
 		</div>
 
 		<div id="colorFields">
-			<input type="text" name="colorSet[color1][colorName]" placeholder="Color" required="true">
-			<input type="text" name="colorSet[color1][colorCode]" placeholder="Color Code" required="true">
+			<input type="text" list="colorNameList" name="colorSet[color1][colorName]" placeholder="Color" required="true" onchange="fillColorCode(event)" class="colorName">
+			<input type="text" name="colorSet[color1][colorCode]" placeholder="Color Code" required="true" readonly>
 			<input type="text" name="colorSet[color1][pictureLink]" placeholder="Image Link">
 			<input type="text" name="colorSet[color1][fbColor]" placeholder="FB Color Number">
 			<button type="button" id="addColor" onclick="addColorFields()">Add Color</button>
+			<datalist id="colorNameList">
+				<% allColors.forEach(color => { %>
+					<option value="<%= color.color %>">
+				<% }); %>
+			</datalist>
 		</div>
 		
 		<fieldset>
@@ -68,7 +74,6 @@
 		</fieldset>
 		
 
-
 		<fieldset>
 			<legend>Cost</legend>
 			<label for="rawCost">Raw Cost: </label>
@@ -84,4 +89,10 @@
 		<input type="submit">
 	</form>
 </div>
+
+<script type="text/javascript">
+	<% allColorsString = JSON.stringify(allColors) %>
+	var clientColorList = <%- allColorsString %>;
+</script>
+
 <% include ./partials/footer %>
