@@ -4,6 +4,7 @@ var middleware = require('../middleware');
 var request = require('request');
 var Counter = require('../models/counter');
 var Color = require('../models/color');
+var colors = require('colors');
 
 async function getNextUpc(seqName){
 	var query = {"_id": seqName};
@@ -136,23 +137,25 @@ router.post('/', middleware.isLoggedIn, async function(req, res){
 			req.flash('error', err)
 			res.redirect("back");
 		} else {
-			console.log('Submitted, response:', response.statusCode, body.Status); // Print the response status code if a response was received
 			// logic for error/success flashes
 			if(response.statusCode == 202){
+				console.log('Submitted, response: ' + response.statusCode.toString().yellow + ' ' + body.Status.yellow);
 				var errors = [];
 				body.Errors.forEach(function(error){
 					var skuError = error.Sku + ': ' + error.ErrorMessages;
-					console.log('ERROR ' + skuError); //log the error
+					console.log('ERROR '.red + skuError); //log the error
 					errors.push(skuError);
 				});
 				req.flash('error', errors.join('<br>'));
 				res.redirect('back');
 			} else if(response.statusCode == 200){
+				console.log('Submitted, response: ' + response.statusCode.toString().green + ' ' + body.Status.green);
 				req.flash('success', 'SKUs Created successfully!');
 				res.redirect('/skuCreation');
 			} else {
+				console.log('Submitted, response: ' + response.statusCode.toString().red + ' ' + body.Status.red);
 				body.Errors.forEach(function(error){
-					console.log('ERROR ' + error.Sku + ': ' + error.ErrorMessages)
+					console.log('ERROR '.red + error.Sku + ': ' + error.ErrorMessages)
 				});
 				req.flash('error', 'Possible error, unexpected response code: ' + response.statusCode);
 				res.redirect('back');
