@@ -136,11 +136,13 @@ router.post('/', middleware.isLoggedIn, async function(req, res){
 			req.flash('error', err)
 			res.redirect("back");
 		} else {
+			console.log('Submitted, response:', response.statusCode, body.Status); // Print the response status code if a response was received
 			// logic for error/success flashes
 			if(response.statusCode == 202){
 				var errors = [];
 				body.Errors.forEach(function(error){
 					var skuError = error.Sku + ': ' + error.ErrorMessages;
+					console.log('ERROR ' + skuError); //log the error
 					errors.push(skuError);
 				});
 				req.flash('error', errors.join('<br>'));
@@ -149,11 +151,12 @@ router.post('/', middleware.isLoggedIn, async function(req, res){
 				req.flash('success', 'SKUs Created successfully!');
 				res.redirect('/skuCreation');
 			} else {
+				body.Errors.forEach(function(error){
+					console.log('ERROR ' + error.Sku + ': ' + error.ErrorMessages)
+				});
 				req.flash('error', 'Possible error, unexpected response code: ' + response.statusCode);
 				res.redirect('back');
 			}
-			console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
-  			console.log('body:', body); // Print the status response
 		}
 	});
 	} catch(error) {
