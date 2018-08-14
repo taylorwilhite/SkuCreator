@@ -109,7 +109,7 @@ router.post('/', middleware.isLoggedIn, async function(req, res){
 			    ],			
 			    "SupplierInfo":[  
 			      {  
-			         "SupplierName":"JuJu",
+			         "SupplierName":supName,
 			         "IsPrimary":true,
 			         "IsActive":true,
 			         "Cost":rawCost
