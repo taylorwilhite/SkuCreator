@@ -25,6 +25,7 @@ function addColorFields(){
 	var colorFieldCode = document.createElement('input');
 	var pictureLink = document.createElement('input');
 	var fbColorField = document.createElement('input');
+	var delButton = document.createElement('button');
 	colorField.type = 'text';
 	colorField.name = 'colorSet[color' + fieldNum + '][colorName]';
 	colorField.classList.add('colorName');
@@ -41,18 +42,26 @@ function addColorFields(){
 	fbColorField.type = 'text';
 	fbColorField.name = 'colorSet[color' + fieldNum + '][fbColor]';
 	fbColorField.placeholder = 'FB Color Number';
+	delButton.classList.add('delete-color');
+	delButton.type = 'button';
+	delButton.onclick = removeColorField;
+	delButton.innerHTML = 'Delete';
 
 	
 	colorDiv.appendChild(colorField);
 	colorDiv.appendChild(colorFieldCode);
 	colorDiv.appendChild(pictureLink);
 	colorDiv.appendChild(fbColorField);
+	colorDiv.appendChild(delButton);
 	container.appendChild(colorDiv);
 	fieldNum++;
 };
 
-function removeColorField(el){
+function removeColorField(){
 	//TODO: put in logic deleting the div here
+	var colorDiv = this.parentNode;
+	var colorFields = colorDiv.parentNode;
+	colorFields.removeChild(colorDiv);
 };
 
 function kimonoSizeToggle(){
