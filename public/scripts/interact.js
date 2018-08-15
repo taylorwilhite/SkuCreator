@@ -51,6 +51,10 @@ function addColorFields(){
 	fieldNum++;
 };
 
+function removeColorField(el){
+	//TODO: put in logic deleting the div here
+};
+
 function kimonoSizeToggle(){
 	if(kimonoStyle == false){
 		regSizes.forEach(function(size){
