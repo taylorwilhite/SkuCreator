@@ -107,7 +107,7 @@ function validateColors(){
 	var colorsArr = Array.from(checkedColors)
 	for(i = 0; i < colorsArr.length; i++){
 		console.log(colorsArr[i].value);
-		var colorChecked = clientColorList.find(arrColor => {return arrColor.color === colorsArr[i].value});
+		var colorChecked = clientColorList.find(arrColor => {return arrColor.color.toUpperCase() === colorsArr[i].value.toUpperCase()});
 		if(colorChecked == undefined){
 			alert('One or more Colors is not in the system. Please correct your colors.');
 			return false;
