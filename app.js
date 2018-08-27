@@ -20,6 +20,7 @@ require('dotenv').load();
 // Routes
 var indexRoutes = require('./routes/index');
 var skuRoutes = require('./routes/skuCreation');
+var colorRoutes = require('./routes/color');
 
 // DB setup
 var databaseUri = process.env.MONGODB_URI || 'mongodb://localhost/skuCreateDb';
@@ -59,6 +60,7 @@ app.use(function(req, res, next){
 // Route information
 app.use('/', indexRoutes);
 app.use('/skuCreation', skuRoutes);
+app.use('/color', colorRoutes);
 
 // Start Server
 app.listen(process.env.PORT || 3000, function(){
