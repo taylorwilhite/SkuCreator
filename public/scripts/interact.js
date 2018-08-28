@@ -66,15 +66,15 @@ function removeColorField(){
 function sendData(url, formId){
 	var form = document.getElementById(formId);
 
-	var formData = new FormData();
-	for (var i=0; i < form.length; i++){
-		formData.append(form[i].name, form[i].value);
-	}
+	var formData = {}
+	formData.color = form[0].value;
+	formData.colorCode = form[1].value;
+	console.log(formData);
 
 	return fetch(url, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify(formData)
 	})
