@@ -1,6 +1,6 @@
 <% include ./partials/header %>
 
-<div class='container'>
+<div class="container" id="main-container">
 	<h1>Create SKUs</h1>
 	<form onsubmit="return validateColors()" action="/skuCreation" method="POST">
 		<input type="text" name="sku[parent]" placeholder="Parent SKU" required="true">

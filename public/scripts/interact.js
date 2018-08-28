@@ -83,6 +83,11 @@ function sendData(url, formId){
 };
 
 function makeColor(data){
+	var container = document.getElementById('main-container');
+	var tempFlash = document.createElement('div');
+	var tempMessage = document.createElement('p');
+	tempFlash.classList.add('alert', 'temp-flash');
+
 	if(data.success){
 		console.log(data.success);
 		// create new color in list
@@ -92,13 +97,19 @@ function makeColor(data){
 		newColorOption.value = data.success.color;
 		dataList.appendChild(newColorOption);
 		console.log('Option Added!');
-		// display confirmation
 
+		// display confirmation
+		tempMessage.innerHTML = 'Option Added Successfully!';
+		tempFlash.classList.add('alert-success');
 	} else {
 		// check for error and display error flash
 		console.log(data.error);
+		tempMessage.innerHTML = data.error;
+		tempFlash.classList.add('alert-error');
 	}
-}
+	tempFlash.appendChild(tempMessage);
+	container.insertAdjacentElement('afterbegin', tempFlash);
+};
 
 function kimonoSizeToggle(){
 	if(kimonoStyle == false){
