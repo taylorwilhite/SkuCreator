@@ -97,6 +97,15 @@
 		
 		<input type="submit">
 	</form>
+
+	<form id="newColorForm">
+		<h3 class="newColorField">Add New Color</h3>
+		<label for="newColor">New Color </label>
+		<input type="text" name="newColor" id="newColor">
+		<label for="newCode">New Code </label>
+		<input type="text" name="newCode" id="newCode">
+		<button onclick="sendData('/colors')">Create New Color</button>
+	</form>
 </div>
 
 <script type="text/javascript">

@@ -9,3 +9,5 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 // if there, give an error
 // if not there, create and send ok to client
 });
+
+module.exports = router;
