@@ -79,7 +79,7 @@ function sendData(url, formId){
 		body: JSON.stringify(formData)
 	})
 	.then(response => {return response.json()})
-	.then(data => console.log(data.body));
+	.then(data => console.log(data.error));
 };
 
 function kimonoSizeToggle(){
