@@ -69,7 +69,6 @@ function sendData(url, formId){
 	var formData = {}
 	formData.color = form[0].value;
 	formData.colorCode = form[1].value;
-	console.log(formData);
 
 	return fetch(url, {
 		method: 'POST',
@@ -89,21 +88,18 @@ function makeColor(data){
 	tempFlash.classList.add('alert', 'temp-flash');
 
 	if(data.success){
-		console.log(data.success);
 		// create new color in list
 		clientColorList.push(data.success);
 		var dataList = document.getElementById('colorNameList');
 		var newColorOption = document.createElement('option');
 		newColorOption.value = data.success.color;
 		dataList.appendChild(newColorOption);
-		console.log('Option Added!');
 
 		// display confirmation
 		tempMessage.innerHTML = 'Option Added Successfully!';
 		tempFlash.classList.add('alert-success');
 	} else {
 		// check for error and display error flash
-		console.log(data.error);
 		tempMessage.innerHTML = data.error;
 		tempFlash.classList.add('alert-error');
 	}

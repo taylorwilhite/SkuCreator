@@ -5,12 +5,8 @@ var middleware = require('../middleware');
 var Color = require('../models/color');
 
 router.post('/', middleware.isLoggedIn, (req, res) => {
-	// res.send({body: 'You got a response!'});
-	console.log(req.body);
-
 	var newColor = req.body.color.toUpperCase();
 	var newColorCode = req.body.colorCode.toUpperCase();
-	console.log(newColor);
 
 	// send color and code to dB
 	Color.findOne({color: newColor}, (err, foundColor) => {
