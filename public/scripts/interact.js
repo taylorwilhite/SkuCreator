@@ -79,8 +79,26 @@ function sendData(url, formId){
 		body: JSON.stringify(formData)
 	})
 	.then(response => {return response.json()})
-	.then(data => console.log(data.error));
+	.then(data => makeColor(data));
 };
+
+function makeColor(data){
+	if(data.success){
+		console.log(data.success);
+		// create new color in list
+		clientColorList.push(data.success);
+		var dataList = document.getElementById('colorNameList');
+		var newColorOption = document.createElement('option');
+		newColorOption.value = data.success.color;
+		dataList.appendChild(newColorOption);
+		console.log('Option Added!');
+		// display confirmation
+
+	} else {
+		// check for error and display error flash
+		console.log(data.error);
+	}
+}
 
 function kimonoSizeToggle(){
 	if(kimonoStyle == false){

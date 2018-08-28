@@ -10,9 +10,10 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 
 	var newColor = req.body.color.toUpperCase();
 	var newColorCode = req.body.colorCode.toUpperCase();
+	console.log(newColor);
 
 	// send color and code to dB
-	Color.find({color: newColor}, (err, foundColor) => {
+	Color.findOne({color: newColor}, (err, foundColor) => {
 		if(err){
 			console.log(err);
 			res.status(400).send(err);
