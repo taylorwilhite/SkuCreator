@@ -9,14 +9,14 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 	var newColorCode = req.body.colorCode.toUpperCase();
 
 	// send color and code to dB
-	Color.findOne({color: newColor}, (err, foundColor) => {
+	Color.findOne({$or: [{color: newColor}, {colorCode: newColorCode}]}, (err, foundColor) => {
 		if(err){
 			console.log(err);
 			res.status(400).send(err);
 		} else {
 			// if there, give an error
 			if(foundColor){
-				res.status(202).send({error: 'This color already exists!'});
+				res.status(202).send({error: 'This color or code already exists!'});
 			} else {
 				// if not there, create and send ok to client
 				Color.create({color: newColor, colorCode: newColorCode}, (err, newlyCreated) => {
