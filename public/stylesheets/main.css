@@ -105,7 +105,6 @@ input[type='submit']:hover, button:hover {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
-  position: absolute;
   width: 100%;
 }
 
@@ -145,6 +144,7 @@ input[type='submit']:hover, button:hover {
   transform: translateY(-100px);
   opacity: 0;
   animation: 5s tempFlashMessage;
+  position: absolute;
 }
 
 #main-container {
