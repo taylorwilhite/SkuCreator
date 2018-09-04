@@ -32,5 +32,13 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",
     "request": "^2.87.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0"
   }
 }
