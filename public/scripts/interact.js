@@ -3,14 +3,14 @@ let kimonoStyle = false;
 const regSizes = ['XL', 'L', 'M', 'S'];
 const kimonoSizes = ['LXL', 'SM'];
 
-function selectAll(source) {
+function selectAll(source) { // eslint-disable-line no-unused-vars
   const checkboxes = document.getElementsByName('size[]');
   for (let i = 0; i < checkboxes.length; i += 1) {
     checkboxes[i].checked = source.checked;
   }
 }
 
-function fillColorCode(event) {
+function fillColorCode(event) { // eslint-disable-line no-unused-vars
   const colorIndex = event.target.name.replace(/\[colorName\]/, '[colorCode]');
   const foundCode = clientColorList.find(
     selected => selected.color === event.target.value,
@@ -24,7 +24,7 @@ function removeColorField() {
   colorFields.removeChild(colorDiv);
 }
 
-function addColorFields() {
+function addColorFields() { // eslint-disable-line no-unused-vars
   let fieldNum = 2;
   const container = document.getElementById('colorFields');
   const colorDiv = document.createElement('div');
@@ -89,7 +89,7 @@ function makeColor(data) {
   container.insertAdjacentElement('afterbegin', tempFlash);
 }
 
-function sendData(url, formId) {
+function sendData(url, formId) { // eslint-disable-line no-unused-vars
   const form = document.getElementById(formId);
 
   const formData = {};
@@ -126,7 +126,7 @@ function addSizes(size) {
   sizeField.prepend(sizeLabel);
 }
 
-function kimonoSizeToggle() {
+function kimonoSizeToggle() { // eslint-disable-line no-unused-vars
   if (kimonoStyle === false) {
     regSizes.forEach(size => deleteSizes(size));
     kimonoSizes.forEach(size => addSizes(size));
@@ -138,7 +138,7 @@ function kimonoSizeToggle() {
 }
 
 
-function validateColors() {
+function validateColors() { // eslint-disable-line no-unused-vars
   const checkedColors = document.getElementsByClassName('colorName');
   const colorsArr = Array.from(checkedColors);
   for (let i = 0; i < colorsArr.length; i += 1) {
