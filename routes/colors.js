@@ -19,7 +19,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
     } else {
       // if not there, create and send ok to client
       Color.create({ color: newColor, colorCode: newColorCode }, (error, newlyCreated) => {
-        if (err) {
+        if (error) {
           console.log(error);
           res.status(400).send({ error: 'There was a problem creating this color, please try again' });
         } else {

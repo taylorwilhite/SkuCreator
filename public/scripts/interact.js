@@ -98,9 +98,9 @@ function sendData(url, formId) { // eslint-disable-line no-unused-vars
   formData.colorCode = form[1].value;
 
   return fetch(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(formData),
   })
