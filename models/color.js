@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var colorSchema = new mongoose.Schema({
-	color:String,
-	colorCode:String
+const colorSchema = new mongoose.Schema({
+  color: String,
+  colorCode: String,
 });
 
 module.exports = mongoose.model('Color', colorSchema);
