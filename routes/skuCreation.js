@@ -62,6 +62,8 @@ router.post('/', middleware.isLoggedIn, async function(req, res){
 	var fbCode = req.body.fbCode;
 	var plusLanded = req.body.plus.landedCost;
 	var plusRaw = req.body.plus.rawCost;
+  const hps = req.body.hps;
+  const inseam = req.body.inseam;
 
 	// Create Empty object to push SKUs into
 	var newSKUs = {
@@ -97,7 +99,9 @@ router.post('/', middleware.isLoggedIn, async function(req, res){
 			       "Color":skuColor,
 			       "Size":size,
 			       "FB Code":fbCode,
-			       "FB Color Number":fbColor
+			       "FB Color Number":fbColor,
+             Inseam: inseam,
+             HPS: hps,
 			    },				
 				"Classification":classification,
 				"Supplier":"JuJu",
