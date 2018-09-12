@@ -63,6 +63,8 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
     const plusLanded = req.body.plus.landedCost;
     const plusRaw = req.body.plus.rawCost;
 
+    console.log(req.body.colorSet);
+
     // Create Empty object to push SKUs into
     const newSKUs = {
       Items: [],
@@ -70,7 +72,7 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
       UserToken: req.session.UserToken,
     };
     // Format Correctly
-    for (let colorIndex = 0; colorIndex < colorSet.length; colorIndex += 1) {
+    for (let colorIndex = 0; colorIndex < Object.keys(colorSet).length; colorIndex += 1) {
       const skuColor = colorSet[colorIndex].colorName;
       const colorCode = colorSet[colorIndex].colorCode;
       const picture = picLink(colorSet[colorIndex].pictureLink);
@@ -87,6 +89,8 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
           landedCost = regLanded;
           rawCost = regRaw;
         }
+
+        console.log(size, colorCode);
 
         let newSize = {
           Sku: sku + colorCode + "-" + size,
@@ -122,6 +126,8 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
     }
     // Wait for previous function
     await wait1Sec(1);
+
+    console.log(newSKUs);
 
     // Submit to SKUvault
     request(
