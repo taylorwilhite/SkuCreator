@@ -21,14 +21,10 @@ async function getNextUpc(seqName) {
   return counter.sequence_value;
 }
 
-function picLink(linkUrl) {
-  console.log(typeof linkUrl);
-  linkUrl.toString();
-  console.log(typeof linkUrl);
-  linkUrl.replace(/www\.dropbox/, 'dl.dropboxusercontent');
-  console.log(linkUrl);
-  linkUrl.replace(/\?.*/, '');
-  console.log(linkUrl);
+function picLink(changeLink) {
+  let linkUrl = changeLink;
+  linkUrl = linkUrl.replace(/www\.dropbox/, 'dl.dropboxusercontent');
+  linkUrl = linkUrl.replace(/\?.*/, '');
   return linkUrl;
 }
 
@@ -83,7 +79,6 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
       const colorCode = colorSet[colorIndex][1].colorCode;
       const picture = picLink(colorSet[colorIndex][1].pictureLink);
       const fbColor = colorSet[colorIndex][1].fbColor;
-      console.log(colorSet[colorIndex][1].pictureLink);
 
       sizes.forEach(async (size) => {
         let landedCost = '';
