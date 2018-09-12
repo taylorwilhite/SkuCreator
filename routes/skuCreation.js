@@ -62,8 +62,8 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
     const fbCode = req.body.fbCode;
     const plusLanded = req.body.plus.landedCost;
     const plusRaw = req.body.plus.rawCost;
-
-    console.log(req.body.colorSet);
+    const hps = req.body.hps;
+    const inseam = req.body.inseam;
 
     // Create Empty object to push SKUs into
     const newSKUs = {
@@ -90,8 +90,6 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
           rawCost = regRaw;
         }
 
-        console.log(size, colorCode);
-
         let newSize = {
           Sku: sku + colorCode + "-" + size,
           Description: desc,
@@ -101,6 +99,8 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
             Size: size,
             'FB Code': fbCode,
             'FB Color Number': fbColor,
+            Inseam: inseam,
+            HPS: hps,
           },
           Classification: classification,
           Supplier: supName,
