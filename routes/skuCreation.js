@@ -22,8 +22,13 @@ async function getNextUpc(seqName) {
 }
 
 function picLink(linkUrl) {
+  console.log(typeof linkUrl);
+  linkUrl.toString();
+  console.log(typeof linkUrl);
   linkUrl.replace(/www\.dropbox/, 'dl.dropboxusercontent');
+  console.log(linkUrl);
   linkUrl.replace(/\?.*/, '');
+  console.log(linkUrl);
   return linkUrl;
 }
 
@@ -55,7 +60,7 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
     const brand = req.body.brand;
     const supName = req.body.supp.Name;
     const supPrim = req.body.supp.Primary;
-    const colorSet = req.body.colorSet;
+    let colorSet = Object.entries(req.body.colorSet);
     const sizes = req.body.size;
     const regLanded = req.body.landedCost;
     const regRaw = req.body.supp.Cost;
@@ -71,12 +76,14 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
       TenantToken: req.session.TenantToken,
       UserToken: req.session.UserToken,
     };
+
     // Format Correctly
-    for (let colorIndex = 0; colorIndex < Object.keys(colorSet).length; colorIndex += 1) {
-      const skuColor = colorSet[colorIndex].colorName;
-      const colorCode = colorSet[colorIndex].colorCode;
-      const picture = picLink(colorSet[colorIndex].pictureLink);
-      const fbColor = colorSet[colorIndex].fbColor;
+    for (let colorIndex = 0; colorIndex < colorSet.length; colorIndex += 1) {
+      const skuColor = colorSet[colorIndex][1].colorName;
+      const colorCode = colorSet[colorIndex][1].colorCode;
+      const picture = picLink(colorSet[colorIndex][1].pictureLink);
+      const fbColor = colorSet[colorIndex][1].fbColor;
+      console.log(colorSet[colorIndex][1].pictureLink);
 
       sizes.forEach(async (size) => {
         let landedCost = '';
@@ -126,8 +133,6 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
     }
     // Wait for previous function
     await wait1Sec(1);
-
-    console.log(newSKUs);
 
     // Submit to SKUvault
     request(
