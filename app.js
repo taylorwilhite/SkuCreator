@@ -26,7 +26,7 @@ const db = mongoose.connection;
 
 mongoose.connect(databaseUri)
   .then(() => console.log('Database Connected'))
-  .catch(err => console.log('Database connection error: ' + err.message));
+  .catch(err => console.log(`Database connection error: ${err.message}`));
 
 // Config
 // seedDB();
