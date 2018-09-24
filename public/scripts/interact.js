@@ -3,6 +3,7 @@
 let kimonoStyle = false;
 const regSizes = ['XL', 'L', 'M', 'S'];
 const kimonoSizes = ['LXL', 'SM'];
+let fieldNum = 2;
 
 function selectAll(source) { // eslint-disable-line no-unused-vars
   const checkboxes = document.getElementsByName('size[]');
@@ -26,7 +27,6 @@ function removeColorField() {
 }
 
 function addColorFields() { // eslint-disable-line no-unused-vars
-  let fieldNum = 2;
   const container = document.getElementById('colorFields');
   const colorDiv = document.createElement('div');
   const colorField = document.createElement('input');
