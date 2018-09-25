@@ -19,6 +19,7 @@ require('dotenv').load();
 const indexRoutes = require('./routes/index');
 const skuRoutes = require('./routes/skuCreation');
 const colorRoutes = require('./routes/colors');
+const fabricBookRoutes = require('./routes/fabricBook');
 
 // DB setup
 const databaseUri = process.env.MONGODB_URI || 'mongodb://localhost/skuCreateDb';
@@ -60,6 +61,7 @@ app.use((req, res, next) => {
 app.use('/', indexRoutes);
 app.use('/skuCreation', skuRoutes);
 app.use('/colors', colorRoutes);
+app.use('/fabricBooks', fabricBookRoutes);
 
 // Start Server
 app.listen(process.env.PORT || 3000, () => {
