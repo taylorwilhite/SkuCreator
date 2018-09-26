@@ -20,6 +20,42 @@ function fillColorCode(event) { // eslint-disable-line no-unused-vars
   document.querySelector("input[name='" + colorIndex + "']").value = foundCode;
 }
 
+function addBookFields() {
+  const container = document.getElementById('bookFields');
+  const bookDiv = document.createElement('div');
+  const number = document.createElement('input');
+  const title = document.createElement('input');
+  const supplier = document.createElement('select');
+  const brand = document.createElement('select');
+  const material = document.createElement('input');
+  const care = document.createElement('input');
+  const image = document.createElement('input');
+  const weight = document.createElement('input');
+
+  const fields = [number, title, supplier, brand, material, care, image, weight];
+  const textFields = [number, title, material, care, image, weight];
+
+  bookDiv.classList.add('fabricBookFieldset');
+  fields.forEach((field) => {
+    field.name = `fabricBooks[${fieldNum}][${field}]`;
+  });
+
+  textFields.forEach((field) => {
+    field.type = 'text';
+    field.placeholder = `${field}`;
+  });
+
+  bookDiv.appendChild(number);
+  bookDiv.appendChild(title);
+  bookDiv.appendChild(material);
+  bookDiv.appendChild(care);
+  bookDiv.appendChild(image);
+  bookDiv.appendChild(weight);
+  container.appendChild(bookDiv);
+
+  fieldNum += 1;
+}
+
 function removeColorField() {
   const colorDiv = this.parentNode;
   const colorFields = colorDiv.parentNode;
