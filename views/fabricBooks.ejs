@@ -1,0 +1,58 @@
+<% include ./partials/header %>
+
+<div class="container" id="main-container">
+	<h1>Create Fabric Books</h1>
+  <form action="/fabricBooks" method="POST">
+  <div id="BookFields">
+    <div class="fabricBookFieldset">
+      <input type="text" name="fabricBooks[0][number]" placeholder="Fabric Book Number" required="true">
+      <input type="text" name="fabricBooks[0][title]" placeholder="Title" required="true">
+      <label for="supplier">Supplier: </label>
+      <select name="fabricBooks[0][supplier]" id="supplier" required="true">
+        <option value="Juju">Juju</option>
+        <option value="J&H">J&H</option>
+        <option value="Larry">Larry</option>
+        <option value="ArtiLady Jewelry">ArtiLady Jewelry</option>
+        <option value="Lara Fashion">Lara Fashion</option>
+      </select>
+  
+      <label for="brand">Brand: </label>
+      <select name="fabricBooks[0][brand]" id="brand" required="true">
+        <option value="" selected>Select One</option>
+        <option value="AMARYLLIS">AMARYLLIS</option>
+        <option value="AMA By Amaryllis">AMA By Amaryllis</option>
+        <option value="REFLECTION">REFLECTION</option>
+      </select>
+  
+      <input type="text" list="materialList" name="fabricBooks[0][material]" placeholder="Material Content" required="true" onchange="fillCareInstruction(event)" class="colorName">
+      <input type="text" name=fabricBooks[0][care]" placeholder="Care Instructions" required="true">
+      <input type="text" name="fabricBooks[0][image]" placeholder="Image Link">
+    </div>
+		
+		<button type="button" id="addColor" onclick="addBookFields()">Add Another Book</button>
+    <datalist id="colorNameList">
+      <% allMaterial.forEach(material => { %>
+        <option value="<%= material.material %>">
+      <% }); %>
+    </datalist>
+	</div>
+		
+		<input type="submit">
+	</form>
+
+	<form id="newMaterialForm">
+		<h3 class="newMaterialField">Add New Material</h3>
+		<label for="newMaterial">New Material </label>
+		<input type="text" name="newMaterial" id="newMaterial">
+		<label for="newCare">New Care Instructions </label>
+		<input type="text" name="newCare" id="newCare">
+		<button type="button" onclick="sendData('/materials', 'newMaterialForm')">Create New Material</button>
+	</form>
+</div>
+
+<script type="text/javascript">
+	<% allMaterialsString = JSON.stringify(allMaterial) %>
+	var clientMaterialList = <%- allMaterialsString %>;
+</script>
+
+<% include ./partials/footer %>
