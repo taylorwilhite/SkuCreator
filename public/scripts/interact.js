@@ -32,21 +32,51 @@ function addBookFields() {
   const image = document.createElement('input');
   const weight = document.createElement('input');
 
-  const fields = [number, title, supplier, brand, material, care, image, weight];
   const textFields = [number, title, material, care, image, weight];
+  const suppliers = ['Juju', 'J&H', 'Larry', 'Lara Fashion'];
+  const brands = ['AMARYLLIS', 'AMA By Amaryllis', 'REFLECTION'];
 
   bookDiv.classList.add('fabricBookFieldset');
-  fields.forEach((field) => {
-    field.name = `fabricBooks[${fieldNum}][${field}]`;
+
+  number.name = `fabricBooks[${fieldNum}][number]`;
+  number.placeholder = 'Fabric Book Number';
+  title.name = `fabricBooks[${fieldNum}][title]`;
+  title.placeholder = 'Title';
+  material.name = `fabricBooks[${fieldNum}][material]`;
+  material.placeholder = 'Material Content';
+  care.name = `fabricBooks[${fieldNum}][care]`;
+  care.placeholder = 'Care Instructions';
+  image.name = `fabricBooks[${fieldNum}][image]`;
+  image.placeholder = 'Image Link';
+  weight.name = `fabricBooks[${fieldNum}][weight]`;
+  weight.placeholder = 'Weight (in oz)';
+
+  supplier.name = `fabricBooks[${fieldNum}][supplier]`;
+  supplier.id = 'supplier';
+  suppliers.forEach((supplierName) => {
+    const option = document.createElement('option');
+    option.value = supplierName;
+    option.text = supplierName;
+    supplier.appendChild(option);
+  });
+
+  brand.name = `fabricBooks[${fieldNum}][brand]`;
+  brand.id = 'brand';
+  brands.forEach((brandName) => {
+    const option = document.createElement('option');
+    option.value = brandName;
+    option.text = brandName;
+    brand.appendChild(option);
   });
 
   textFields.forEach((field) => {
     field.type = 'text';
-    field.placeholder = `${field}`;
   });
 
   bookDiv.appendChild(number);
   bookDiv.appendChild(title);
+  bookDiv.appendChild(supplier);
+  bookDiv.appendChild(brand);
   bookDiv.appendChild(material);
   bookDiv.appendChild(care);
   bookDiv.appendChild(image);

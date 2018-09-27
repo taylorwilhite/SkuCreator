@@ -30,15 +30,15 @@
       <input type="text" name="fabricBooks[0][image]" placeholder="Image Link">
     </div>
 		
-		<button type="button" id="addMaterial" onclick="addBookFields()">Add Another Book</button>
     <datalist id="materialList">
       <% allMaterial.forEach(material => { %>
         <option value="<%= material.material %>">
       <% }); %>
     </datalist>
 	</div>
-		
-		<input type="submit">
+  
+  <button type="button" id="addMaterial" onclick="addBookFields()">Add Another Book</button>
+	<input type="submit">
 	</form>
 
 	<form id="newMaterialForm">
