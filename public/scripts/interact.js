@@ -20,6 +20,14 @@ function fillColorCode(event) { // eslint-disable-line no-unused-vars
   document.querySelector("input[name='" + colorIndex + "']").value = foundCode;
 }
 
+function fillCareInstruction(event) { // eslint-disable-line no-unused-vars
+  const materialIndex = event.target.name.replace(/\[material\]/, '[care]');
+  const foundCode = clientMaterialList.find(
+    selected => selected.material === event.target.value,
+  ).care;
+  document.querySelector("input[name='" + materialIndex + "']").value = foundCode;
+}
+
 function addBookFields() {
   const container = document.getElementById('bookFields');
   const bookDiv = document.createElement('div');
@@ -165,9 +173,9 @@ function makeBook(data) {
   if (data.success) {
     // create new color in list
     clientMaterialList.push(data.success);
-    const dataList = document.getElementById('MaterialList');
+    const dataList = document.getElementById('materialList');
     const newMaterialOption = document.createElement('option');
-    newMaterialOption.value = data.success.color;
+    newMaterialOption.value = data.success.material;
     dataList.appendChild(newMaterialOption);
 
     // display confirmation

@@ -20,6 +20,7 @@ const indexRoutes = require('./routes/index');
 const skuRoutes = require('./routes/skuCreation');
 const colorRoutes = require('./routes/colors');
 const fabricBookRoutes = require('./routes/fabricBook');
+const materialRoutes = require('./routes/materials');
 
 // DB setup
 const databaseUri = process.env.MONGODB_URI || 'mongodb://localhost/skuCreateDb';
@@ -62,6 +63,7 @@ app.use('/', indexRoutes);
 app.use('/skuCreation', skuRoutes);
 app.use('/colors', colorRoutes);
 app.use('/fabricBooks', fabricBookRoutes);
+app.use('/materials', materialRoutes);
 
 // Start Server
 app.listen(process.env.PORT || 3000, () => {
