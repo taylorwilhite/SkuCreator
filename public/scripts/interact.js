@@ -156,9 +156,34 @@ function makeColor(data) {
   container.insertAdjacentElement('afterbegin', tempFlash);
 }
 
-function sendData(url, formId) { // eslint-disable-line no-unused-vars
+function makeBook(data) {
+  const container = document.getElementById('main-container');
+  const tempFlash = document.createElement('div');
+  const tempMessage = document.createElement('p');
+  tempFlash.classList.add('alert', 'temp-flash');
+
+  if (data.success) {
+    // create new color in list
+    clientMaterialList.push(data.success);
+    const dataList = document.getElementById('MaterialList');
+    const newMaterialOption = document.createElement('option');
+    newMaterialOption.value = data.success.color;
+    dataList.appendChild(newMaterialOption);
+
+    // display confirmation
+    tempMessage.innerHTML = 'Option Added Successfully!';
+    tempFlash.classList.add('alert-success');
+  } else {
+    // check for error and display error flash
+    tempMessage.innerHTML = data.error;
+    tempFlash.classList.add('alert-error');
+  }
+  tempFlash.appendChild(tempMessage);
+  container.insertAdjacentElement('afterbegin', tempFlash);
+}
+
+function sendData(url, formId, dataFunc) { // eslint-disable-line no-unused-vars
   const form = document.getElementById(formId);
-  console.log(form);
 
   const formData = {};
   // formData.color = form[0].value;
@@ -168,7 +193,6 @@ function sendData(url, formId) { // eslint-disable-line no-unused-vars
     const value = form[i].value;
     formData[key] = value;
   }
-  console.log(formData);
 
   return fetch(url, {
     method: "POST",
@@ -178,7 +202,7 @@ function sendData(url, formId) { // eslint-disable-line no-unused-vars
     body: JSON.stringify(formData),
   })
     .then(response => response.json())
-    .then(data => makeColor(data));
+    .then(data => dataFunc(data));
 }
 
 function deleteSizes(size) {
