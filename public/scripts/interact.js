@@ -158,10 +158,17 @@ function makeColor(data) {
 
 function sendData(url, formId) { // eslint-disable-line no-unused-vars
   const form = document.getElementById(formId);
+  console.log(form);
 
   const formData = {};
-  formData.color = form[0].value;
-  formData.colorCode = form[1].value;
+  // formData.color = form[0].value;
+  // formData.colorCode = form[1].value;
+  for (let i = 0; i < form.length; i += 1) {
+    const key = form[i].name;
+    const value = form[i].value;
+    formData[key] = value;
+  }
+  console.log(formData);
 
   return fetch(url, {
     method: "POST",

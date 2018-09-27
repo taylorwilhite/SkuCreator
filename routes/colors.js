@@ -5,8 +5,8 @@ const Color = require('../models/color');
 const router = express.Router();
 
 router.post('/', middleware.isLoggedIn, (req, res) => {
-  const newColor = req.body.color.toUpperCase();
-  const newColorCode = req.body.colorCode.toUpperCase();
+  const newColor = req.body.newColor.toUpperCase();
+  const newColorCode = req.body.newCode.toUpperCase();
 
   // send color and code to dB
   Color.findOne({ $or: [{ color: newColor }, { colorCode: newColorCode }] }, (err, foundColor) => {
