@@ -5,6 +5,8 @@ const middleware = require('../middleware');
 const Material = require('../models/material');
 const routeFunctions = require('../middleware/routeFunctions');
 
+const { getFabricBook, picLink } = routeFunctions;
+
 const router = express.Router();
 
 router.get('/', middleware.isLoggedIn, (req, res) => {
@@ -28,7 +30,8 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
   };
 
   for (let i = 0; i < Object.keys(fabricBooks).length; i += 1) {
-    const newBook = routeFunctions.getFabricBook(fabricBooks[i]);
+    fabricBooks[i].image = picLink(fabricBooks[i].image);
+    const newBook = getFabricBook(fabricBooks[i]);
     newBooks.Items.push(newBook);
   }
 

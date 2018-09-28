@@ -29,4 +29,11 @@ module.exports = {
 
     return newBook;
   },
+
+  picLink: (changeLink) => {
+    let linkUrl = changeLink;
+    linkUrl = linkUrl.replace(/www\.dropbox/, 'dl.dropboxusercontent');
+    linkUrl = linkUrl.replace(/\?.*/, '');
+    return linkUrl;
+  },
 };

@@ -4,6 +4,9 @@ const request = require('request');
 const middleware = require('../middleware');
 const Counter = require('../models/counter');
 const Color = require('../models/color');
+const routeFunctions = require('../middleware/routeFunctions');
+
+const { picLink } = routeFunctions;
 
 const router = express.Router();
 
@@ -19,13 +22,6 @@ async function getNextUpc(seqName) {
     return returnCounter.sequence_value;
   }).exec();
   return counter.sequence_value;
-}
-
-function picLink(changeLink) {
-  let linkUrl = changeLink;
-  linkUrl = linkUrl.replace(/www\.dropbox/, 'dl.dropboxusercontent');
-  linkUrl = linkUrl.replace(/\?.*/, '');
-  return linkUrl;
 }
 
 function wait1Sec(x) {
