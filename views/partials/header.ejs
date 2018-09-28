@@ -11,12 +11,14 @@
 </head>
 <body>
 	<nav>
-			<% if(!activeUser){ %>
-			<a href="/login">Login</a>
-			<a href="/register">Register</a>
-			<% } else { %>
-			<a href="/logout">Logout</a>
-			<% } %>
+		<% if(!activeUser){ %>
+		<a href="/login">Login</a>
+		<a href="/register">Register</a>
+		<% } else { %>
+		<a href="/logout">Logout</a>
+    <a href="/fabricBooks">Fabric Books</a>
+    <a href="/skuCreation">SKUs</a>
+		<% } %>
 	</nav>
 
 	<div class="container">
