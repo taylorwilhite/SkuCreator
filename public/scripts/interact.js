@@ -39,6 +39,7 @@ function addBookFields() {
   const care = document.createElement('input');
   const image = document.createElement('input');
   const weight = document.createElement('input');
+  const delButton = document.createElement('button');
 
   const textFields = [number, title, material, care, image, weight];
   const suppliers = ['Juju', 'J&H', 'Larry', 'Lara Fashion'];
@@ -58,6 +59,10 @@ function addBookFields() {
   image.placeholder = 'Image Link';
   weight.name = `fabricBooks[${fieldNum}][weight]`;
   weight.placeholder = 'Weight (in oz)';
+  delButton.classList.add('delete-color');
+  delButton.type = 'button';
+  delButton.onclick = removeFields;
+  delButton.innerHTML = 'Delete';
 
   supplier.name = `fabricBooks[${fieldNum}][supplier]`;
   supplier.id = 'supplier';
@@ -89,15 +94,16 @@ function addBookFields() {
   bookDiv.appendChild(care);
   bookDiv.appendChild(image);
   bookDiv.appendChild(weight);
+  bookDiv.appendChild(delButton);
   container.appendChild(bookDiv);
 
   fieldNum += 1;
 }
 
-function removeColorField() {
-  const colorDiv = this.parentNode;
-  const colorFields = colorDiv.parentNode;
-  colorFields.removeChild(colorDiv);
+function removeFields() {
+  const fieldDiv = this.parentNode;
+  const mainDiv = fieldDiv.parentNode;
+  mainDiv.removeChild(fieldDiv);
 }
 
 function addColorFields() { // eslint-disable-line no-unused-vars
@@ -126,7 +132,7 @@ function addColorFields() { // eslint-disable-line no-unused-vars
   fbColorField.placeholder = 'FB Color Number';
   delButton.classList.add('delete-color');
   delButton.type = 'button';
-  delButton.onclick = removeColorField;
+  delButton.onclick = removeFields;
   delButton.innerHTML = 'Delete';
 
   colorDiv.appendChild(colorField);
