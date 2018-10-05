@@ -215,7 +215,7 @@ function sendData(url, formId, dataFunc, dataType) { // eslint-disable-line no-u
     },
     body: JSON.stringify(formData),
   })
-    .then(response => response.dataType())
+    .then(response => response.json())
     .then(data => dataFunc(data));
 }
 
