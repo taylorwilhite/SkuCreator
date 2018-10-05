@@ -15,10 +15,7 @@ const makeExcel = (body) => {
   ws.cell(1, 10).string('Country of Origin (REQUIRED)');
   ws.cell(1, 11).string('Re-used Style');
 
-  console.log(body);
-
   body.Products.forEach((item, i) => {
-    console.log(item);
     const { Brand, Sku, Code, Description } = item;
     const image = item.Pictures[0];
     const size = item.Attributes.find(obj => obj.Name === 'Size').Value;
