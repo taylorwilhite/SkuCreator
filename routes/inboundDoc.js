@@ -1,9 +1,7 @@
 const express = require('express');
 const request = require('request');
 const middleware = require('../middleware');
-const routeFunctions = require('../middleware/routeFunctions');
-
-const { makeExcel } = routeFunctions;
+const makeExcel = require('../middleware/makeExcel');
 
 const router = express.Router();
 
@@ -34,7 +32,8 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
         req.flash('error', err);
         res.redirect('back');
       } else if (response.statusCode === 200) {
-        makeExcel(body);
+        const wb = makeExcel(body);
+        wb.write('excelTest.xlsx', res);
       } else {
         req.flash('error', `Possible error, unexpected response code: ${response.statusCode}`);
         res.redirect('back');

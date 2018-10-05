@@ -18,6 +18,8 @@ const makeExcel = (body) => {
   body.Products.forEach((item) => {
     const { Brand, Sku, Code, Description } = item;
   });
+
+  return wb;
 };
 
-export default makeExcel;
+module.exports = makeExcel;

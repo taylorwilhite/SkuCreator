@@ -196,7 +196,7 @@ function makeBook(data) {
   container.insertAdjacentElement('afterbegin', tempFlash);
 }
 
-function sendData(url, formId, dataFunc) { // eslint-disable-line no-unused-vars
+function sendData(url, formId, dataFunc, dataType) { // eslint-disable-line no-unused-vars
   const form = document.getElementById(formId);
 
   const formData = {};
@@ -215,7 +215,7 @@ function sendData(url, formId, dataFunc) { // eslint-disable-line no-unused-vars
     },
     body: JSON.stringify(formData),
   })
-    .then(response => response.json())
+    .then(response => response.dataType())
     .then(data => dataFunc(data));
 }
 
