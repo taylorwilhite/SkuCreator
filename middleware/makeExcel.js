@@ -3,17 +3,34 @@ const xl = require('excel4node');
 const makeExcel = (body) => {
   const wb = new xl.Workbook();
   const ws = wb.addWorksheet('Worksheet');
-  ws.cell(1, 1).string('Reference Image');
-  ws.cell(1, 2).string('Brand');
-  ws.cell(1, 3).string('Vendor Sku (REQUIRED)');
-  ws.cell(1, 4).string('zulily Product ID');
-  ws.cell(1, 5).string('UPC');
-  ws.cell(1, 6).string('Product Name (REQUIRED)');
-  ws.cell(1, 7).string('Size');
-  ws.cell(1, 8).string('Color');
-  ws.cell(1, 9).string('Qty (REQUIRED)');
-  ws.cell(1, 10).string('Country of Origin (REQUIRED)');
-  ws.cell(1, 11).string('Re-used Style');
+  const style = wb.createStyle({
+    font: {
+      color: 'FFFFFF',
+    },
+    fill: {
+      type: 'pattern',
+      patternType: 'solid',
+      bgColor: '808080',
+      fgColor: '808080',
+    },
+    border: {
+      right: {
+        style: 'double',
+      },
+      outline: true,
+    },
+  });
+  ws.cell(1, 1).string('Reference Image').style(style);
+  ws.cell(1, 2).string('Brand').style(style);
+  ws.cell(1, 3).string('Vendor Sku (REQUIRED)').style(style);
+  ws.cell(1, 4).string('zulily Product ID').style(style);
+  ws.cell(1, 5).string('UPC').style(style);
+  ws.cell(1, 6).string('Product Name (REQUIRED)').style(style);
+  ws.cell(1, 7).string('Size').style(style);
+  ws.cell(1, 8).string('Color').style(style);
+  ws.cell(1, 9).string('Qty (REQUIRED)').style(style);
+  ws.cell(1, 10).string('Country of Origin (REQUIRED)').style(style);
+  ws.cell(1, 11).string('Re-used Style').style(style);
 
   body.Products.forEach((item, i) => {
     const { Brand, Sku, Code, Description } = item;
