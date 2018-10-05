@@ -21,7 +21,8 @@ const makeExcel = (body) => {
     console.log(item);
     const { Brand, Sku, Code, Description } = item;
     const image = item.Pictures[0];
-    const { Size, Color } = item.Attributes;
+    const size = item.Attributes.find(obj => obj.Name === 'Size').Value;
+    const color = item.Attributes.find(obj => obj.Name === 'Color').Value;
     const rowOffset = 2;
     ws.cell(rowOffset + i, 1).string(image);
     ws.cell(rowOffset + i, 2).string(Brand);
@@ -29,8 +30,8 @@ const makeExcel = (body) => {
     ws.cell(rowOffset + i, 4).string('');
     ws.cell(rowOffset + i, 5).string(Code);
     ws.cell(rowOffset + i, 6).string(Description);
-    ws.cell(rowOffset + i, 7).string(Size);
-    ws.cell(rowOffset + i, 8).string(Color);
+    ws.cell(rowOffset + i, 7).string(size);
+    ws.cell(rowOffset + i, 8).string(color);
     ws.cell(rowOffset + i, 9).string('');
     ws.cell(rowOffset + i, 10).string('China');
     ws.cell(rowOffset + i, 11).string('');
