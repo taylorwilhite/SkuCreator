@@ -33,7 +33,9 @@ const makeExcel = (body) => {
   ws.cell(1, 11).string('Re-used Style').style(style);
 
   body.Products.forEach((item, i) => {
-    const { Brand, Sku, Code, Description } = item;
+    const {
+      Brand, Sku, Code, Description,
+    } = item;
     const image = item.Pictures[0];
     const size = item.Attributes.find(obj => obj.Name === 'Size').Value;
     const color = item.Attributes.find(obj => obj.Name === 'Color').Value;
