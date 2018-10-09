@@ -32,8 +32,9 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
         req.flash('error', err);
         res.redirect('back');
       } else if (response.statusCode === 200) {
+        const date = new Date();
         const wb = makeExcel(body);
-        wb.write('excelTest.xlsx', res);
+        wb.write(`AMARYLLIS ZPS Inbound Doc ${date.getMonth()}-${date.getDay()}.xlsx`, res);
       } else {
         req.flash('error', `Possible error, unexpected response code: ${response.statusCode}`);
         res.redirect('back');
