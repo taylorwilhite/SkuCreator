@@ -61,6 +61,7 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
     const plusRaw = req.body.plus.rawCost;
     const hps = req.body.hps;
     const inseam = req.body.inseam;
+    const weight = req.body.weight;
 
     // Create Empty object to push SKUs into
     const newSKUs = {
@@ -104,6 +105,8 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
           Supplier: supName,
           Brand: brand,
           Cost: landedCost,
+          Weight: weight,
+          WeightUnit: 'oz',
           VariationParentSku: sku,
           Pictures: [
             picture,
