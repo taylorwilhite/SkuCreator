@@ -2,7 +2,6 @@ const express = require('express');
 const colors = require('colors');
 const request = require('request');
 const middleware = require('../middleware');
-const Counter = require('../models/counter');
 const Color = require('../models/color');
 const routeFunctions = require('../middleware/routeFunctions');
 
@@ -10,19 +9,6 @@ const { picLink } = routeFunctions;
 
 const router = express.Router();
 
-async function getNextUpc(seqName) {
-  const query = { _id: seqName };
-  const update = { $inc: { sequence_value: 1 } };
-  const options = { new: true };
-
-  const counter = await Counter.findOneAndUpdate(query, update, options, (err, returnCounter) => {
-    if (err) {
-      return console.log(err);
-    }
-    return returnCounter.sequence_value;
-  }).exec();
-  return counter.sequence_value;
-}
 
 function wait1Sec(x) {
   return new Promise((resolve) => {
