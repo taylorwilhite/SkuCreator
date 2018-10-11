@@ -1,3 +1,5 @@
+const Counter = require('../models/counter');
+
 module.exports = {
   getFabricBook: (body) => {
     const { material, number, title, supplier, brand, weight, image, care } = body;
@@ -35,5 +37,19 @@ module.exports = {
     linkUrl = linkUrl.replace(/www\.dropbox/, 'dl.dropboxusercontent');
     linkUrl = linkUrl.replace(/\?.*/, '');
     return linkUrl;
+  },
+
+  getNextUpc: async (seqName) => {
+    const query = { _id: seqName };
+    const update = { $inc: { sequence_value: 1 } };
+    const options = { new: true };
+
+    const counter = await Counter.findOneAndUpdate(query, update, options, (err, returnCounter) => {
+      if (err) {
+        return console.log(err);
+      }
+      return returnCounter.sequence_value;
+    }).exec();
+    return counter.sequence_value;
   },
 };
