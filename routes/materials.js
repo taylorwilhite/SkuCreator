@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/', middleware.isLoggedIn, (req, res) => {
   const newMaterial = req.body.newMaterial.toUpperCase();
-  const newCare = req.body.newCare.toUpperCase();
+  const { newCare } = req.body;
 
   // send color and code to dB
   Material.findOne({ material: newMaterial }, (err, foundMaterial) => {
