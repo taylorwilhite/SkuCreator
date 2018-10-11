@@ -31,7 +31,7 @@ module.exports = async function skuCreation(body, tenant, user) {
     const { colorName, colorCode, fbColor } = colorSet[colorIndex][1];
     const picture = picLink(colorSet[colorIndex][1].pictureLink);
 
-    const colorSizes = sizes.map((size) => {
+    sizes.map((size) => {
       let landedCost = '';
       let rawCost = '';
       // For loop for sizes
@@ -76,9 +76,8 @@ module.exports = async function skuCreation(body, tenant, user) {
         Code: upc,
       };
       upc += 1;
-      return newSize;
+      return newSKUs.Items.push(newSize);
     });
-    newSKUs.Items.push(colorSizes);
   }
 
   // const promiseSkus = await Promise.all(newSKUs.Items);
