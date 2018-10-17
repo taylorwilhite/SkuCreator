@@ -4,6 +4,20 @@ let kimonoStyle = false;
 const regSizes = ['XL', 'L', 'M', 'S'];
 const kimonoSizes = ['LXL', 'SM'];
 let fieldNum = 2;
+const bookFields = {
+  container: 'bookFields',
+  namePrefix: 'fabricBooks',
+  fields: [
+    { name: 'number', element: 'input', placeholder: 'Fabric Book Number', type: 'text' },
+    { name: 'title', element: 'input', placeholder: 'Title', type: 'text' },
+    { name: 'supplier', element: 'select', options: ['Juju', 'J&H', 'Larry', 'Lara Fashion'] },
+    { name: 'brand', element: 'select', options: ['AMARYLLIS', 'AMA By Amaryllis', 'REFLECTION'] },
+    { name: 'material', element: 'input', placeholder: 'Material Content', type: 'text' },
+    { name: 'care', element: 'input', placeholder: 'Care Instructions', type: 'text' },
+    { name: 'image', element: 'input', placeholder: 'Image Link', type: 'text' },
+    { name: 'weight', element: 'input', placeholder: 'Weight (in oz)', type: 'text' },
+  ],
+};
 
 function selectAll(source) { // eslint-disable-line no-unused-vars
   const checkboxes = document.getElementsByName('size[]');
@@ -28,83 +42,50 @@ function fillCareInstruction(event) { // eslint-disable-line no-unused-vars
   document.querySelector("input[name='" + materialIndex + "']").value = foundCode;
 }
 
-function addBookFields() {
-  const container = document.getElementById('bookFields');
-  const bookDiv = document.createElement('div');
-  const number = document.createElement('input');
-  const title = document.createElement('input');
-  const supplier = document.createElement('select');
-  const brand = document.createElement('select');
-  const material = document.createElement('input');
-  const care = document.createElement('input');
-  const image = document.createElement('input');
-  const weight = document.createElement('input');
-  const delButton = document.createElement('button');
-
-  const textFields = [number, title, material, care, image, weight];
-  const suppliers = ['Juju', 'J&H', 'Larry', 'Lara Fashion'];
-  const brands = ['AMARYLLIS', 'AMA By Amaryllis', 'REFLECTION'];
-
-  bookDiv.classList.add('fabricBookFieldset');
-
-  number.name = `fabricBooks[${fieldNum}][number]`;
-  number.placeholder = 'Fabric Book Number';
-  title.name = `fabricBooks[${fieldNum}][title]`;
-  title.placeholder = 'Title';
-  material.name = `fabricBooks[${fieldNum}][material]`;
-  material.placeholder = 'Material Content';
-  care.name = `fabricBooks[${fieldNum}][care]`;
-  care.placeholder = 'Care Instructions';
-  image.name = `fabricBooks[${fieldNum}][image]`;
-  image.placeholder = 'Image Link';
-  weight.name = `fabricBooks[${fieldNum}][weight]`;
-  weight.placeholder = 'Weight (in oz)';
-  delButton.classList.add('delete-color');
-  delButton.type = 'button';
-  delButton.onclick = removeFields;
-  delButton.innerHTML = 'Delete';
-
-  supplier.name = `fabricBooks[${fieldNum}][supplier]`;
-  supplier.id = 'supplier';
-  suppliers.forEach((supplierName) => {
-    const option = document.createElement('option');
-    option.value = supplierName;
-    option.text = supplierName;
-    supplier.appendChild(option);
-  });
-
-  brand.name = `fabricBooks[${fieldNum}][brand]`;
-  brand.id = 'brand';
-  brands.forEach((brandName) => {
-    const option = document.createElement('option');
-    option.value = brandName;
-    option.text = brandName;
-    brand.appendChild(option);
-  });
-
-  textFields.forEach((field) => {
-    field.type = 'text';
-  });
-
-  bookDiv.appendChild(number);
-  bookDiv.appendChild(title);
-  bookDiv.appendChild(supplier);
-  bookDiv.appendChild(brand);
-  bookDiv.appendChild(material);
-  bookDiv.appendChild(care);
-  bookDiv.appendChild(image);
-  bookDiv.appendChild(weight);
-  bookDiv.appendChild(delButton);
-  container.appendChild(bookDiv);
-
-  fieldNum += 1;
-}
-
 function removeFields() {
   const fieldDiv = this.parentNode;
   const mainDiv = fieldDiv.parentNode;
   mainDiv.removeChild(fieldDiv);
 }
+
+function addFields(fields) {
+  const container = document.getElementById(fields.container);
+  const fieldDiv = document.createElement('div');
+  const { namePrefix } = fields;
+  fields.fields.forEach((field) => {
+    const newField = document.createElement(field.element);
+    newField.name = `${namePrefix}[${fieldNum}][${field.name}]`;
+    if (field.placeholder) {
+      newField.placeholder = field.placeholder;
+    }
+    if (field.type) {
+      newField.type = field.type;
+    }
+    if (field.options) {
+      field.options.forEach((option) => {
+        const newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.text = option;
+        newField.appendChild(newOption);
+      });
+    }
+    fieldDiv.appendChild(newField);
+  });
+  const delButton = document.createElement('button');
+
+  fieldDiv.classList.add('fabricBookFieldset');
+
+  delButton.classList.add('delete-color');
+  delButton.type = 'button';
+  delButton.onclick = removeFields;
+  delButton.innerHTML = 'Delete';
+
+  fieldDiv.appendChild(delButton);
+  container.appendChild(fieldDiv);
+
+  fieldNum += 1;
+}
+
 
 function addColorFields() { // eslint-disable-line no-unused-vars
   const container = document.getElementById('colorFields');
