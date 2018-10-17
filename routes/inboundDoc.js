@@ -11,8 +11,9 @@ router.get('/', middleware.isLoggedIn, (req, res) => {
 
 router.post('/', middleware.isLoggedIn, (req, res) => {
   const { inboundSkus } = req.body;
-  const SkuArr = inboundSkus.split('\r\n');
+  const SkuArr = inboundSkus.split('\r\n'); // put SKUs in array based on newline
 
+  // Form basic object to send to skuvault
   const reqBody = {
     ProductSkus: SkuArr,
     TenantToken: req.session.TenantToken,
@@ -26,12 +27,13 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
       headers: [{ 'Content-Type': 'application/json', Accept: 'application/json' }],
       json: true,
       body: reqBody,
-    }, (err, response, body) => {
+    }, (err, response, body) => { // Handle response
       if (err) {
         console.log(err);
         req.flash('error', err);
         res.redirect('back');
       } else if (response.statusCode === 200) {
+        // Create new workbook
         const date = new Date();
         const wb = makeExcel(body);
         wb.write(`AMARYLLIS ZPS Inbound Doc ${date.getMonth()}-${date.getDay()}.xlsx`, res);
