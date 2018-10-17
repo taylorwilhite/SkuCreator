@@ -8,14 +8,20 @@ const bookFields = {
   container: 'bookFields',
   namePrefix: 'fabricBooks',
   fields: [
-    { name: 'number', element: 'input', placeholder: 'Fabric Book Number', type: 'text' },
-    { name: 'title', element: 'input', placeholder: 'Title', type: 'text' },
+    { name: 'number', element: 'input', attributes: { placeholder: 'Fabric Book Number', type: 'text' } },
+    { name: 'title', element: 'input', attributes: { placeholder: 'Title', type: 'text' } },
     { name: 'supplier', element: 'select', options: ['Juju', 'J&H', 'Larry', 'Lara Fashion'] },
     { name: 'brand', element: 'select', options: ['AMARYLLIS', 'AMA By Amaryllis', 'REFLECTION'] },
-    { name: 'material', element: 'input', placeholder: 'Material Content', type: 'text' },
-    { name: 'care', element: 'input', placeholder: 'Care Instructions', type: 'text' },
-    { name: 'image', element: 'input', placeholder: 'Image Link', type: 'text' },
-    { name: 'weight', element: 'input', placeholder: 'Weight (in oz)', type: 'text' },
+    {
+      name: 'material',
+      element: 'input',
+      attributes: {
+        onchange: 'fillCareInstruction(event)', placeholder: 'Material Content', type: 'text', required: 'true', list: 'materialList',
+      },
+    },
+    { name: 'care', element: 'input', attributes: { placeholder: 'Care Instructions', type: 'text' } },
+    { name: 'image', element: 'input', attributes: { placeholder: 'Image Link', type: 'text' } },
+    { name: 'weight', element: 'input', attributes: { placeholder: 'Weight (in oz)', type: 'text' } },
   ],
 };
 
@@ -52,15 +58,17 @@ function addFields(fields) {
   const container = document.getElementById(fields.container);
   const fieldDiv = document.createElement('div');
   const { namePrefix } = fields;
+  // Loop through fields from object and apply attributes
   fields.fields.forEach((field) => {
     const newField = document.createElement(field.element);
     newField.name = `${namePrefix}[${fieldNum}][${field.name}]`;
-    if (field.placeholder) {
-      newField.placeholder = field.placeholder;
+    // Get the keys from attributes and apply each attribute to field
+    if (field.attributes) {
+      Object.keys(field.attributes).forEach((key) => {
+        newField.setAttribute(key, field.attributes[key]);
+      });
     }
-    if (field.type) {
-      newField.type = field.type;
-    }
+    // Conditional for select options
     if (field.options) {
       field.options.forEach((option) => {
         const newOption = document.createElement('option');
