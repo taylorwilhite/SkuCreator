@@ -70,7 +70,7 @@
 			<input type="text" name="colorSet[color1][colorCode]" placeholder="Color Code" required="true" readonly>
 			<input type="text" name="colorSet[color1][pictureLink]" placeholder="Image Link">
 			<input type="text" name="colorSet[color1][fbColor]" placeholder="FB Color Number">
-			<button type="button" id="addColor" onclick="addColorFields()">Add Color</button>
+			<button type="button" id="addColor" onclick="addFields(colorFields)">Add Color</button>
 			<datalist id="colorNameList">
 				<% allColors.forEach(color => { %>
 					<option value="<%= color.color %>">
