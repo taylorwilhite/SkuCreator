@@ -4,6 +4,7 @@ let kimonoStyle = false;
 const regSizes = ['XL', 'L', 'M', 'S'];
 const kimonoSizes = ['LXL', 'SM'];
 let fieldNum = 2;
+
 const bookFields = {
   container: 'bookFields',
   namePrefix: 'fabricBooks',
@@ -22,6 +23,24 @@ const bookFields = {
     { name: 'care', element: 'input', attributes: { placeholder: 'Care Instructions', type: 'text' } },
     { name: 'image', element: 'input', attributes: { placeholder: 'Image Link', type: 'text' } },
     { name: 'weight', element: 'input', attributes: { placeholder: 'Weight (in oz)', type: 'text' } },
+  ],
+};
+
+const colorFields = {
+  container: 'colorFields',
+  namePrefix: 'colorSet',
+  fields: [
+    {
+      name: 'colorName',
+      element: 'input',
+      attributes: {
+        onchange: 'fillColorCode(event)', placeholder: 'Color', type: 'text', required: 'true', list: 'colorNameList',
+      },
+    },
+    { name: 'colorCode', element: 'input', attributes: { placeholder: 'Color Code', type: 'text', readonly: 'true' } },
+    { name: 'pictureLink', element: 'input', attributes: { placeholder: 'Image Link', type: 'text' } },
+    { name: 'fbColor', element: 'input', attributes: { placeholder: 'FB Color Number', type: 'text' } },
+
   ],
 };
 
@@ -94,44 +113,6 @@ function addFields(fields) {
   fieldNum += 1;
 }
 
-
-function addColorFields() { // eslint-disable-line no-unused-vars
-  const container = document.getElementById('colorFields');
-  const colorDiv = document.createElement('div');
-  const colorField = document.createElement('input');
-  const colorFieldCode = document.createElement('input');
-  const pictureLink = document.createElement('input');
-  const fbColorField = document.createElement('input');
-  const delButton = document.createElement('button');
-  colorField.type = 'text';
-  colorField.name = 'colorSet[color' + fieldNum + '][colorName]';
-  colorField.classList.add('colorName');
-  colorField.placeholder = 'Color';
-  colorField.setAttribute('list', 'colorNameList');
-  colorField.setAttribute('onchange', 'fillColorCode(event)');
-  colorFieldCode.type = 'text';
-  colorFieldCode.name = 'colorSet[color' + fieldNum + '][colorCode]';
-  colorFieldCode.placeholder = 'Color Code';
-  colorFieldCode.setAttribute('readonly', '');
-  pictureLink.type = 'text';
-  pictureLink.name = 'colorSet[color' + fieldNum + '][pictureLink]';
-  pictureLink.placeholder = 'Image Link';
-  fbColorField.type = 'text';
-  fbColorField.name = 'colorSet[color' + fieldNum + '][fbColor]';
-  fbColorField.placeholder = 'FB Color Number';
-  delButton.classList.add('delete-color');
-  delButton.type = 'button';
-  delButton.onclick = removeFields;
-  delButton.innerHTML = 'Delete';
-
-  colorDiv.appendChild(colorField);
-  colorDiv.appendChild(colorFieldCode);
-  colorDiv.appendChild(pictureLink);
-  colorDiv.appendChild(fbColorField);
-  colorDiv.appendChild(delButton);
-  container.appendChild(colorDiv);
-  fieldNum += 1;
-}
 
 function makeColor(data) {
   const container = document.getElementById('main-container');
