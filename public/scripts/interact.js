@@ -189,6 +189,29 @@ function sendData(url, formId, dataFunc, dataType) { // eslint-disable-line no-u
     .then(data => dataFunc(data));
 }
 
+function flashDisplay(data) {
+  const container = document.getElementById('main-container');
+  const tempFlash = document.createElement('div');
+  const tempMessage = document.createElement('p');
+  tempFlash.classList.add('alert', 'temp-flash');
+
+  if (data.success) {
+    tempMessage.innerHTML = data.success.message;
+    tempFlash.classList.add('alert-success');
+  } else {
+    tempMessage.innerHTML = data.error ? data.error.message : 'Something went wrong, please try again';
+    tempFlash.classList.add('alert-error');
+  }
+  tempFlash.appendChild(tempMessage);
+  container.insertAdjacentElement('afterbegin', tempFlash);
+}
+
+function getData(endpoint) {
+  return fetch(endpoint)
+    .then(response => response.json())
+    .then(data => flashDisplay(data));
+}
+
 function deleteSizes(size) {
   const deleteSize = document.querySelector('input[value=' + size + ']');
   const sizeLabel = deleteSize.parentNode;
