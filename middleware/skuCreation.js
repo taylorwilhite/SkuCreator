@@ -62,6 +62,7 @@ module.exports = async function skuCreation(body, tenant, user) {
         Weight: weight,
         WeightUnit: 'oz',
         VariationParentSku: sku,
+        Note: sku,
         Pictures: [
           picture,
         ],
