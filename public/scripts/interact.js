@@ -11,7 +11,9 @@ const bookFields = {
   fields: [
     { name: 'number', element: 'input', attributes: { placeholder: 'Fabric Book Number', type: 'text' } },
     { name: 'title', element: 'input', attributes: { placeholder: 'Title', type: 'text' } },
+    { element: 'label', labelFor: 'supplier', text: 'Supplier: ' },
     { name: 'supplier', element: 'select', options: ['Juju', 'J&H', 'Larry', 'Lara Fashion'] },
+    { element: 'label', labelFor: 'brand', text: 'Brand: ' },
     { name: 'brand', element: 'select', options: ['AMARYLLIS', 'AMA By Amaryllis', 'REFLECTION'] },
     {
       name: 'material',
@@ -21,8 +23,8 @@ const bookFields = {
       },
     },
     { name: 'care', element: 'input', attributes: { placeholder: 'Care Instructions', type: 'text' } },
-    { name: 'image', element: 'input', attributes: { placeholder: 'Image Link', type: 'text' } },
     { name: 'weight', element: 'input', attributes: { placeholder: 'Weight (in oz)', type: 'text' } },
+    { name: 'image', element: 'input', attributes: { placeholder: 'Image Link', type: 'text' } },
   ],
 };
 
@@ -80,7 +82,13 @@ function addFields(fields) {
   // Loop through fields from object and apply attributes
   fields.fields.forEach((field) => {
     const newField = document.createElement(field.element);
-    newField.name = `${namePrefix}[${fieldNum}][${field.name}]`;
+    if (field.element !== 'label') {
+      newField.name = `${namePrefix}[${fieldNum}][${field.name}]`;
+    } else {
+      // Logic specific to option labels
+      newField.setAttribute('for', `${namePrefix}[${fieldNum}][${field.labelFor}]`);
+      newField.innerHTML = field.text;
+    }
     // Get the keys from attributes and apply each attribute to field
     if (field.attributes) {
       Object.keys(field.attributes).forEach((key) => {
@@ -89,6 +97,7 @@ function addFields(fields) {
     }
     // Conditional for select options
     if (field.options) {
+      newField.id = newField.name;
       field.options.forEach((option) => {
         const newOption = document.createElement('option');
         newOption.value = option;
