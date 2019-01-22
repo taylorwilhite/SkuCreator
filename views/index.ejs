@@ -32,35 +32,11 @@
 			<label for="classification">Classification: </label>
 			<select name="classification" id="classification" required="true">
 				<option value="" selected>Select One</option>
-				<option value="(1) Accessories- Fashion Jewelry">(1) Accessories- Fashion Jewelry</option>
-				<option value="(1) Accessories- Rings">(1) Accessories- Rings</option>
-				<option value="(2) Apparel- Pants">(2) Apparel- Pants</option>
-        <option value="(2-SMU) Apparel- Pants">(2-SMU) Apparel- Pants</option>
-        <option value="(2) Apparel- Bottoms">(2) Apparel- Bottoms</option>
-				<option value="(2-SMU) Apparel- Bottoms">(2-SMU) Apparel- Bottoms</option>
-				<option value="(2) Apparel- Pants and Capries">(2) Apparel- Pants and Capries</option>
-				<option value="(2-SMU) Apparel- Pants and Capries">(2-SMU) Apparel- Pants and Capries</option>
-				<option value="(2) Apparel- Shorts">(2) Apparel- Shorts</option>
-				<option value="(2-SMU) Apparel- Shorts">(2-SMU) Apparel- Shorts</option>
-				<option value="(2) Apparel- Women's Skirts">(2) Apparel- Women's Skirts</option>
-				<option value="(2-SMU) Apparel- Women's Skirts">(2-SMU) Apparel- Women's Skirts</option>
-				<option value="(3) Apparel- Tops">(3) Apparel- Tops</option>
-				<option value="(3-SMU) Apparel- Tops">(3-SMU) Apparel- Tops</option>
-				<option value="(4) Apparel- Sweaters">(4) Apparel- Sweaters</option>
-				<option value="(4-SMU) Apparel- Sweaters">(4-SMU) Apparel- Sweaters</option>
-				<option value="(5) Apparel- Outerwear">(5) Apparel- Outerwear</option>
-				<option value="(5-SMU) Apparel- Outerwear">(5-SMU) Apparel- Outerwear</option>
-				<option value="(A6) Apparel- Dress">(A6) Apparel- Dress</option>
-				<option value="(A6-SMU) Apparel- Dress">(A6-SMU) Apparel- Dress</option>
-				<option value="(A6) Apparel- Jumpsuits & Rompers">(A6) Apparel- Jumpsuits & Rompers</option>
-				<option value="(A6-SMU) Apparel- Jumpsuits & Rompers">(A6-SMU) Apparel- Jumpsuits & Rompers</option>
-				<option value="(A7) Apparel- Activewear">(A7) Apparel- Activewear</option>
-				<option value="(A7-SMU) Apparel- Activewear">(A7-SMU) Apparel- Activewear</option>
-				<option value="(A7) Apparel- Swimwear">(A7) Apparel- Swimwear</option>
-				<option value="(9)-Cardigans">(9)-Cardigans</option>
-				<option value="(10) Undergarment">(10) Undergarment</option>
-				<option value="(11) Sport Accessories">(11) Sport Accessories</option>
-				<option value="(12) Activewear Accessories">(12) Activewear Accessories</option>
+				<<% allClass.forEach(classification => { %>
+					<% if (classification.isEnabled) { %>
+					<option value="<%= classification.name %>"><%= classification.name %></option>
+					<% }; %>
+				<% }); %>>
 			</select>
 
 			<label for="brand">Brand: </label>
