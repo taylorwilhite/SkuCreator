@@ -15,7 +15,7 @@ async function retrieveClass() {
       return console.log(err);
     }
     return allClasses;
-  }).exec();
+  }).sort({ name: 1 }).exec();
   return classes;
 }
 
