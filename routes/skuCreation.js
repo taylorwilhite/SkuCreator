@@ -27,7 +27,6 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(allColors);
       res.render('index', { allColors, allClass });
     }
   });
