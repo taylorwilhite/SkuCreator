@@ -1,7 +1,7 @@
 /* eslint-env browser */
 /* global clientColorList */
 let kimonoStyle = false;
-const regSizes = ['XL', 'L', 'M', 'S'];
+const regSizes = ['XL', 'L', 'M', 'S', 'XS'];
 const kimonoSizes = ['LXL', 'SM'];
 let fieldNum = 2;
 
