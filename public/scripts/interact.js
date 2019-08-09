@@ -15,6 +15,8 @@ const bookFields = {
     { name: 'supplier', element: 'select', options: ['Juju', 'J&H', 'Larry', 'Lara Fashion'] },
     { element: 'label', labelFor: 'brand', text: 'Brand: ' },
     { name: 'brand', element: 'select', options: ['AMARYLLIS', 'AMA By Amaryllis', 'REFLECTION'] },
+    { element: 'label', labelFor: 'construction', text: 'Construction: ' },
+    { name: 'construction', element: 'select', options: ['Knit', 'Woven'] },
     {
       name: 'material',
       element: 'input',
