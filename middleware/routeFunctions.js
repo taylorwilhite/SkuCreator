@@ -6,7 +6,7 @@ module.exports = {
 
     const newBook = {
       Sku: `${number}-FB`,
-      Classification: '(A7) Material- General',
+      Classification: 'Material',
       Supplier: supplier,
       Brand: brand,
       Description: title,
