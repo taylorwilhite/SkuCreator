@@ -9,25 +9,12 @@
 		<input type="text" name="variantTitle" placeholder="Title" required="true">
 		<label for="suppName">Supplier: </label>
 		<select name="supp[Name]" id="suppName" required="true">
-			<option value="Tian Yan Clothing ltd">Tian Yan Clothing ltd</option>
-			<option value="Limay">Limay</option>
-			<option value="Juju">Juju</option>
-			<option value="J&H">J&H</option>
-			<option value="Larry">Larry</option>
-			<option value="ArtiLady Jewelry">ArtiLady Jewelry</option>
-			<option value="1 Style in USA">1 Style in USA</option>
-			<option value="Lara Fashion">Lara Fashion</option>
-			<option value="2NE1 Apparel">2NE1 Apparel</option>
-			<option value="Apple B">Apple B</option>
-			<option value="B-Tween">B-Tween</option>
-			<option value="Cozy Casual">Cozy Casual</option>
-			<option value="Double Zero">Double Zero</option>
-			<option value="Love Tree Fashion">Love Tree Fashion</option>
-			<option value="Rae Mode">Rae Mode</option>
-			<option value="See and be Seen">See and be Seen</option>
-			<option value="S & G Apparel">S & G Apparel</option>
-			<option value="Shes J Apparel">Shes J Apparel</option>
-			<option value="Bibi">Bibi</option>
+			<option value="" selected>Select One</option>
+			<<% allSupp.forEach(supplier => { %>
+				<% if (supplier.isEnabled) { %>
+				<option value="<%= supplier.name %>"><%= supplier.name %></option>
+				<% }; %>
+			<% }); %>>
 		</select>
 
 		<div class='inputSet'>
