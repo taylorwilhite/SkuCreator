@@ -6,20 +6,10 @@ const Color = require('../models/color');
 const Classification = require('../models/classification');
 const Supplier = require('../models/supplier');
 const skuCreation = require('../middleware/skuCreation');
+const { retrieveModel } = require('../middleware/routeFunctions');
 
 
 const router = express.Router();
-
-async function retrieveModel(model) {
-  const models = await model.find({}, (err, allModels) => {
-    if (err) {
-      return console.log(err);
-    }
-    return allModels;
-  }).sort({ name: 1 }).exec();
-  return models;
-}
-
 
 router.get('/', middleware.isLoggedIn, async (req, res) => {
   // Pull all colors and pass to view

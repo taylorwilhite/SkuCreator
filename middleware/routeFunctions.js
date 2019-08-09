@@ -55,4 +55,14 @@ module.exports = {
     }).exec();
     return counter.sequence_value;
   },
+
+  retrieveModel: async (model) => {
+    const models = await model.find({}, (err, allModels) => {
+      if (err) {
+        return console.log(err);
+      }
+      return allModels;
+    }).sort({ name: 1 }).exec();
+    return models;
+  },
 };
