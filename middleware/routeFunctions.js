@@ -2,7 +2,9 @@ const Counter = require('../models/counter');
 
 module.exports = {
   getFabricBook: (body) => {
-    const { material, number, title, supplier, brand, weight, image, care } = body;
+    const {
+      material, number, title, supplier, brand, weight, image, care, construction,
+    } = body;
 
     const newBook = {
       Sku: `${number}-FB`,
@@ -19,6 +21,7 @@ module.exports = {
       Attributes: {
         Content: material,
         'Care Instruction': care,
+        Construction: construction,
       },
       SupplierInfo: [
         {
