@@ -14,9 +14,7 @@ module.exports = async function skuCreation(body, tenant, user) {
   const supName = body.supp.Name;
   const colorSet = Object.entries(body.colorSet);
   const sizes = body.size;
-  const regLanded = body.landedCost;
-  const regRaw = body.supp.Cost;
-  const plusLanded = body.plus.landedCost;
+  const regRaw = body.rawCost;
   const plusRaw = body.plus.rawCost;
 
   // Create Empty object to push SKUs into
@@ -36,10 +34,10 @@ module.exports = async function skuCreation(body, tenant, user) {
       let rawCost = '';
       // For loop for sizes
       if (size === 'P1X' || size === 'P2X' || size === 'P3X') {
-        landedCost = plusLanded;
+        landedCost = plusRaw;
         rawCost = plusRaw;
       } else {
-        landedCost = regLanded;
+        landedCost = regRaw;
         rawCost = regRaw;
       }
 
