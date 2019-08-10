@@ -28,7 +28,7 @@ const syncRoutes = require('./routes/sync');
 const databaseUri = process.env.MONGODB_URI || 'mongodb://localhost/skuCreateDb';
 const db = mongoose.connection;
 
-mongoose.connect(databaseUri)
+mongoose.connect(databaseUri, { useNewUrlParser: true })
   .then(() => console.log('Database Connected'))
   .catch(err => console.log(`Database connection error: ${err.message}`));
 
