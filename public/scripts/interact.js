@@ -4,15 +4,19 @@ let kimonoStyle = false;
 const regSizes = ['XL', 'L', 'M', 'S', 'XS'];
 const kimonoSizes = ['LXL', 'SM'];
 let fieldNum = 2;
+let suppList;
 
 const bookFields = {
+  setSuppliers(suppliers) {
+    this.fields[3].options = suppliers;
+  },
   container: 'bookFields',
   namePrefix: 'fabricBooks',
   fields: [
     { name: 'number', element: 'input', attributes: { placeholder: 'Fabric Book Number', type: 'text' } },
     { name: 'title', element: 'input', attributes: { placeholder: 'Title', type: 'text' } },
     { element: 'label', labelFor: 'supplier', text: 'Supplier: ' },
-    { name: 'supplier', element: 'select', options: ['Juju', 'J&H', 'Larry', 'Lara Fashion'] },
+    { name: 'supplier', element: 'select', options: suppList },
     { element: 'label', labelFor: 'brand', text: 'Brand: ' },
     { name: 'brand', element: 'select', options: ['AMARYLLIS', 'AMA By Amaryllis', 'REFLECTION'] },
     { element: 'label', labelFor: 'construction', text: 'Construction: ' },
