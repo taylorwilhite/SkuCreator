@@ -9,10 +9,12 @@
       <input type="text" name="fabricBooks[0][title]" placeholder="Title" required="true">
       <label for="supplier">Supplier: </label>
       <select name="fabricBooks[0][supplier]" id="supplier" required="true">
-        <option value="Juju">Juju</option>
-        <option value="J&H">J&H</option>
-        <option value="Larry">Larry</option>
-        <option value="Lara Fashion">Lara Fashion</option>
+        <option value="" selected>Select One</option>
+        <% allSupp.forEach(supplier => { %>
+          <% if (supplier.isEnabled) { %>
+          <option value="<%= supplier.name %>"><%= supplier.name %></option>
+          <% }; %>
+        <% }); %>
       </select>
   
       <label for="brand">Brand: </label>
@@ -59,7 +61,10 @@
 
 <script type="text/javascript">
 	<% allMaterialsString = JSON.stringify(allMaterial) %>
-	var clientMaterialList = <%- allMaterialsString %>;
+  var clientMaterialList = <%- allMaterialsString %>;
+  
+  <% supps = JSON.stringify(allSupp.map(supplier => supplier.name)) %>
+  bookFields.setSuppliers(<%- supps %>);
 </script>
 
 <% include ./partials/footer %>

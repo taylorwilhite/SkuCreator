@@ -2,19 +2,19 @@ const express = require('express');
 const request = require('request');
 const middleware = require('../middleware');
 const Material = require('../models/material');
-const routeFunctions = require('../middleware/routeFunctions');
-
-const { getFabricBook, picLink } = routeFunctions;
+const Supplier = require('../models/supplier');
+const { getFabricBook, picLink, retrieveModel } = require('../middleware/routeFunctions');
 
 const router = express.Router();
 
-router.get('/', middleware.isLoggedIn, (req, res) => {
+router.get('/', middleware.isLoggedIn, async (req, res) => {
+  const allSupp = await retrieveModel(Supplier);
   // Get all made material contents and care instructions
   Material.find({}, (err, allMaterial) => {
     if (err) {
       console.log(err);
     } else {
-      res.render('fabricBooks', { allMaterial });
+      res.render('fabricBooks', { allMaterial, allSupp });
     }
   });
 });

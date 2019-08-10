@@ -4,30 +4,22 @@ const middleware = require('../middleware');
 const Counter = require('../models/counter');
 const Color = require('../models/color');
 const Classification = require('../models/classification');
+const Supplier = require('../models/supplier');
 const skuCreation = require('../middleware/skuCreation');
+const { retrieveModel } = require('../middleware/routeFunctions');
 
 
 const router = express.Router();
 
-async function retrieveClass() {
-  const classes = await Classification.find({}, (err, allClasses) => {
-    if (err) {
-      return console.log(err);
-    }
-    return allClasses;
-  }).sort({ name: 1 }).exec();
-  return classes;
-}
-
-
 router.get('/', middleware.isLoggedIn, async (req, res) => {
   // Pull all colors and pass to view
-  const allClass = await retrieveClass();
+  const allClass = await retrieveModel(Classification);
+  const allSupp = await retrieveModel(Supplier);
   Color.find({}, (err, allColors) => {
     if (err) {
       console.log(err);
     } else {
-      res.render('index', { allColors, allClass });
+      res.render('index', { allColors, allClass, allSupp });
     }
   });
 });
