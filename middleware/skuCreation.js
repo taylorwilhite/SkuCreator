@@ -9,7 +9,7 @@ module.exports = async function skuCreation(body, tenant, user) {
   const sku = body.sku.parent;
   const desc = body.variantTitle;
   const {
-    classification, brand, fbCode, hps, inseam, weight,
+    classification, brand, fbCode, hps, inseam, weight, neckType,
   } = body;
   const supName = body.supp.Name;
   const colorSet = Object.entries(body.colorSet);
@@ -52,6 +52,7 @@ module.exports = async function skuCreation(body, tenant, user) {
           'FB Color Number': fbColor,
           Inseam: inseam,
           HPS: hps,
+          'Neck type': neckType,
         },
         Classification: classification,
         Supplier: supName,

@@ -151,5 +151,12 @@ input[type='submit']:hover, button:hover {
   padding-top: 75px;
 }
 
+.hidden-input {
+  display: none;
+}
+
+.show-input {
+  display: inline;
+}
 
 

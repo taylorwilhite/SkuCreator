@@ -3,6 +3,19 @@
 let kimonoStyle = false;
 const regSizes = ['XL', 'L', 'M', 'S', 'XS'];
 const kimonoSizes = ['LXL', 'SM'];
+const neckClasses = [
+  'Jumpsuits & Rompers',
+  'Dresses',
+  'LST',
+  'Maxi Dress',
+  'Midi Dress',
+  'Mini Dress',
+  'NST',
+  'SST',
+  'Sweaters',
+  'Tops',
+  'Outerwear',
+];
 let fieldNum = 2;
 let suppList;
 
@@ -269,5 +282,16 @@ function validateColors() { // eslint-disable-line no-unused-vars
       alert('One or more Colors is not in the system. Please correct your colors.');
       return false;
     }
+  }
+}
+
+function showNeckType(e) {
+  const classification = e.value;
+  const parent = document.getElementById('neck-contain');
+
+  if (neckClasses.includes(classification)) {
+    parent.classList.add('show-input');
+  } else {
+    parent.classList.remove('show-input');
   }
 }
