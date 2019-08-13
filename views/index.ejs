@@ -19,7 +19,7 @@
 
 		<div class='inputSet'>
 			<label for="classification">Classification: </label>
-			<select name="classification" id="classification" required="true">
+			<select name="classification" id="classification" required="true" onchange="showNeckType(this)">
 				<option value="" selected>Select One</option>
 				<<% allClass.forEach(classification => { %>
 					<% if (classification.isEnabled) { %>
@@ -46,7 +46,8 @@
 		<label for="weight">Weight (in oz): </label>
 		<input type="number" name="weight" id="weight" placeholder="8" step="1">
 
-		<label for="neckType">Neck Type: </label>
+		<span class="hidden-input" id="neck-contain">
+			<label for="neckType">Neck Type: </label>
 			<select name="neckType" id="neckType">
 				<option value="" selected>Select One</option>
 				<option value="Crew neck">Crew neck</option>
@@ -65,6 +66,7 @@
 				<option value="Collar">Collar</option>
 				<option value="Strapless">Strapless</option>
 			</select>
+		</span>
 
 		<div id="colorFields">
 			<input type="text" list="colorNameList" name="colorSet[color1][colorName]" placeholder="Color" required="true" onchange="fillColorCode(event)" class="colorName">
