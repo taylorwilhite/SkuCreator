@@ -46,6 +46,26 @@
 		<label for="weight">Weight (in oz): </label>
 		<input type="number" name="weight" id="weight" placeholder="8" step="1">
 
+		<label for="neckType">Neck Type: </label>
+			<select name="neckType" id="neckType">
+				<option value="" selected>Select One</option>
+				<option value="Crew neck">Crew neck</option>
+				<option value="Boat neck">Boat neck</option>
+				<option value="V-Neck">V-Neck</option>
+				<option value="Mock">Mock</option>
+				<option value="Turtle">Turtle</option>
+				<option value="Jewel">Jewel</option>
+				<option value="Cowl">Cowl</option>
+				<option value="Square">Square</option>
+				<option value="Scoop">Scoop</option>
+				<option value="Keyhole">Keyhole</option>
+				<option value="Sweetheart">Sweetheart</option>
+				<option value="Off Shoulder">Off Shoulder</option>
+				<option value="Halter">Halter</option>
+				<option value="Collar">Collar</option>
+				<option value="Strapless">Strapless</option>
+			</select>
+
 		<div id="colorFields">
 			<input type="text" list="colorNameList" name="colorSet[color1][colorName]" placeholder="Color" required="true" onchange="fillColorCode(event)" class="colorName">
 			<input type="text" name="colorSet[color1][colorCode]" placeholder="Color Code" required="true" readonly>
