@@ -4,6 +4,16 @@ const Color = require('../models/color');
 
 const router = express.Router();
 
+router.get('/', middleware.isLoggedIn, (req, res) => {
+  Color.find({}, (err, allColors) => {
+    if (err) {
+      req.flash('error', err);
+      res.redirect('back');
+    }
+    res.render('colors', { allColors });
+  });
+});
+
 router.post('/', middleware.isLoggedIn, (req, res) => {
   const newColor = req.body.newColor.toUpperCase();
   const newColorCode = req.body.newCode.toUpperCase();

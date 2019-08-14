@@ -159,4 +159,34 @@ input[type='submit']:hover, button:hover {
   display: inline;
 }
 
+input[type="text"].color-edit-input {
+  border: 1px solid transparent;
+  background: transparent;
+  transition: all 0.3s linear;
+  max-width: 100px;
+}
 
+input[type="text"].color-edit-input:focus {
+  border: 1px solid gray;
+  background: #ffffff;
+  transition: all 0.3s linear;
+}
+
+.color-edit-submit, .color-edit-delete {
+  display: none;
+}
+.color-edit-delete {
+  background-color: #a94442;
+  border: 1px solid gray;
+}
+.color-edit-delete:hover {
+  background-color: #892422
+}
+.color-edit-submit {
+  border: 1px solid gray;
+}
+
+.color-edit-form:focus-within .color-edit-submit,
+.color-edit-form:focus-within .color-edit-delete {
+  display: inline;
+}
