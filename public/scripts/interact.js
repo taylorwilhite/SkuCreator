@@ -319,6 +319,14 @@ function updateColor(e) {
     .then(data => flashDisplay(data));
 }
 
+function removeColor(data, node) {
+  if (data.success) {
+    const deleteNode = node.parentNode;
+    deleteNode.remove();
+  }
+  flashDisplay(data);
+}
+
 function deleteColor(e) {
   e.preventDefault();
 
@@ -329,5 +337,5 @@ function deleteColor(e) {
     method: "DELETE",
   })
     .then(response => response.json())
-    .then(data => console.log(data));
+    .then(data => removeColor(data, form));
 }

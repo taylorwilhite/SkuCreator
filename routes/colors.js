@@ -54,7 +54,15 @@ router.put('/:id', middleware.isLoggedIn, (req, res) => {
 });
 
 router.delete('/:id', middleware.isLoggedIn, (req, res) => {
-  res.status(200).send({ success: req.params.id });
+  Color.findOneAndDelete(
+    { _id: req.params.id },
+    (err, result) => {
+      if (err) {
+        res.status(400).send({ error: 'There was a problem deleting this color, please try again' });
+      }
+      res.status(200).send({ success: `Color ${result.color} deleted successfully` });
+    },
+  );
 });
 
 module.exports = router;
