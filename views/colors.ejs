@@ -1,8 +1,8 @@
 <% include ./partials/header %>
 
-<div class="container" id="main-container">
+<div class="container color-flex" id="main-container">
   <% allColors.forEach(color => {%>
-    <div>
+    <div class="color-form-contain">
       <form class="color-edit-form">
         <input type="hidden" value="<%= color._id %>" name="colorId">
         <input class="color-edit-input" name="color" type="text" value="<%= color.color %>">

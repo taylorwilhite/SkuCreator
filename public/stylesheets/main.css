@@ -173,7 +173,8 @@ input[type="text"].color-edit-input:focus {
 }
 
 .color-edit-submit, .color-edit-delete {
-  display: none;
+  opacity: 0;
+  transition: all 0.1s linear;
 }
 .color-edit-delete {
   background-color: #a94442;
@@ -188,5 +189,16 @@ input[type="text"].color-edit-input:focus {
 
 .color-edit-form:hover .color-edit-submit,
 .color-edit-form:hover .color-edit-delete {
-  display: inline;
+  opacity: 1;
+}
+
+.color-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.color-form-contain {
+  min-width: 400px;
+  margin-left: 0;
 }
