@@ -1,5 +1,6 @@
 const express = require('express');
 const request = require('request');
+const rp = require('request-promise-native');
 const middleware = require('../middleware');
 const Counter = require('../models/counter');
 const Color = require('../models/color');
@@ -26,6 +27,27 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
 
 router.post('/', middleware.isLoggedIn, async (req, res) => {
   try {
+    if (req.body.fbCode) {
+      const fbBody = {
+        ProductSKUs: [
+          req.body.fbCode,
+        ],
+        TenantToken: req.session.TenantToken,
+        UserToken: req.session.UserToken,
+      };
+
+      req.body.fbInfo = await rp({
+        method: 'POST',
+        url: 'https://app.skuvault.com/api/products/getProducts',
+        headers: [{ 'Content-Type': 'application/json', Accept: 'application/json' }],
+        json: true,
+        body: fbBody,
+      })
+        // eslint-disable-next-line no-return-assign
+        .then(response => response.Products[0].Attributes)
+        .catch(err => console.log(err));
+    }
+
     skuCreation(req.body, req.session.TenantToken, req.session.UserToken).then((data) => {
       // Update upc counter with new upc
       Counter.findOneAndUpdate({ _id: 'productupc' }, { $set: { sequence_value: data.upc } }).exec();
