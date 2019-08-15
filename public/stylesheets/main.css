@@ -201,4 +201,10 @@ input[type="text"].color-edit-input:focus {
 .color-form-contain {
   min-width: 400px;
   margin-left: 0;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  padding-top: 10px;
+}
+.color-form-contain:hover {
+  background-color: #bbb;
 }
