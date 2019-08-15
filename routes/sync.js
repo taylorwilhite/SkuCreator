@@ -25,7 +25,7 @@ router.get('/classifications', middleware.isLoggedIn, (req, res) => {
   }, (err, response, body) => {
     if (err) {
       console.log(err);
-      res.status(400).send({ error: { message: err } });
+      res.status(400).send({ error: err });
     } else if (response.statusCode === 200) {
       // Update database here
       Classification.deleteMany({}, error => console.log(error));
@@ -38,9 +38,9 @@ router.get('/classifications', middleware.isLoggedIn, (req, res) => {
         newClasses.push(newClass);
       }
       Classification.insertMany(newClasses, error => console.log(error));
-      res.status(200).send({ success: { message: 'Classifications updated successfully!' } });
+      res.status(200).send({ success: 'Classifications updated successfully!' });
     } else {
-      res.status(response.statusCode).send({ error: { message: `Error ${response.statusCode}: ${body.Errors}` } });
+      res.status(response.statusCode).send({ error: `Error ${response.statusCode}: ${body.Errors}` });
     }
   });
 });
@@ -60,7 +60,7 @@ router.get('/suppliers', middleware.isLoggedIn, (req, res) => {
   }, (err, response, body) => {
     if (err) {
       console.log(err);
-      res.status(400).send({ error: { message: err } });
+      res.status(400).send({ error: err });
     } else if (response.statusCode === 200) {
       // Update database here
       Supplier.deleteMany({}, error => console.log(error));
@@ -73,9 +73,9 @@ router.get('/suppliers', middleware.isLoggedIn, (req, res) => {
         newSupps.push(newSupp);
       }
       Supplier.insertMany(newSupps, error => console.log(error));
-      res.status(200).send({ success: { message: 'Suppliers updated successfully!' } });
+      res.status(200).send({ success: 'Suppliers updated successfully!' });
     } else {
-      res.status(response.statusCode).send({ error: { message: `Error ${response.statusCode}: ${body.Errors}` } });
+      res.status(response.statusCode).send({ error: `Error ${response.statusCode}: ${body.Errors}` });
     }
   });
 });
