@@ -224,14 +224,16 @@ function flashDisplay(data) {
   tempFlash.classList.add('alert', 'temp-flash');
 
   if (data.success) {
-    tempMessage.innerHTML = data.success.message;
+    tempMessage.innerHTML = data.success;
     tempFlash.classList.add('alert-success');
   } else {
-    tempMessage.innerHTML = data.error ? data.error.message : 'Something went wrong, please try again';
+    tempMessage.innerHTML = data.error ? data.error : 'Something went wrong, please try again';
     tempFlash.classList.add('alert-error');
   }
   tempFlash.appendChild(tempMessage);
   container.insertAdjacentElement('afterbegin', tempFlash);
+
+  setTimeout(() => tempFlash.remove(), 6000);
 }
 
 function getData(endpoint) {
@@ -294,4 +296,46 @@ function showNeckType(e) {
   } else {
     parent.classList.remove('show-input');
   }
+}
+
+function updateColor(e) {
+  e.preventDefault();
+
+  const form = e.target.parentNode;
+  console.log(form);
+  const formData = {};
+  const colorId = form[0].value;
+  formData.color = form[1].value;
+  formData.colorCode = form[2].value;
+
+  fetch(`/colors/${colorId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then(response => response.json())
+    .then(data => flashDisplay(data));
+}
+
+function removeColor(data, node) {
+  if (data.success) {
+    const deleteNode = node.parentNode;
+    deleteNode.remove();
+  }
+  flashDisplay(data);
+}
+
+function deleteColor(e) {
+  e.preventDefault();
+
+  const form = e.target.parentNode;
+  const colorId = form[0].value;
+
+  fetch(`/colors/${colorId}`, {
+    method: "DELETE",
+  })
+    .then(response => response.json())
+    .then(data => removeColor(data, form));
 }

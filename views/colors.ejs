@@ -1,0 +1,38 @@
+<% include ./partials/header %>
+
+<div class="container color-flex" id="main-container">
+  <% allColors.forEach(color => {%>
+    <div class="color-form-contain">
+      <form class="color-edit-form">
+        <input type="hidden" value="<%= color._id %>" name="colorId">
+        <input class="color-edit-input" name="color" type="text" value="<%= color.color %>">
+        <input class="color-edit-input" name="colorCode" type="text" value="<%= color.colorCode%>">
+        <button type="button" class="color-edit-submit">Update</button>
+        <button type="button" class="color-edit-delete">Delete</button>
+      </form>
+    </div>
+  <% }) %>
+</div>
+
+<script>
+window.onload = () => {
+  addClickListeners();
+}
+
+function addClickListeners() {
+  document.querySelectorAll('.color-edit-submit').forEach( button => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      updateColor(e);
+    })
+  })
+  document.querySelectorAll('.color-edit-delete').forEach( button => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      deleteColor(e);
+    })
+  })
+}
+</script>
+
+<% include ./partials/footer %>
