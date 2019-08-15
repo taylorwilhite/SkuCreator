@@ -40,4 +40,12 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
   });
 });
 
+router.put('/:id', middleware.isLoggedIn, (req, res) => {
+  res.status(200).send({ 'heres the id': req.params.id });
+});
+
+router.delete('/:id', middleware.isLoggedIn, (req, res) => {
+  res.status(200).send({ 'deleted the id': req.params.id });
+});
+
 module.exports = router;

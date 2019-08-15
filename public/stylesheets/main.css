@@ -186,7 +186,7 @@ input[type="text"].color-edit-input:focus {
   border: 1px solid gray;
 }
 
-.color-edit-form:focus-within .color-edit-submit,
-.color-edit-form:focus-within .color-edit-delete {
+.color-edit-form:hover .color-edit-submit,
+.color-edit-form:hover .color-edit-delete {
   display: inline;
 }

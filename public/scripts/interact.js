@@ -295,3 +295,37 @@ function showNeckType(e) {
     parent.classList.remove('show-input');
   }
 }
+
+function updateColor(e) {
+  e.preventDefault();
+
+  const form = e.target.parentNode;
+  console.log(form);
+  const formData = {};
+  const colorId = form[0].value;
+  formData.color = form[1].value;
+  formData.colorCode = form[2].value;
+
+  fetch(`/colors/${colorId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then(response => response.json())
+    .then(data => console.log(data));
+}
+
+function deleteColor(e) {
+  e.preventDefault();
+
+  const form = e.target.parentNode;
+  const colorId = form[0].value;
+
+  fetch(`/colors/${colorId}`, {
+    method: "DELETE",
+  })
+    .then(response => response.json())
+    .then(data => console.log(data));
+}

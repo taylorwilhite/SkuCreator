@@ -14,4 +14,25 @@
   <% }) %>
 </div>
 
+<script>
+window.onload = () => {
+  addClickListeners();
+}
+
+function addClickListeners() {
+  document.querySelectorAll('.color-edit-submit').forEach( button => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      updateColor(e);
+    })
+  })
+  document.querySelectorAll('.color-edit-delete').forEach( button => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      deleteColor(e);
+    })
+  })
+}
+</script>
+
 <% include ./partials/footer %>
