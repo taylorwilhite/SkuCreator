@@ -6,7 +6,7 @@
       <form class="color-edit-form">
         <input type="hidden" value="<%= color._id %>" name="colorId">
         <input class="color-edit-input" name="color" type="text" value="<%= color.color %>">
-        <input class="color-edit-input" type="text" value="<%= color.colorCode%>">
+        <input class="color-edit-input" name="colorCode" type="text" value="<%= color.colorCode%>">
         <button type="button" class="color-edit-submit">Update</button>
         <button type="button" class="color-edit-delete">Delete</button>
       </form>

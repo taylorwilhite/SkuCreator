@@ -224,10 +224,10 @@ function flashDisplay(data) {
   tempFlash.classList.add('alert', 'temp-flash');
 
   if (data.success) {
-    tempMessage.innerHTML = data.success.message;
+    tempMessage.innerHTML = data.success;
     tempFlash.classList.add('alert-success');
   } else {
-    tempMessage.innerHTML = data.error ? data.error.message : 'Something went wrong, please try again';
+    tempMessage.innerHTML = data.error ? data.error : 'Something went wrong, please try again';
     tempFlash.classList.add('alert-error');
   }
   tempFlash.appendChild(tempMessage);
@@ -314,7 +314,7 @@ function updateColor(e) {
     body: JSON.stringify(formData),
   })
     .then(response => response.json())
-    .then(data => console.log(data));
+    .then(data => flashDisplay(data));
 }
 
 function deleteColor(e) {

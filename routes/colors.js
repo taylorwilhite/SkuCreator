@@ -41,11 +41,20 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 });
 
 router.put('/:id', middleware.isLoggedIn, (req, res) => {
-  res.status(200).send({ 'heres the id': req.params.id });
+  Color.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: { color: req.body.color.toUpperCase(), colorCode: req.body.colorCode.toUpperCase() } },
+    (err, result) => {
+      if (err) {
+        res.status(400).send({ error: 'There was a problem updating this color, please try again' });
+      }
+      res.status(200).send({ success: `Color ${result.color} updated successfully` });
+    },
+  );
 });
 
 router.delete('/:id', middleware.isLoggedIn, (req, res) => {
-  res.status(200).send({ 'deleted the id': req.params.id });
+  res.status(200).send({ success: req.params.id });
 });
 
 module.exports = router;
