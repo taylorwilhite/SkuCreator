@@ -232,6 +232,8 @@ function flashDisplay(data) {
   }
   tempFlash.appendChild(tempMessage);
   container.insertAdjacentElement('afterbegin', tempFlash);
+
+  setTimeout(() => tempFlash.remove(), 6000);
 }
 
 function getData(endpoint) {
