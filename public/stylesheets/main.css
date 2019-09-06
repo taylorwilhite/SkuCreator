@@ -79,6 +79,9 @@ input[type='submit']:hover, button:hover {
   border-color: #204d74;
 }
 
+.sizeStyle {
+  margin-top: 15px;
+}
 .delete-color {
   background-color: transparent;
   border-color: transparent;

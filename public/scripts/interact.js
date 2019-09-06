@@ -1,8 +1,16 @@
 /* eslint-env browser */
 /* global clientColorList */
-let kimonoStyle = false;
-const regSizes = ['XL', 'L', 'M', 'S', 'XS'];
-const kimonoSizes = ['LXL', 'SM'];
+let sizeStyle = 'reg';
+const regSizes = ['P3X', 'P2X', 'P1X', 'XL', 'L', 'M', 'S', 'XS'];
+const kimonoSizes = ['P3X', 'P2X', 'P1X', 'LXL', 'SM'];
+const denimSizes = ['16', '14', '12', '10', '8', '6', '4', '2', '0'];
+const sweaterSizes = ['2X/3X', '1X/XL', 'M/L', 'XS/S'];
+const sizeMap = {
+  reg: regSizes,
+  kimono: kimonoSizes,
+  denim: denimSizes,
+  sweater: sweaterSizes,
+};
 const neckClasses = [
   'Jumpsuits & Rompers',
   'Dresses',
@@ -243,7 +251,7 @@ function getData(endpoint) {
 }
 
 function deleteSizes(size) {
-  const deleteSize = document.querySelector('input[value=' + size + ']');
+  const deleteSize = document.querySelector('input[value="' + size + '"]');
   const sizeLabel = deleteSize.parentNode;
   sizeLabel.parentNode.removeChild(sizeLabel);
 }
@@ -261,15 +269,14 @@ function addSizes(size) {
   sizeField.prepend(sizeLabel);
 }
 
-function kimonoSizeToggle() { // eslint-disable-line no-unused-vars
-  if (kimonoStyle === false) {
-    regSizes.forEach(size => deleteSizes(size));
-    kimonoSizes.forEach(size => addSizes(size));
-  } else {
-    kimonoSizes.forEach(size => deleteSizes(size));
-    regSizes.forEach(size => addSizes(size));
-  }
-  kimonoStyle = !kimonoStyle;
+function sizeToggle(style) { // eslint-disable-line no-unused-vars
+  const styleArr = sizeMap[style];
+  const currArr = sizeMap[sizeStyle];
+
+  currArr.forEach(size => deleteSizes(size));
+  styleArr.forEach(size => addSizes(size));
+
+  sizeStyle = style;
 }
 
 
