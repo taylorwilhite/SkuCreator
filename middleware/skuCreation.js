@@ -16,6 +16,15 @@ module.exports = async function skuCreation(body, tenant, user) {
   const sizes = body.size;
   const regRaw = body.rawCost;
   const plusRaw = body.plus.rawCost;
+  let content = '';
+  let care = '';
+  let construction = '';
+
+  if (body.fbInfo) {
+    content = body.fbInfo.find(attr => attr.Name === 'Content').Value;
+    care = body.fbInfo.find(attr => attr.Name === 'Care Instruction').Value;
+    construction = body.fbInfo.find(attr => attr.Name === 'Construction').Value;
+  }
 
   // Create Empty object to push SKUs into
   const newSKUs = {
@@ -53,6 +62,9 @@ module.exports = async function skuCreation(body, tenant, user) {
           Inseam: inseam,
           HPS: hps,
           'Neck type': neckType,
+          'Fabric Content': content,
+          'Care Instructions': care,
+          'Fabric Construction': construction,
         },
         Classification: classification,
         Supplier: supName,
