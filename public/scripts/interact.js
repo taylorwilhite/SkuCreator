@@ -346,3 +346,60 @@ function deleteColor(e) {
     .then(response => response.json())
     .then(data => removeColor(data, form));
 }
+
+function addSupplier() {
+  const container = document.getElementById('suppCost');
+  const fieldDiv = document.createElement('div');
+  fieldDiv.classList.add('inputSet');
+
+  const suppSelect = document.createElement('select');
+  const regLabel = document.createElement('label');
+  const suppLabel = document.createElement('label');
+  const plusLabel = document.createElement('label');
+  const regCost = document.createElement('input');
+  const plusCost = document.createElement('input');
+  const defaultOpt = document.createElement('option');
+  defaultOpt.value = '';
+  defaultOpt.text = 'Select One';
+  defaultOpt.dataset.id = '';
+  suppSelect.appendChild(defaultOpt);
+
+  clientSuppList.forEach((supplier) => {
+    const suppOption = document.createElement('option');
+    suppOption.value = supplier.name;
+    suppOption.text = supplier.name;
+    suppOption.dataset.id = supplier._id;
+
+    suppSelect.appendChild(suppOption);
+  });
+
+  suppSelect.name = 'supp[0][Name]';
+  suppSelect.required = 'true';
+
+  suppLabel.innerText = 'Supplier: ';
+  regLabel.innerText = 'Reg Cost: ';
+  plusLabel.innerText = 'Plus Cost: ';
+  regCost.type = 'number';
+  plusCost.type = 'number';
+  regCost.name = 'supp[0][rawCost]';
+  plusCost.name = 'supp[0][plusCost]';
+  regCost.step = '0.01';
+  plusCost.step = '0.01';
+
+  const delButton = document.createElement('button');
+  delButton.classList.add('delete-color');
+  delButton.type = 'button';
+  delButton.onclick = removeFields;
+  delButton.innerHTML = 'Delete';
+
+  regLabel.appendChild(regCost);
+  suppLabel.appendChild(suppSelect);
+  plusLabel.appendChild(plusCost);
+
+  fieldDiv.appendChild(suppLabel);
+  fieldDiv.appendChild(regLabel);
+  fieldDiv.appendChild(plusLabel);
+  fieldDiv.appendChild(delButton);
+
+  container.appendChild(fieldDiv);
+}

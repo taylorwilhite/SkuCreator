@@ -7,15 +7,6 @@
 		
 		<input type="text" name="fbCode" placeholder="Fabric Book">
 		<input type="text" name="variantTitle" placeholder="Title" required="true">
-		<label for="suppName">Supplier: </label>
-		<select name="supp[Name]" id="suppName" required="true">
-			<option value="" selected>Select One</option>
-			<<% allSupp.forEach(supplier => { %>
-				<% if (supplier.isEnabled) { %>
-				<option value="<%= supplier.name %>"><%= supplier.name %></option>
-				<% }; %>
-			<% }); %>>
-		</select>
 
 		<div class='inputSet'>
 			<label for="classification">Classification: </label>
@@ -102,12 +93,24 @@
 		</fieldset>
 		
 
-		<fieldset>
+		<fieldset id="suppCost">
 			<legend>Cost</legend>
-			<label for="rawCost">Raw Cost: </label>
-			<input type="number" name="rawCost" id="rawCost" step="0.01">
-			<label for="plusRawCost">Raw Cost (PLUS): </label>
-			<input type="number" name="plus[rawCost]" id="plusRawCost" step="0.01">
+			<div class="inputSet">
+				<label for="suppName">Supplier: </label>
+				<select name="supp[0][Name]" id="suppName" required="true">
+					<option value="" selected>Select One</option>
+					<<% allSupp.forEach(supplier => { %>
+						<% if (supplier.isEnabled) { %>
+						<option value="<%= supplier.name %>"><%= supplier.name %></option>
+						<% }; %>
+					<% }); %>>
+				</select>
+				<label for="rawCost">Raw Cost: </label>
+				<input type="number" name="supp[0][rawCost]" id="rawCost" step="0.01">
+				<label for="plusRawCost">Plus Cost: </label>
+				<input type="number" name="supp[0][plusCost]" id="plusRawCost" step="0.01">
+				<button type="button" onclick="addSupplier()">Add Supplier</button>
+			</div>
 		</fieldset>
 		
 		<input type="submit">
@@ -126,6 +129,8 @@
 <script type="text/javascript">
 	<% allColorsString = JSON.stringify(allColors) %>
 	var clientColorList = <%- allColorsString %>;
+	<% allSupps = JSON.stringify(allSupp) %>
+	var clientSuppList = <%- JSON.stringify(allSupp) %>;
 </script>
 
 <% include ./partials/footer %>
