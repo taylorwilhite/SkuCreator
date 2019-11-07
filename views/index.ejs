@@ -97,11 +97,11 @@
 			<legend>Cost</legend>
 			<div class="inputSet">
 				<label for="suppName">Supplier: </label>
-				<select name="supp[0][Name]" id="suppName" required="true">
+				<select name="supp[0][Name]" id="suppName" required="true" onchange="updateSupplier(this)">
 					<option value="" selected>Select One</option>
 					<<% allSupp.forEach(supplier => { %>
 						<% if (supplier.isEnabled) { %>
-						<option value="<%= supplier.name %>"><%= supplier.name %></option>
+						<option value="<%= supplier.name %>" data-id="<%= supplier._id %>"><%= supplier.name %></option>
 						<% }; %>
 					<% }); %>>
 				</select>

@@ -347,6 +347,16 @@ function deleteColor(e) {
     .then(data => removeColor(data, form));
 }
 
+function updateSupplier(target) {
+  const { id } = target.options[target.selectedIndex].dataset;
+  const rawInput = target.closest('div.inputSet').querySelectorAll('input')[0];
+  const plusInput = target.closest('div.inputSet').querySelectorAll('input')[1];
+
+  target.name = `supp[${id}][Name]`;
+  rawInput.name = `supp[${id}][rawCost]`;
+  plusInput.name = `supp[${id}][plusCost]`;
+}
+
 function addSupplier() {
   const container = document.getElementById('suppCost');
   const fieldDiv = document.createElement('div');
@@ -402,4 +412,6 @@ function addSupplier() {
   fieldDiv.appendChild(delButton);
 
   container.appendChild(fieldDiv);
+
+  suppSelect.addEventListener('change', e => updateSupplier(e.target));
 }
