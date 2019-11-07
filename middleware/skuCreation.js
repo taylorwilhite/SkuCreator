@@ -3,6 +3,13 @@ const routeFunctions = require('./routeFunctions');
 
 const { picLink, getNextUpc } = routeFunctions;
 
+const plusCheck = (size, reg, plus) => {
+  if (size === 'P1X' || size === 'P2X' || size === 'P3X') {
+    return plus;
+  }
+  return reg;
+};
+
 
 module.exports = async function skuCreation(body, tenant, user) {
   let upc = await getNextUpc('productupc');
@@ -11,11 +18,8 @@ module.exports = async function skuCreation(body, tenant, user) {
   const {
     classification, brand, fbCode, hps, inseam, weight, neckType,
   } = body;
-  const supName = body.supp.Name;
   const colorSet = Object.entries(body.colorSet);
   const sizes = body.size;
-  const regRaw = body.rawCost;
-  const plusRaw = body.plus.rawCost ? body.plus.rawCost : body.rawCost;
   let content = '';
   let care = '';
   let construction = '';
@@ -39,16 +43,18 @@ module.exports = async function skuCreation(body, tenant, user) {
     const picture = picLink(colorSet[colorIndex][1].pictureLink);
 
     sizes.map((size) => {
-      let landedCost = '';
-      let rawCost = '';
+      const supp = Object.values(body.supp).map((supplier) => {
+        return {
+          SupplierName: supplier.Name,
+          IsPrimary: false,
+          IsActive: true,
+          Cost: supplier.plusCost ? plusCheck(size, supplier.rawCost, supplier.plusCost) : supplier.rawCost,
+        };
+      });
+      const supName = supp[0].SupplierName;
+      const defCost = supp[0].Cost;
+      supp[0].IsPrimary = true;
       // For loop for sizes
-      if (size === 'P1X' || size === 'P2X' || size === 'P3X') {
-        landedCost = plusRaw;
-        rawCost = plusRaw;
-      } else {
-        landedCost = regRaw;
-        rawCost = regRaw;
-      }
 
       const newSize = {
         Sku: `${sku}${colorCode}-${size}`,
@@ -69,7 +75,7 @@ module.exports = async function skuCreation(body, tenant, user) {
         Classification: classification,
         Supplier: supName,
         Brand: brand,
-        Cost: landedCost,
+        Cost: defCost,
         Weight: weight,
         WeightUnit: 'oz',
         VariationParentSku: sku,
@@ -77,14 +83,7 @@ module.exports = async function skuCreation(body, tenant, user) {
         Pictures: [
           picture,
         ],
-        SupplierInfo: [
-          {
-            SupplierName: supName,
-            IsPrimary: true,
-            IsActive: true,
-            Cost: rawCost,
-          },
-        ],
+        SupplierInfo: supp,
         Code: upc,
       };
       upc += 1;
