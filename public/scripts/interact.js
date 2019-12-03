@@ -2,7 +2,7 @@
 /* global clientColorList */
 let sizeStyle = 'reg';
 const regSizes = ['P3X', 'P2X', 'P1X', 'XL', 'L', 'M', 'S', 'XS'];
-const kimonoSizes = ['P3X', 'P2X', 'P1X', 'LXL', 'SM'];
+const kimonoSizes = ['OSP', 'P3X', 'P2X', 'P1X', 'LXL', 'SM'];
 const denimSizes = ['16', '14', '12', '10', '8', '6', '4', '2', '0'];
 const sweaterSizes = ['2X/3X', '1X/XL', 'M/L', 'XS/S'];
 const sizeMap = {

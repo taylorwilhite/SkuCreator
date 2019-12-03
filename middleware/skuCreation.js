@@ -2,9 +2,9 @@
 const routeFunctions = require('./routeFunctions');
 
 const { picLink, getNextUpc } = routeFunctions;
-
+const plusSizes = ['P1X', 'P2X', 'P3X', 'OSP'];
 const plusCheck = (size, reg, plus) => {
-  if (size === 'P1X' || size === 'P2X' || size === 'P3X') {
+  if (plusSizes.includes(size)) {
     return plus;
   }
   return reg;
