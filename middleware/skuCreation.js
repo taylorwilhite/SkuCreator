@@ -16,7 +16,7 @@ module.exports = async function skuCreation(body, tenant, user) {
   const sku = body.sku.parent;
   const desc = body.variantTitle;
   const {
-    classification, brand, fbCode, hps, inseam, weight, neckType,
+    classification, brand, fbCode, hps, inseam, neckType,
   } = body;
   const colorSet = Object.entries(body.colorSet);
   const sizes = body.size;
@@ -48,12 +48,16 @@ module.exports = async function skuCreation(body, tenant, user) {
           SupplierName: supplier.Name,
           IsPrimary: false,
           IsActive: true,
-          Cost: supplier.plusCost ? plusCheck(size, supplier.rawCost, supplier.plusCost) : supplier.rawCost,
+          Cost: supplier.plusCost
+            ? plusCheck(size, supplier.rawCost, supplier.plusCost) : supplier.rawCost,
         };
       });
       const supName = supp[0].SupplierName;
       const defCost = supp[0].Cost;
       supp[0].IsPrimary = true;
+
+      const weight = body.plusWeight
+        ? plusCheck(size, body.regWeight, body.plusWeight) : body.regWeight;
       // For loop for sizes
 
       const newSize = {
