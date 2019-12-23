@@ -415,3 +415,24 @@ function addSupplier() {
 
   suppSelect.addEventListener('change', e => updateSupplier(e.target));
 }
+
+let fbCodeIndex = 0;
+function addFbCode() { // eslint-disable-line no-unused-vars
+  if (fbCodeIndex >= 3) {
+    return;
+  }
+  fbCodeIndex += 1;
+  const parent = document.getElementById('fb-container');
+  const fbField = document.createElement('input');
+
+  fbField.type = 'text';
+  fbField.name = 'fbCode[]';
+  fbField.placeholder = 'Fabric Book';
+  fbField.setAttribute('data-fbIndex', fbCodeIndex);
+
+  parent.appendChild(fbField);
+  if (fbCodeIndex === 3) {
+    const addButton = document.getElementById('fb-add-btn');
+    addButton.style.display = 'none';
+  }
+}

@@ -5,7 +5,10 @@
 	<form onsubmit="return validateColors()" action="/skuCreation" method="POST">
 		<input type="text" name="sku[parent]" placeholder="Parent SKU" required="true">
 		
-		<input type="text" name="fbCode" placeholder="Fabric Book">
+		<span id="fb-container">
+			<input type="text" name="fbCode[]" data-fbIndex="0" placeholder="Fabric Book">
+		</span>
+		<button id="fb-add-btn" type="button" onclick="addFbCode()">Add FB</button>
 		<input type="text" name="variantTitle" placeholder="Title" required="true">
 
 		<div class='inputSet'>
