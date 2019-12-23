@@ -68,7 +68,6 @@ const colorFields = {
     },
     { name: 'colorCode', element: 'input', attributes: { placeholder: 'Color Code', type: 'text', readonly: 'true' } },
     { name: 'pictureLink', element: 'input', attributes: { placeholder: 'Image Link', type: 'text' } },
-    { name: 'fbColor', element: 'input', attributes: { placeholder: 'FB Color Number', type: 'text' } },
 
   ],
 };
@@ -137,6 +136,22 @@ function addFields(fields) {
   const delButton = document.createElement('button');
 
   fieldDiv.classList.add('fabricBookFieldset');
+
+  if (fields === colorFields) {
+    console.log('Color Fields!');
+    const fbParent = document.createElement('span');
+    fbParent.classList.add('fb-color-container');
+
+    for (let i = 0; i <= fbCodeIndex; i += 1) {
+      const newFbField = document.createElement('input');
+      newFbField.name = `${namePrefix}[${fieldNum}][fbColor][]`;
+      newFbField.type = 'text';
+      newFbField.placeholder = 'FB Color Number';
+
+      fbParent.appendChild(newFbField);
+    }
+    fieldDiv.appendChild(fbParent);
+  }
 
   delButton.classList.add('delete-color');
   delButton.type = 'button';
@@ -434,5 +449,20 @@ function addFbCode() { // eslint-disable-line no-unused-vars
   if (fbCodeIndex === 3) {
     const addButton = document.getElementById('fb-add-btn');
     addButton.style.display = 'none';
+  }
+
+  const colorContainer = document.getElementById('colorFields');
+  const colorSets = colorContainer.querySelectorAll('.fabricBookFieldset');
+  console.log(colorSets);
+  for (let i = 0; i < colorSets.length; i += 1) {
+    const fbContainer = colorSets[i].querySelector('.fb-color-container');
+    const newFbNum = document.createElement('input');
+    const inputName = fbContainer.children[0].name;
+    newFbNum.type = 'text';
+    newFbNum.placeholder = 'FB Color Number';
+    newFbNum.setAttribute('data-fbIndex', fbCodeIndex);
+    newFbNum.name = `${inputName}`;
+
+    fbContainer.appendChild(newFbNum);
   }
 }
