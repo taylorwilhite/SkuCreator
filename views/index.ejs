@@ -4,12 +4,12 @@
 	<h1>Create SKUs</h1>
 	<form onsubmit="return validateColors()" action="/skuCreation" method="POST">
 		<input type="text" name="sku[parent]" placeholder="Parent SKU" required="true">
+		<input type="text" name="variantTitle" placeholder="Title" required="true">
 		
 		<span id="fb-container">
 			<input type="text" name="fbCode[]" data-fbIndex="0" placeholder="Fabric Book">
 		</span>
 		<button id="fb-add-btn" type="button" onclick="addFbCode()">Add FB</button>
-		<input type="text" name="variantTitle" placeholder="Title" required="true">
 
 		<div class='inputSet'>
 			<label for="classification">Classification: </label>
@@ -28,6 +28,20 @@
 				<option value="AMARYLLIS">AMARYLLIS</option>
 				<option value="AMA By Amaryllis">AMA By Amaryllis</option>
 				<option value="REFLECTION">REFLECTION</option>
+			</select>
+
+			<label for="care">Care Instructions: </label>
+			<select name="care" id="care" required="true">
+				<option value="" selected>Select One</option>
+				<option value="19-1001">19-1001</option>
+				<option value="19-1002">19-1002</option>
+				<option value="19-1003">19-1003</option>
+				<option value="19-1004">19-1004</option>
+				<option value="19-1005">19-1005</option>
+				<option value="19-1006">19-1006</option>
+				<option value="19-1007">19-1007</option>
+				<option value="19-1008">19-1008</option>
+				<option value="19-1009">19-1009</option>
 			</select>
 		</div>
 
