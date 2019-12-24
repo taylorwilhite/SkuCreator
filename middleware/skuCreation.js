@@ -16,17 +16,15 @@ module.exports = async function skuCreation(body, tenant, user) {
   const sku = body.sku.parent;
   const desc = body.variantTitle;
   const {
-    classification, brand, fbCode, hps, inseam, neckType,
+    classification, brand, fbCode, hps, inseam, neckType, care,
   } = body;
   const colorSet = Object.entries(body.colorSet);
   const sizes = body.size;
   let content = '';
-  let care = '';
   let construction = '';
 
   if (body.fbInfo) {
     content = body.fbInfo.find(attr => attr.Name === 'Content').Value;
-    care = body.fbInfo.find(attr => attr.Name === 'Care Instruction').Value;
     construction = body.fbInfo.find(attr => attr.Name === 'Construction').Value;
   }
 
