@@ -30,7 +30,7 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
     if (req.body.fbCode) {
       const fbBody = {
         ProductSKUs: [
-          req.body.fbCode,
+          req.body.fbCode[0],
         ],
         TenantToken: req.session.TenantToken,
         UserToken: req.session.UserToken,
