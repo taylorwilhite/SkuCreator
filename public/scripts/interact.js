@@ -312,11 +312,25 @@ function validateColors() { // eslint-disable-line no-unused-vars
 function showNeckType(e) {
   const classification = e.value;
   const parent = document.getElementById('neck-contain');
+  const hps = document.getElementById('hps-contain');
+  const inseam = document.getElementById('inseam-contain');
 
   if (neckClasses.includes(classification)) {
     parent.classList.add('show-input');
   } else {
     parent.classList.remove('show-input');
+  }
+
+  if (classification === 'Tops') {
+    hps.classList.add('show-input');
+  } else {
+    hps.classList.remove('show-input');
+  }
+
+  if (classification === 'Bottoms') {
+    inseam.classList.add('show-input');
+  } else {
+    inseam.classList.remove('show-input');
   }
 }
 
