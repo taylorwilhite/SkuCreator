@@ -24,6 +24,24 @@ const neckClasses = [
   'Tops',
   'Outerwear',
 ];
+const HpsClasses = [
+  'Cardigans',
+  'Dresses',
+  'SST',
+  'LST',
+  'NST',
+  'SST',
+  'Outerwear',
+  'Sweaters',
+  'Swimwear',
+  'Undergarments',
+];
+const inseamClasses = [
+  'Bottoms',
+  'Jumpsuits & Rompers',
+  'Swimwear',
+  'Undergarments',
+];
 let fieldNum = 2;
 let suppList;
 
@@ -321,13 +339,13 @@ function showNeckType(e) {
     parent.classList.remove('show-input');
   }
 
-  if (classification === 'Tops') {
+  if (HpsClasses.includes(classification)) {
     hps.classList.add('show-input');
   } else {
     hps.classList.remove('show-input');
   }
 
-  if (classification === 'Bottoms') {
+  if (inseamClasses.includes(classification)) {
     inseam.classList.add('show-input');
   } else {
     inseam.classList.remove('show-input');
