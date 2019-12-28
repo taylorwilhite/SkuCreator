@@ -23,6 +23,8 @@ const neckClasses = [
   'Sweaters',
   'Tops',
   'Outerwear',
+  'Swimwear',
+  'Undergarment',
 ];
 const HpsClasses = [
   'Cardigans',
@@ -34,13 +36,13 @@ const HpsClasses = [
   'Outerwear',
   'Sweaters',
   'Swimwear',
-  'Undergarments',
+  'Undergarment',
 ];
 const inseamClasses = [
   'Bottoms',
   'Jumpsuits & Rompers',
   'Swimwear',
-  'Undergarments',
+  'Undergarment',
 ];
 let fieldNum = 2;
 let suppList;
