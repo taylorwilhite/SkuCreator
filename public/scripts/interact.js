@@ -23,6 +23,26 @@ const neckClasses = [
   'Sweaters',
   'Tops',
   'Outerwear',
+  'Swimwear',
+  'Undergarment',
+];
+const HpsClasses = [
+  'Cardigans',
+  'Dresses',
+  'SST',
+  'LST',
+  'NST',
+  'SST',
+  'Outerwear',
+  'Sweaters',
+  'Swimwear',
+  'Undergarment',
+];
+const inseamClasses = [
+  'Bottoms',
+  'Jumpsuits & Rompers',
+  'Swimwear',
+  'Undergarment',
 ];
 let fieldNum = 2;
 let suppList;
@@ -312,11 +332,25 @@ function validateColors() { // eslint-disable-line no-unused-vars
 function showNeckType(e) {
   const classification = e.value;
   const parent = document.getElementById('neck-contain');
+  const hps = document.getElementById('hps-contain');
+  const inseam = document.getElementById('inseam-contain');
 
   if (neckClasses.includes(classification)) {
     parent.classList.add('show-input');
   } else {
     parent.classList.remove('show-input');
+  }
+
+  if (HpsClasses.includes(classification)) {
+    hps.classList.add('show-input');
+  } else {
+    hps.classList.remove('show-input');
+  }
+
+  if (inseamClasses.includes(classification)) {
+    inseam.classList.add('show-input');
+  } else {
+    inseam.classList.remove('show-input');
   }
 }
 
