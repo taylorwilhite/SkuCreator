@@ -170,7 +170,20 @@ function addFields(fields) {
 
       fbParent.appendChild(newFbField);
     }
+
+    const trimParent = document.createElement('span');
+    trimParent.classList.add('trim-color-container');
+
+    for (let i = 0; i <= trimCodeIndex; i += 1) {
+      const newTrimField = document.createElement('input');
+      newTrimField.name = `${namePrefix}[${fieldNum}][trimColor][]`;
+      newTrimField.type = 'text';
+      newTrimField.placeholder = 'Trim Number';
+
+      trimParent.appendChild(newTrimField);
+    }
     fieldDiv.appendChild(fbParent);
+    fieldDiv.appendChild(trimParent);
   }
 
   delButton.classList.add('delete-color');
@@ -466,6 +479,7 @@ function addSupplier() {
 }
 
 let fbCodeIndex = 0;
+let trimCodeIndex = 0;
 function addFbCode() { // eslint-disable-line no-unused-vars
   if (fbCodeIndex >= 3) {
     return;
@@ -498,5 +512,39 @@ function addFbCode() { // eslint-disable-line no-unused-vars
     newFbNum.name = `${inputName}`;
 
     fbContainer.appendChild(newFbNum);
+  }
+}
+
+function addTrimCode() { // eslint-disable-line no-unused-vars
+  if (trimCodeIndex >= 5) {
+    return;
+  }
+  trimCodeIndex += 1;
+  const parent = document.getElementById('trim-container');
+  const trimField = document.createElement('input');
+
+  trimField.type = 'text';
+  trimField.name = 'trimCode[]';
+  trimField.placeholder = 'Trim';
+  trimField.setAttribute('data-trimIndex', trimCodeIndex);
+
+  parent.appendChild(trimField);
+  if (trimCodeIndex === 5) {
+    const addButton = document.getElementById('trim-add-btn');
+    addButton.style.display = 'none';
+  }
+
+  const colorContainer = document.getElementById('colorFields');
+  const colorSets = colorContainer.querySelectorAll('.fabricBookFieldset');
+  for (let i = 0; i < colorSets.length; i += 1) {
+    const trimContainer = colorSets[i].querySelector('.trim-color-container');
+    const newTrimNum = document.createElement('input');
+    const inputName = trimContainer.children[0].name;
+    newTrimNum.type = 'text';
+    newTrimNum.placeholder = 'Trim Number';
+    newTrimNum.setAttribute('data-trimIndex', trimCodeIndex);
+    newTrimNum.name = `${inputName}`;
+
+    trimContainer.appendChild(newTrimNum);
   }
 }

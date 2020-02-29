@@ -11,6 +11,14 @@
 		</span>
 		<button id="fb-add-btn" type="button" onclick="addFbCode()">Add FB</button>
 
+		<div>
+			<span id="trim-container">
+				<input type="text" name="trimCode[]" data-trimIndex="0" placeholder="Trim">
+			</span>
+			<button id="trim-add-btn" type="button" onclick="addTrimCode()">Add Trim</button>
+			
+		</div>
+
 		<div class='inputSet'>
 			<label for="classification">Classification: </label>
 			<select name="classification" id="classification" required="true" onchange="showNeckType(this)">
@@ -87,6 +95,7 @@
 		</span>
 
 		<div id="colorFields">
+			<button type="button" id="addColor" onclick="addFields(colorFields)">Add Color</button>
 			<div class="fabricBookFieldset">
 				<input type="text" list="colorNameList" name="colorSet[color1][colorName]" placeholder="Color" required="true" onchange="fillColorCode(event)" class="colorName">
 				<input type="text" name="colorSet[color1][colorCode]" placeholder="Color Code" required="true" readonly>
@@ -94,7 +103,9 @@
 				<span class="fb-color-container">
 						<input type="text" name="colorSet[color1][fbColor][]" data-fbColor="0" placeholder="FB Color Number">
 				</span>
-				<button type="button" id="addColor" onclick="addFields(colorFields)">Add Color</button>
+				<span class="trim-color-container">
+						<input type="text" name="colorSet[color1][trimColor][]" data-trimColor="0" placeholder="Trim Number">
+				</span>
 			</div>
 			<datalist id="colorNameList">
 				<% allColors.forEach(color => { %>
