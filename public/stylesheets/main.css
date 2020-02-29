@@ -211,3 +211,13 @@ input[type="text"].color-edit-input:focus {
 .color-form-contain:hover {
   background-color: #bbb;
 }
+.fb-color-container {
+  display: block;
+}
+.fabricBookFieldset {
+  padding-top: 10px;
+  border-radius: 10px;
+}
+.fabricBookFieldset:nth-of-type(2n) {
+  background: #dadada;
+}
