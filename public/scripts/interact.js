@@ -489,13 +489,14 @@ function addFbCode() { // eslint-disable-line no-unused-vars
   fbCodeIndex += 1;
   const parent = document.getElementById('fb-container');
   const fbField = document.createElement('input');
+  const button = document.getElementById('fb-add-btn');
 
   fbField.type = 'text';
   fbField.name = 'fbCode[]';
   fbField.placeholder = 'Fabric Book';
   fbField.setAttribute('data-fbIndex', fbCodeIndex);
 
-  parent.appendChild(fbField);
+  parent.insertBefore(fbField, button);
   if (fbCodeIndex === 3) {
     const addButton = document.getElementById('fb-add-btn');
     addButton.style.display = 'none';
@@ -524,13 +525,14 @@ function addTrimCode() { // eslint-disable-line no-unused-vars
   trimCodeIndex += 1;
   const parent = document.getElementById('trim-container');
   const trimField = document.createElement('input');
+  const button = document.getElementById('trim-add-btn');
 
   trimField.type = 'text';
   trimField.name = 'trimCode[]';
   trimField.placeholder = 'Trim';
   trimField.setAttribute('data-trimIndex', trimCodeIndex);
 
-  parent.appendChild(trimField);
+  parent.insertBefore(trimField, button);
   if (trimCodeIndex === 5) {
     const addButton = document.getElementById('trim-add-btn');
     addButton.style.display = 'none';

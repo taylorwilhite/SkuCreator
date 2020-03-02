@@ -226,3 +226,10 @@ input[type="text"].color-edit-input:focus {
 .trim-pusher {
   margin-left: 357px;
 }
+.addFieldsContainer {
+  display: inline-flex;
+  flex-direction: column;
+}
+#addColor {
+  min-width: 80px;
+}
