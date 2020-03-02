@@ -159,6 +159,7 @@ function addFields(fields) {
 
   if (fields === colorFields) {
     console.log('Color Fields!');
+    const fbTrimParent = document.createElement('div');
     const fbParent = document.createElement('span');
     fbParent.classList.add('fb-color-container');
 
@@ -182,8 +183,9 @@ function addFields(fields) {
 
       trimParent.appendChild(newTrimField);
     }
-    fieldDiv.appendChild(fbParent);
-    fieldDiv.appendChild(trimParent);
+    fbTrimParent.appendChild(fbParent);
+    fbTrimParent.appendChild(trimParent);
+    fieldDiv.appendChild(fbTrimParent);
   }
 
   delButton.classList.add('delete-color');

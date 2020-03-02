@@ -217,7 +217,12 @@ input[type="text"].color-edit-input:focus {
 .fabricBookFieldset {
   padding-top: 10px;
   border-radius: 10px;
+  display: flex;
+  align-items: flex-start;
 }
 .fabricBookFieldset:nth-of-type(2n) {
   background: #dadada;
+}
+.trim-pusher {
+  margin-left: 357px;
 }
