@@ -11,7 +11,7 @@
 		</span>
 		<button id="fb-add-btn" type="button" onclick="addFbCode()">Add FB</button>
 
-		<div>
+		<div class="trim-pusher">
 			<span id="trim-container">
 				<input type="text" name="trimCode[]" data-trimIndex="0" placeholder="Trim">
 			</span>
@@ -86,12 +86,14 @@
 				<input type="text" list="colorNameList" name="colorSet[color1][colorName]" placeholder="Color" required="true" onchange="fillColorCode(event)" class="colorName">
 				<input type="text" name="colorSet[color1][colorCode]" placeholder="Color Code" required="true" readonly>
 				<input type="text" name="colorSet[color1][pictureLink]" placeholder="Image Link">
-				<span class="fb-color-container">
+				<div>
+					<span class="fb-color-container">
 						<input type="text" name="colorSet[color1][fbColor][]" data-fbColor="0" placeholder="FB Color Number">
-				</span>
-				<span class="trim-color-container">
-						<input type="text" name="colorSet[color1][trimColor][]" data-trimColor="0" placeholder="Trim Number">
-				</span>
+					</span>
+					<span class="trim-color-container">
+							<input type="text" name="colorSet[color1][trimColor][]" data-trimColor="0" placeholder="Trim Number">
+					</span>
+				</div>
 			</div>
 			<datalist id="colorNameList">
 				<% allColors.forEach(color => { %>
