@@ -6,17 +6,17 @@
 		<input type="text" name="sku[parent]" placeholder="Parent SKU" required="true">
 		<input type="text" name="variantTitle" placeholder="Title" required="true">
 		
-		<span id="fb-container">
-			<input type="text" name="fbCode[]" data-fbIndex="0" placeholder="Fabric Book">
-		</span>
-		<button id="fb-add-btn" type="button" onclick="addFbCode()">Add FB</button>
+		<div class="addFieldsContainer">
+			<span id="fb-container">
+				<input type="text" name="fbCode[]" data-fbIndex="0" placeholder="Fabric Book">
+				<button id="fb-add-btn" type="button" onclick="addFbCode()">Add FB</button>
+			</span>
+			
 
-		<div class="trim-pusher">
 			<span id="trim-container">
 				<input type="text" name="trimCode[]" data-trimIndex="0" placeholder="Trim">
+				<button id="trim-add-btn" type="button" onclick="addTrimCode()">Add Trim</button>
 			</span>
-			<button id="trim-add-btn" type="button" onclick="addTrimCode()">Add Trim</button>
-			
 		</div>
 
 		<div class='inputSet'>
@@ -81,7 +81,6 @@
 		</span>
 
 		<div id="colorFields">
-			<button type="button" id="addColor" onclick="addFields(colorFields)">Add Color</button>
 			<div class="fabricBookFieldset">
 				<input type="text" list="colorNameList" name="colorSet[color1][colorName]" placeholder="Color" required="true" onchange="fillColorCode(event)" class="colorName">
 				<input type="text" name="colorSet[color1][colorCode]" placeholder="Color Code" required="true" readonly>
@@ -94,6 +93,7 @@
 							<input type="text" name="colorSet[color1][trimColor][]" data-trimColor="0" placeholder="Trim Number">
 					</span>
 				</div>
+				<button type="button" id="addColor" onclick="addFields(colorFields)">Add Color</button>
 			</div>
 			<datalist id="colorNameList">
 				<% allColors.forEach(color => { %>
