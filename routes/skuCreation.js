@@ -44,7 +44,12 @@ router.post('/', middleware.isLoggedIn, async (req, res) => {
         body: fbBody,
       })
         // eslint-disable-next-line no-return-assign
-        .then(response => response.Products[0].Attributes)
+        .then((response) => {
+          if (response.Products[0].Attributes) {
+            return response.Products[0].Attributes;
+          }
+          return null;
+        })
         .catch(err => console.log(err));
     }
 
