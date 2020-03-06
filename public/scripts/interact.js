@@ -545,7 +545,7 @@ function addTrimCode() { // eslint-disable-line no-unused-vars
     const newTrimNum = document.createElement('input');
     const inputName = trimContainer.children[0].name;
     newTrimNum.type = 'text';
-    newTrimNum.placeholder = 'Trim Number';
+    newTrimNum.placeholder = 'Trim Color';
     newTrimNum.setAttribute('data-trimIndex', trimCodeIndex);
     newTrimNum.name = `${inputName}`;
 

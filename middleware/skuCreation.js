@@ -77,6 +77,8 @@ module.exports = async function skuCreation(body, tenant, user) {
           'FB Color Number 3': fbColor[2],
           'FB Code 4': fbCode[3],
           'FB Color Number 4': fbColor[3],
+          Trim: trimCode[0],
+          'Trim Color': trimColor[0],
           'Trim 1': trimCode[0],
           'Trim Color 1': trimColor[0],
           'Trim 2': trimCode[1],
