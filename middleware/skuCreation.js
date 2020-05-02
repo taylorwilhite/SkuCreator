@@ -67,6 +67,7 @@ module.exports = async function skuCreation(body, tenant, user) {
         Attributes: {
           Color: colorName,
           Size: size,
+          'Parent SKU w/ color': `${sku}${colorCode}`,
           'FB Code': fbCode[0],
           'FB Color Number': fbColor[0],
           'FB Code 1': fbCode[0],
