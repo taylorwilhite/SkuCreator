@@ -44,6 +44,33 @@ const inseamClasses = [
   'Swimwear',
   'Undergarment',
 ];
+const sleeveClasses = [
+  'Tops',
+  'Sweaters',
+  'Dresses/Jumpsuits',
+  'Jumpsuits & Rompers',
+  'Dresses',
+  'LST',
+  'Maxi Dress',
+  'Midi Dress',
+  'Mini Dress',
+  'NST',
+  'SST',
+  'Outerwear',
+  'Swimwear',
+  'Undergarment',
+];
+const detailsClasses = [
+  'Tops',
+  'Sweaters',
+  'Dresses/Jumpsuits',
+  'Denim',
+  'Bottoms',
+  'Outerwear',
+  'Swim',
+  'Intimates',
+  'Active/Lounge',
+];
 let fieldNum = 2;
 let suppList;
 
@@ -349,11 +376,31 @@ function showNeckType(e) {
   const parent = document.getElementById('neck-contain');
   const hps = document.getElementById('hps-contain');
   const inseam = document.getElementById('inseam-contain');
+  const sleeve = document.getElementById('sleeve-contain');
+  const sleeveSub = document.getElementById('sleeve-sub-contain');
+  const detail = document.getElementById('details-contain');
+  const fit = document.getElementById('fit-contain');
 
   if (neckClasses.includes(classification)) {
     parent.classList.add('show-input');
   } else {
     parent.classList.remove('show-input');
+  }
+
+  if (sleeveClasses.includes(classification)) {
+    sleeve.classList.add('show-input');
+    sleeveSub.classList.add('show-input');
+  } else {
+    sleeve.classList.remove('show-input');
+    sleeveSub.classList.remove('show-input');
+  }
+
+  if (detailsClasses.includes(classification)) {
+    detail.classList.add('show-input');
+    fit.classList.add('show-input');
+  } else {
+    detail.classList.remove('show-input');
+    fit.classList.remove('show-input');
   }
 
   if (HpsClasses.includes(classification)) {
