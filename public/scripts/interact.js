@@ -370,7 +370,6 @@ function showNeckType(e) {
 }
 
 function updateColor(e) {
-  e.preventDefault();
 
   const form = e.target.parentNode;
   console.log(form);
@@ -398,9 +397,7 @@ function removeColor(data, node) {
   flashDisplay(data);
 }
 
-function deleteColor(e) {
-  e.preventDefault();
-
+function deleteColor() {
   const form = e.target.parentNode;
   const colorId = form[0].value;
 

@@ -1,0 +1,18 @@
+import React from 'react'
+
+const Sync = () => {
+  return (
+    <div class='container' id='main-container'>
+      <h1>Sync Settings</h1>
+      <p>Use the buttons below to sync this tool with changes made in SkuVault</p>
+
+      <h3>Classifications</h3>
+      <button type='button' onclick="getData('/sync/classifications')">Sync</button>
+
+      <h3>Suppliers</h3>
+      <button type='button' onclick="getData('/sync/suppliers')">Sync</button>
+    </div>
+  )
+}
+
+export default Sync
