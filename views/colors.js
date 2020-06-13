@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Colors = ({ colors }) => {
+const Colors = () => {
+  const [colors, setColors] = useState([])
   return (
     <div class='container color-flex' id='main-container'>
       {colors.map(color => {
