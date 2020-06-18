@@ -65,7 +65,7 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: 'Invalid username or password. Please register or try again.' }), (req, res) => {
   if (req.user.isSupplier) {
     req.flash('success', 'Logged in Successfully');
-    res.render('pos');
+    res.redirect('/pos');
   }
   // form object to send to skuvault
   const skuvaultLogin = {
@@ -108,8 +108,6 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/pos', middlewareObj.isSupplier, (req, res) => {
-  console.log(process.env.TENANT);
-  console.log(process.env.USERTOKEN)
   const reqBody = {
     Status: 'NoneReceived',
     TenantToken: process.env.TENANT,
@@ -123,14 +121,36 @@ router.get('/pos', middlewareObj.isSupplier, (req, res) => {
       json: true,
       body: reqBody,
     }, (err, response, body) => {
-      console.log('response', response.statusCode);
-      console.log('body', body.PurchaseOrders);
       if (err) {
         req.flash('error', err);
         res.redirect('back');
       }
       const poList = body.PurchaseOrders.filter(po => po.SupplierName === req.user.name);
       res.render('pos', { poList })
+    }
+  )
+})
+
+router.get('/pos/:poNumber', middlewareObj.isSupplier, (req, res) => {
+  const reqBody = {
+    PONumbers: [req.params.poNumber],
+    TenantToken: process.env.TENANT,
+    UserToken: process.env.USERTOKEN
+  }
+  request(
+    {
+      method: 'POST',
+      url: 'https://app.skuvault.com/api/purchaseorders/getPOs',
+      headers: [{ 'Content-Type': 'application/json', Accept: 'application/json' }],
+      json: true,
+      body: reqBody,
+    }, (err, response, body) => {
+      if (err) {
+        req.flash('error', err);
+        res.redirect('back');
+      }
+      const poItem = body.PurchaseOrders[0];
+      res.render('routepo', { poItem })
     }
   )
 })

@@ -233,3 +233,9 @@ input[type="text"].color-edit-input:focus {
 #addColor {
   min-width: 80px;
 }
+.po-item {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: auto;
+}

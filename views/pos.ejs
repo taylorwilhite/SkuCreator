@@ -3,17 +3,19 @@
   <% poList.forEach(po => { %>
   <div class="po-item">
     <span><%- po.PoNumber %></span>
-    <label>Items Shipped: <input type="text"></label>
-    <label>Date Shipped: <input type="date" value="<%= po.ActualShippedDate %>" ></label>
-    <label>Tracking Number: <input type="text" value="<%= po.TrackingInfo %>"></label>
-    <label>Ship Status:
-      <select>
-        <option value="">Select One</option>
-        <option value="">Shipped</option>
-        <option value="">Not Shipped</option>
-        <option value="">Need to Send</option>
-      </select>
-    </label>
+    <span>
+      <label>Factory Ship Date: <input type="date" value="<%= po.ActualShippedDate %>" ></label>
+      <label>Tracking Number: <input type="text" value="<%= po.TrackingInfo %>"></label>
+      <label>Ship Status:
+        <select>
+          <option value="">Select One</option>
+          <option value="">Shipped</option>
+          <option value="">Not Shipped</option>
+          <option value="">Need to Send</option>
+        </select>
+      </label>
+      <a href="/pos/<%= po.PoNumber %>">Route PO</a>
+    </span>
   </div>
   <% }) %>
 </div>

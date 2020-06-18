@@ -1,0 +1,16 @@
+<% include ./partials/header %>
+
+<div class="container" id="main-container">
+  <h3>PO Number: <%= poItem.PoNumber %></h3>
+  <p>Order date: <%= new Date(poItem.OrderDate).toDateString() %></p>
+  <% poItem.LineItems.forEach(item => { %>
+    <div class="po-sku">
+      <span><%= item.SKU %></span>
+      <span><%= item.Quantity %></span>
+      <span><%= item.Variant %></span>
+      <span><%= item.ProductId %></span>
+    </div>
+  <% }) %>
+</div>
+
+<% include ./partials/footer %>
