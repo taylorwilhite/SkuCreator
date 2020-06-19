@@ -3,14 +3,20 @@
 <div class="container" id="main-container">
   <h3>PO Number: <%= poItem.PoNumber %></h3>
   <p>Order date: <%= new Date(poItem.OrderDate).toDateString() %></p>
+  <form action="/pos/<%= poItem.PoNumber %>" method="POST">
+  <input type="hidden" name="poid" value="<%= poItem.PoId %>">
   <% poItem.LineItems.forEach(item => { %>
     <div class="po-sku">
       <span><%= item.SKU %></span>
       <span><%= item.Quantity %></span>
       <span><%= item.Variant %></span>
       <span><%= item.ProductId %></span>
+      <input type="hidden" name="shippedSkus[<%= item.SKU %>][quant]" value="<%= item.Quantity %>">
+      <label># Shipped: <input type="text" value="<%= item.PublicNotes %>" name="shippedSkus[<%= item.SKU %>][note]"></label>
     </div>
   <% }) %>
+  <button type="submit">Route Items</button>
+  </form>
 </div>
 
 <% include ./partials/footer %>

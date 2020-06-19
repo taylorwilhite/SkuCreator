@@ -1,13 +1,14 @@
 <% include ./partials/header %>
 <div class="container" id="main-container">
+  <form action="/pos" method="POST">
   <% poList.forEach(po => { %>
   <div class="po-item">
     <span><%- po.PoNumber %></span>
     <span>
-      <label>Factory Ship Date: <input type="date" value="<%= po.ActualShippedDate %>" ></label>
-      <label>Tracking Number: <input type="text" value="<%= po.TrackingInfo %>"></label>
+      <label>Factory Ship Date: <input type="date" name="<%= po.PoId %>[shipDate]" value="<%= po.ActualShippedDate %>" ></label>
+      <label>Tracking Number: <input type="text" name="<%= po.PoId %>[tracking]" value="<%= po.TrackingInfo %>"></label>
       <label>Ship Status:
-        <select>
+        <select name="<%= po.PoId %>[status]">
           <option value="">Select One</option>
           <option value="">Shipped</option>
           <option value="">Not Shipped</option>
@@ -18,6 +19,8 @@
     </span>
   </div>
   <% }) %>
+  <button type="submit">Update POs</button>
+  </form>
 </div>
 
 <style></style>

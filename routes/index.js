@@ -131,6 +131,12 @@ router.get('/pos', middlewareObj.isSupplier, (req, res) => {
   )
 })
 
+router.post('/pos', middlewareObj.isSupplier, (req, res) => {
+  const pos = req.body;
+  console.log(pos);
+  res.redirect('/pos');
+})
+
 router.get('/pos/:poNumber', middlewareObj.isSupplier, (req, res) => {
   const reqBody = {
     PONumbers: [req.params.poNumber],
@@ -151,6 +157,44 @@ router.get('/pos/:poNumber', middlewareObj.isSupplier, (req, res) => {
       }
       const poItem = body.PurchaseOrders[0];
       res.render('routepo', { poItem })
+    }
+  )
+})
+
+router.post('/pos/:poNumber', middlewareObj.isSupplier, (req, res) => {
+  const poSkus = Object.entries(req.body.shippedSkus)
+  const reqBody = {
+    POs: [
+      {
+        PurchaseOrderId: req.body.poid,
+        LineItems: poSkus.map(([key, value]) => {
+          return {
+            SKU: key,
+            Quantity: value.quant,
+            PublicNotes: value.note
+          }
+        })
+      }
+    ],
+    TenantToken: process.env.TENANT,
+    UserToken: process.env.USERTOKEN
+  }
+
+  request(
+    {
+      method: 'POST',
+      url: 'https://app.skuvault.com/api/purchaseorders/updatePOs',
+      headers: [{ 'Content-Type': 'application/json', Accept: 'application/json' }],
+      json: true,
+      body: reqBody,
+    }, (err, response, body) => {
+      if (err) {
+        req.flash('error', err);
+        res.redirect('back');
+      }
+      console.log(body);
+      req.flash('success', 'submitted successfully!');
+      res.redirect(`/pos/${req.params.poNumber}`)
     }
   )
 })
