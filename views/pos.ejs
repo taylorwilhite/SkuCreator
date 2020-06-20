@@ -2,17 +2,18 @@
 <div class="container" id="main-container">
   <form action="/pos" method="POST">
   <% poList.forEach(po => { %>
+  <% let shipped = po.ActualShippedDate != "0001-01-01T00:00:00.0000000Z" %>
   <div class="po-item">
     <span><%- po.PoNumber %></span>
     <span>
-      <label>Factory Ship Date: <input type="date" name="<%= po.PoId %>[shipDate]" value="<%= po.ActualShippedDate %>" ></label>
+      <label>Factory Ship Date: <input type="date" name="<%= po.PoId %>[shipDate]" value="<%= shipped ? new Date(po.ActualShippedDate).toISOString().substring(0, 10) : '' %>" ></label>
       <label>Tracking Number: <input type="text" name="<%= po.PoId %>[tracking]" value="<%= po.TrackingInfo %>"></label>
       <label>Ship Status:
         <select name="<%= po.PoId %>[status]">
           <option value="">Select One</option>
-          <option value="">Shipped</option>
-          <option value="">Not Shipped</option>
-          <option value="">Need to Send</option>
+          <option <% if (po.TrackingInfo) { %>selected <% } %> value="Sent">Sent</option>
+          <option value="NotSent">Not Sent</option>
+          <option value="NeedToResend">Need to ReSend</option>
         </select>
       </label>
       <a href="/pos/<%= po.PoNumber %>">Route PO</a>

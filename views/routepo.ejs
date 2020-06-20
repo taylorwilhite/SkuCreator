@@ -7,10 +7,9 @@
   <input type="hidden" name="poid" value="<%= poItem.PoId %>">
   <% poItem.LineItems.forEach(item => { %>
     <div class="po-sku">
-      <span><%= item.SKU %></span>
-      <span><%= item.Quantity %></span>
-      <span><%= item.Variant %></span>
-      <span><%= item.ProductId %></span>
+      <span><b>SKU:</b> <%= item.SKU %></span>
+      <span><b>QTY:</b> <%= item.Quantity %></span>
+      <span><b>ID:</b> <%= item.ProductId %></span>
       <input type="hidden" name="shippedSkus[<%= item.SKU %>][quant]" value="<%= item.Quantity %>">
       <label># Shipped: <input type="text" value="<%= item.PublicNotes %>" name="shippedSkus[<%= item.SKU %>][note]"></label>
     </div>

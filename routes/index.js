@@ -65,7 +65,7 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: 'Invalid username or password. Please register or try again.' }), (req, res) => {
   if (req.user.isSupplier) {
     req.flash('success', 'Logged in Successfully');
-    res.redirect('/pos');
+    return res.redirect('/pos');
   }
   // form object to send to skuvault
   const skuvaultLogin = {
@@ -132,9 +132,44 @@ router.get('/pos', middlewareObj.isSupplier, (req, res) => {
 })
 
 router.post('/pos', middlewareObj.isSupplier, (req, res) => {
-  const pos = req.body;
-  console.log(pos);
-  res.redirect('/pos');
+  const reqBody = {
+    POs: Object.entries(req.body).filter(([key, value]) => value.shipDate || value.tracking || value.status)
+      .map(([key, value]) => {
+        const po = {
+          PurchaseOrderId: key
+        }
+        if (value.status) {
+          po.Status = value.status
+        }
+        if (value.shipDate) {
+          po.ActualShippedDate = value.shipDate
+        }
+        if (value.tracking) {
+          po.TrackingInfo = value.tracking
+        }
+
+        return po
+      }),
+    TenantToken: process.env.TENANT,
+    UserToken: process.env.USERTOKEN
+  }
+  request(
+    {
+      method: 'POST',
+      url: 'https://app.skuvault.com/api/purchaseorders/updatePOs',
+      headers: [{ 'Content-Type': 'application/json', Accept: 'application/json' }],
+      json: true,
+      body: reqBody,
+    }, (err, response, body) => {
+      if (err) {
+        req.flash('error', err);
+        res.redirect('back');
+      }
+      console.log(body);
+      req.flash('success', 'submitted successfully!');
+      res.redirect(`/pos`)
+    }
+  )
 })
 
 router.get('/pos/:poNumber', middlewareObj.isSupplier, (req, res) => {
