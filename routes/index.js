@@ -142,7 +142,7 @@ router.post('/pos', middlewareObj.isSupplier, (req, res) => {
           po.Status = value.status
         }
         if (value.shipDate) {
-          po.ActualShippedDate = value.shipDate
+          po.ArrivalDueDate = value.shipDate
         }
         if (value.tracking) {
           po.TrackingInfo = value.tracking
@@ -202,11 +202,15 @@ router.post('/pos/:poNumber', middlewareObj.isSupplier, (req, res) => {
     POs: [
       {
         PurchaseOrderId: req.body.poid,
+        TrackingInfo: req.body.tracking,
+        ActualShippedDate: new Date().toISOString(),
+        PublicNotes: req.body.notes,
         LineItems: poSkus.map(([key, value]) => {
           return {
             SKU: key,
             Quantity: value.quant,
-            PublicNotes: value.note
+            PublicNotes: value.note,
+            PrivateNotes: value.box
           }
         })
       }

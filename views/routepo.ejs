@@ -1,10 +1,24 @@
 <% include ./partials/header %>
 
 <div class="container" id="main-container">
+  <a class="back-btn" href="/pos">&lt; Back</a>
   <h3>PO Number: <%= poItem.PoNumber %></h3>
   <p>Order date: <%= new Date(poItem.OrderDate).toDateString() %></p>
   <form action="/pos/<%= poItem.PoNumber %>" method="POST">
   <input type="hidden" name="poid" value="<%= poItem.PoId %>">
+  <div class="po-shipping-container">
+    <div class="po-shipping-info">
+      <div class="po-warehouse-info">
+        <p><b>Ship to Warehouse:</b> <%= poItem.ShipToWarehouse %></p>
+        <p><b>Ship to Address:</b> <%= poItem.ShipToAddress %></p>
+        <p><b>Requested Ship Date:</b> <%= poItem.RequestedShipDate == "0001-01-01T00:00:00.0000000Z" ? "N/A" : poItem.RequestedShipDate %></p>
+      </div>
+      <label>Tracking #: <input type="text" name="tracking" value="<%= poItem.TrackingInfo %>"></label>
+    </div>
+    <div class="po-shipping-notes">
+      <label>Notes: <input type="text" name="notes" value="<%= poItem.PublicNotes %>"></label>
+    </div>
+  </div>
   <% poItem.LineItems.forEach(item => { %>
     <div class="po-sku">
       <span><b>SKU:</b> <%= item.SKU %></span>
@@ -12,6 +26,7 @@
       <span><b>ID:</b> <%= item.ProductId %></span>
       <input type="hidden" name="shippedSkus[<%= item.SKU %>][quant]" value="<%= item.Quantity %>">
       <label># Shipped: <input type="text" value="<%= item.PublicNotes %>" name="shippedSkus[<%= item.SKU %>][note]"></label>
+      <label>Box: <input type="text" value="<%= item.PrivateNotes %>" name="shippedSkus[<%= item.SKU %>][box]"></label>
     </div>
   <% }) %>
   <button type="submit">Route Items</button>
