@@ -1,5 +1,5 @@
 <% include ./partials/header %>
-
+<% const totalShipped = poItem.LineItems.reduce((acc, item) => isNaN(parseInt(item.Quantity, 10)) ? acc + 0 : acc + parseInt(item.Quantity), 0) %>
 <div class="container" id="main-container">
   <a class="back-btn" href="/pos">&lt; Back</a>
   <h3>PO Number: <%= poItem.PoNumber %></h3>
@@ -12,11 +12,14 @@
         <p><b>Ship to Warehouse:</b> <%= poItem.ShipToWarehouse %></p>
         <p><b>Ship to Address:</b> <%= poItem.ShipToAddress %></p>
         <p><b>Requested Ship Date:</b> <%= poItem.RequestedShipDate == "0001-01-01T00:00:00.0000000Z" ? "N/A" : poItem.RequestedShipDate %></p>
+        <p><b>Actual Ship Date:</b> <%= poItem.ActualShippedDate == "0001-01-01T00:00:00.0000000Z" ? "N/A" : poItem.ActualShippedDate %></p>
       </div>
       <label>Tracking #: <input type="text" name="tracking" value="<%= poItem.TrackingInfo %>"></label>
+      <span class="po-total-shipped">Total shipped: <%= totalShipped %></span>
     </div>
     <div class="po-shipping-notes">
-      <label>Notes: <input type="text" name="notes" value="<%= poItem.PublicNotes %>"></label>
+      <label>Notes: <textarea cols="33" rows="5" wrap="soft" name="notes"><%= poItem.PublicNotes %></textarea></label>
+      <div class="po-readonly-notes">Private Notes: <%= poItem.PrivateNotes %></div>
     </div>
   </div>
   <% poItem.LineItems.forEach(item => { %>

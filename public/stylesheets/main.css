@@ -236,7 +236,6 @@ input[type="text"].color-edit-input:focus {
 .po-item {
   display: flex;
   justify-content: space-between;
-  max-width: 1200px;
   margin: auto;
   align-items: center;
   padding: 10px;
@@ -262,4 +261,19 @@ input[type="text"].color-edit-input:focus {
 }
 .po-shipping-container label {
   margin: 0;
+}
+.po-pay-status {
+  min-width: 200px;
+  display: inline-block;
+}
+.po-private-notes {
+  min-width: 200px;
+  max-width: 200px;
+  display: inline-block;
+}
+.po-number {
+  max-width: 200px;
+}
+.po-readonly-notes {
+  margin-top: 20px;
 }
