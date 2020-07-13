@@ -233,3 +233,47 @@ input[type="text"].color-edit-input:focus {
 #addColor {
   min-width: 80px;
 }
+.po-item {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+.po-item:nth-of-type(2n) {
+  background: #ccc;
+}
+.po-item input {
+  margin: 0;
+}
+.po-sku span {
+  margin-right: 10px;
+}
+.back-btn {
+  text-decoration: none;
+  color: #333;
+}
+.po-shipping-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 900px;
+}
+.po-shipping-container label {
+  margin: 0;
+}
+.po-pay-status {
+  min-width: 200px;
+  display: inline-block;
+}
+.po-private-notes {
+  min-width: 200px;
+  max-width: 200px;
+  display: inline-block;
+}
+.po-number {
+  max-width: 200px;
+}
+.po-readonly-notes {
+  margin-top: 20px;
+}

@@ -1,0 +1,30 @@
+<% include ./partials/header %>
+<div class="container" id="main-container">
+  <form action="/pos" method="POST">
+  <% poList.forEach(po => { %>
+  <% let shipped = po.ArrivalDueDate != "0001-01-01T00:00:00.0000000Z" %>
+  <div class="po-item">
+    <span class="po-number"><%- po.PoNumber %></span>
+    <span>
+      <label>Fcty Ship Date: <input type="date" name="<%= po.PoId %>[shipDate]" value="<%= shipped ? new Date(po.ArrivalDueDate).toISOString().substring(0, 10) : '' %>" ></label>
+      <label>Tracking #: <input type="text" name="<%= po.PoId %>[tracking]" value="<%= po.TrackingInfo %>"></label>
+      <label>Ship Status:
+        <select name="<%= po.PoId %>[status]">
+          <option value="">Select One</option>
+          <option <% if (po.TrackingInfo) { %>selected <% } %> value="Sent">Sent</option>
+          <option value="NotSent">Not Sent</option>
+          <option value="NeedToResend">Need to ReSend</option>
+        </select>
+      </label>
+      <span class="po-pay-status">Pay Status: <%= po.PaymentStatus %></span>
+      <span class="po-private-notes">Notes: <%= po.PrivateNotes %></span>
+      <a href="/pos/<%= po.PoNumber %>">Route PO</a>
+    </span>
+  </div>
+  <% }) %>
+  <button type="submit">Update POs</button>
+  </form>
+</div>
+
+<style></style>
+<% include ./partials/footer %>
