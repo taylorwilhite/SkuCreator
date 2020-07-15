@@ -16,7 +16,7 @@ module.exports = async function skuCreation(body, tenant, user) {
   const sku = body.sku.parent;
   const desc = body.variantTitle;
   const {
-    classification, brand, fbCode, trimCode, hps, inseam, neckType,
+    classification, brand, fbCode, trimCode, hps, inseam, neckType, department, itemClass, subClass, sleeve, sleeveSub, details, fit
   } = body;
   const colorSet = Object.entries(body.colorSet);
   const sizes = body.size;
@@ -97,6 +97,13 @@ module.exports = async function skuCreation(body, tenant, user) {
           'Neck type': neckType,
           'Fabric Content': content,
           'Fabric Construction': construction,
+          Department: department,
+          Class: itemClass,
+          'Sub Class': subClass,
+          'Sleeve Type': sleeve,
+          'Sleeve Sub Class': sleeveSub,
+          Details: details,
+          'Fit Type': fit
         },
         Classification: classification,
         Supplier: supName,
