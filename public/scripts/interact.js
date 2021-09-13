@@ -1,8 +1,8 @@
 /* eslint-env browser */
 /* global clientColorList */
 let sizeStyle = "reg";
-const regSizes = ["P3X", "P2X", "P1X", "XL", "L", "M", "S", "XS"];
-const kimonoSizes = ["OSP", "P3X", "P2X", "P1X", "LXL", "SM"];
+const regSizes = ["3X", "2X", "1X", "XL", "L", "M", "S", "XS"];
+const kimonoSizes = ["OS", "3X", "2X", "1X", "LXL", "SM"];
 const denimSizes = [
   "20",
   "18",
