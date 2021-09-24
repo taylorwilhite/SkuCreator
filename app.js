@@ -25,26 +25,30 @@ const inboundDocsRoutes = require('./routes/inboundDoc');
 const syncRoutes = require('./routes/sync');
 
 // DB setup
-const databaseUri = process.env.MONGODB_URI || 'mongodb://localhost/skuCreateDb';
+const databaseUri =
+  process.env.MONGODB_URI || 'mongodb://localhost/skuCreateDb';
 const db = mongoose.connection;
 
-mongoose.connect(databaseUri, { useNewUrlParser: true })
+mongoose
+  .connect(databaseUri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Database Connected'))
-  .catch(err => console.log(`Database connection error: ${err.message}`));
+  .catch((err) => console.log(`Database connection error: ${err.message}`));
 
 // Config
 // seedDB();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(__dirname + "/public"));
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  saveUninitialized: false,
-  resave: false,
-  cookie: { maxAge: 8 * 60 * 60 * 1000 },
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-}));
+app.use(express.static(__dirname + '/public'));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false,
+    cookie: { maxAge: 8 * 60 * 60 * 1000 },
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
+);
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
