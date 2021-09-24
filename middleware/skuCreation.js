@@ -2,7 +2,7 @@
 const routeFunctions = require("./routeFunctions");
 
 const { picLink, getNextUpc } = routeFunctions;
-const plusSizes = ["P1X", "P2X", "P3X", "OSP"];
+const plusSizes = ["1X", "2X", "3X", "OS"];
 const plusCheck = (size, reg, plus) => {
   if (plusSizes.includes(size)) {
     return plus;
@@ -36,8 +36,6 @@ module.exports = async function skuCreation(body, tenant, user) {
     moq,
     cto,
   } = body;
-  console.log(moq);
-  console.log(!!cto);
   const colorSet = Object.entries(body.colorSet);
   const sizes = body.size;
   let content = "";
@@ -75,12 +73,12 @@ module.exports = async function skuCreation(body, tenant, user) {
         };
       });
       const supName = supp[0].SupplierName;
-      const defCost = supp[0].Cost;
       supp[0].IsPrimary = true;
 
       const weight = body.plusWeight
         ? plusCheck(size, body.regWeight, body.plusWeight)
         : body.regWeight;
+      const defCost = supp[0].Cost + weight * 0.03 * 6.75;
       // For loop for sizes
 
       const newSize = {
