@@ -30,6 +30,13 @@
 				<% }); %>>
 			</select>
 
+			<label for="season">Season: </label>
+			<select name="season" id="season" required="true">
+				<option value="All year" selected>All Year</option>
+				<option value="Spring/Summer" selected>Spring/Summer</option>
+				<option value="Fall/Winter" selected>Fall/Winter</option>
+			</select>
+
 			<label for="brand">Brand: </label>
 			<select name="brand" id="brand" required="true">
 				<option value="AMARYLLIS" selected="true">AMARYLLIS</option>
@@ -322,8 +329,6 @@
 		</fieldset>
 
 		<div>
-			<label for="moq">MOQ: </label>
-			<input id="moq" type="number" name="moq">
 			<label for="cto">CTO: </label>
 			<input type="checkbox" id="cto" name="cto">
 		</div>

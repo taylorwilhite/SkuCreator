@@ -33,8 +33,8 @@ module.exports = async function skuCreation(body, tenant, user) {
     details,
     fit,
     collection,
-    moq,
     cto,
+    season,
   } = body;
   const colorSet = Object.entries(body.colorSet);
   const sizes = body.size;
@@ -130,8 +130,8 @@ module.exports = async function skuCreation(body, tenant, user) {
           Details: details,
           'Fit Type': fit,
           Collection: collection,
-          MOQ: moq,
           CTO: !!cto ? 'Yes' : '',
+          Season: season,
         },
         Classification: classification,
         Supplier: supName,
