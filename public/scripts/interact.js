@@ -18,12 +18,14 @@ const denimSizes = [
 ];
 const sweaterSizes = ['2X/3X', '1X/XL', 'M/L', 'XS/S'];
 const swimSizes = ['XXXL', 'XXL', 'XL', 'L', 'M', 'S'];
+const marketBuySizes = ['2XL', 'XL', 'L', 'M', 'S'];
 const sizeMap = {
   reg: regSizes,
   kimono: kimonoSizes,
   denim: denimSizes,
   sweater: sweaterSizes,
   swim: swimSizes,
+  market: marketBuySizes,
 };
 const neckClasses = [
   'Jumpsuits & Rompers',
